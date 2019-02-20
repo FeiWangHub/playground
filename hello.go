@@ -187,6 +187,41 @@ LABEL:
 	fmt.Println("打印闭包getSequence的输出", nextNum(), nextNum(), nextNum())
 	nextNum1 := getSequence()
 	fmt.Println("打印new闭包getSequence的输出", nextNum1(), nextNum1(), nextNum1())
+
+	//数组练习 var variable_name [SIZE] variable_type
+	var balance [10]float32 //单纯初始化
+	fmt.Println("单纯初始化数组：", balance)
+	balance = [10]float32{1000.0, 2.0, 3.4, 7.0, 50.0}
+	fmt.Println("赋值后的数组：", balance)
+	var autoArray = [...]int{1, 2, 3}
+	fmt.Println("自动指定size的数组：", autoArray)
+	fmt.Println("随机访问数组index1：", autoArray[1])
+	for index := 0; index < 10; index++ {
+		balance[index] = float32(index) + float32(100) /* 设置元素为 i + 100 */
+	}
+	fmt.Println(balance)
+
+	//向函数传递数组练习
+	var arr = []int{100, 2, 3, 14, 7, 50}
+	var avg = getAverage(arr, len(arr))
+	fmt.Println("向函数传递数组练习, getAverage:", avg)
+
+	//pointer指针练习
+	var ip *int /* 指向整型*/
+	var intValue = 3
+	ip = &intValue //指向intValue地址
+	fmt.Printf("原始int数据地址:%d, pointer地址:%d, pointer的值为:%d\n",
+		&intValue, ip, *ip)
+	fmt.Println("判断ip是否是空指针:", ip == nil)
+
+	//指针的数组练习
+	var arr5 = [5]int{100, 2, 3, 14, 7}
+	var ptr [len(arr5)]*int
+	fmt.Println("指针数组的练习:")
+	for index := 0; index < len(arr5); index++ {
+		ptr[i] = &arr5[index] /* 整数地址赋值给指针数组 */
+		fmt.Printf("a[%d] = %d\n", i, *ptr[i])
+	}
 }
 
 //函数func function_name( [parameter list] ) [return_types] {函数体}
@@ -213,8 +248,9 @@ func swapIntRef(a *int, b *int) {
 	*b = tmp
 }
 
-//go语言方法：一个方法就是一个包含了接受者的函数，接受者可以是命名类型或者结构体类型的一个值或者是一个指针
-//一个定义在a对象之外的，a对象的函数
+/*Circle go语言方法：
+一个方法就是一个包含了接受者的函数，接受者可以是命名类型或者结构体类型的一个值或者是一个指针
+一个定义在a对象之外的，a对象的函数*/
 type Circle struct {
 	radius float64
 }
@@ -231,4 +267,15 @@ func getSequence() func() int {
 		i++
 		return i
 	}
+}
+
+//向函数传递数组
+func getAverage(arr []int, size int) float32 {
+	var i int
+	var avg, sum float32
+	for i = 0; i < size; i++ {
+		sum += float32(arr[i])
+	}
+	avg = sum / float32(size)
+	return avg
 }
