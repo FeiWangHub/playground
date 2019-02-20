@@ -222,6 +222,60 @@ LABEL:
 		ptr[i] = &arr5[index] /* 整数地址赋值给指针数组 */
 		fmt.Printf("a[%d] = %d\n", i, *ptr[i])
 	}
+
+	//结构体struct练习
+	book1 := Books{"Go语言", "www.go.org", "trainning", 142521}
+	book2 := Books{title: "title", author: "author", subject: "subject"}
+	fmt.Println("结构体练习", book1)
+	fmt.Println("结构体练习K-V，忽略字段为0或空", book2)
+	book1.author = "修改过的author"
+	fmt.Printf("修改过的book1的author为%s\n", book1.author)
+	//结构体做参数
+	printBook(book1)
+
+	//切片slice练习，对数组的抽象
+	var capacity = 10
+	var slice1 []int = make([]int, 5, capacity)
+	slice3 := []int{1, 2, 3}
+	var arr6 = [6]int{1, 2, 3, 4, 5, 6}
+	slice4 := arr6[0:1] //slice的end index
+	printSlice(slice1)
+	printSlice(slice3)
+	printSlice(slice4)
+	//append & copy slice
+	slice4 = append(slice4, 999)
+	printSlice(slice4)
+	slice5big := make([]int, len(slice4), cap(slice4)*3)
+	copy(slice5big, slice4)
+	printSlice(slice5big)
+
+	//range练习
+	nums := []int{2, 3, 4}
+	sum := 0
+	for _, num := range nums {
+		sum += num
+	}
+	fmt.Println("用range循环slice", sum)
+
+	kvs := map[string]string{"a": "apple", "b": "banana"}
+	for k, v := range kvs {
+		fmt.Printf("用range循环map, k=%s, v=%s\n", k, v)
+	}
+
+	//map练习
+	var countryCapMap map[string]string     //初始化是nil map
+	countryCapMap = make(map[string]string) //make之后才可以使用
+	countryCapMap["France"] = "paris"
+	countryCapMap["Italy"] = "罗马"
+	countryCapMap["Japan"] = "Tokyo"
+	for k, v := range countryCapMap {
+		fmt.Println("循环map,", k, "首都是", v)
+	}
+	//查看元素是否存在
+	fmt.Println("尝试去一个map中没有的key：", countryCapMap["美国"])
+	//delete 元素
+	delete(countryCapMap, "Italy")
+	fmt.Println("delete删除italy之后的map:", countryCapMap)
 }
 
 //函数func function_name( [parameter list] ) [return_types] {函数体}
@@ -255,6 +309,14 @@ type Circle struct {
 	radius float64
 }
 
+//Books 结构体练习
+type Books struct {
+	title   string
+	author  string
+	subject string
+	bookID  int
+}
+
 func (c Circle) getArea() float64 {
 	//c.radius 即为 Circle 类型对象中的属性
 	return 3.14 * c.radius * c.radius
@@ -278,4 +340,19 @@ func getAverage(arr []int, size int) float32 {
 	}
 	avg = sum / float32(size)
 	return avg
+}
+
+//结构体做参数
+func printBook(book Books) {
+	var ptr = &book
+	fmt.Println("结构体做参数printBook测试，指针地址：", ptr)
+	fmt.Printf("Book title : %s\n", book.title)
+	fmt.Printf("Book author : %s\n", book.author)
+	fmt.Printf("Book subject : %s\n", book.subject)
+	fmt.Printf("Book bookID : %d\n", book.bookID)
+}
+
+//slice
+func printSlice(x []int) {
+	fmt.Printf("len=%d, cap=%d, slice=%v\n", len(x), cap(x), x)
 }
