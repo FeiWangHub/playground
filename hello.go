@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+	"unsafe"
+)
 
 //PublicVar comment
 var PublicVar string = "public var"
@@ -15,6 +19,8 @@ var ( // 这种因式分解关键字的写法一般用于声明全局变量
 )
 var c, d int = 1, 2
 var e, f = 123, "hello"
+
+const usr = "abc"
 
 func main() {
 	/* 多行
@@ -35,7 +41,194 @@ func main() {
 	var str3 = str1
 	fmt.Println("第二个字符串，直接来源于第一个字符串，相同字符串的地址", &str1, &str3)
 
-	//常量const test http://www.runoob.com/go/go-constants.html
-	const pwd = "password"
+	//常量const test http://www.runoob.com/go/go-constants.html, 和函数表达式
+	const usr, pwd, isAdmin = 123, "password", false
+	const (
+		mix     = 0
+		female  = 1
+		male    = 2
+		str4    = "12345"
+		strLen  = len(str4)
+		strSize = unsafe.Sizeof(str4)
+	)
+	fmt.Println("strLen:", strLen, "strSize:", strSize)
 
+	//特殊常量iota, const 中每新增一行常量声明将使 iota 计数一次(从0开始)
+	const (
+		a1 = iota //0
+		a2 = iota //1
+		a3 = iota //2
+		a4 = "a4" //iota= 3
+		a5        //iota = 4
+		a6 = iota // iota =5
+	)
+	fmt.Println(a1, a2, a3, a4, a5, a6)
+
+	//常量左移实验
+	const (
+		i = 1 << iota //左移0位
+		j = 3 << iota //左移1位, 110
+		k             //左移2位, 1100
+		l             ////左移3位11000
+	)
+	fmt.Println("i=", i, "j=", j, "k=", k, "l=", l)
+
+	//算数运算符 +-*/% ++ --
+	//关系运算符 == != > < >= <=
+	//逻辑运算符 && || !
+	//位运算符 &与 |或 ^异或 << >>
+	//赋值运算(全都是先计算再赋值) = += -= *= /= %= <<= >>= &= ^= |=
+	//其他 &返回变量实际地址 *指针变量
+
+	//条件语句 if, else if, switch, select
+
+	//switch 从上至下, 匹配成功后就不会执行其他 case，如果我们需要执行后面的 case，可以使用 fallthrough
+	grade := "B"
+	marks := 90
+	switch marks {
+	case 80:
+		grade = "B"
+	case 50, 60, 70:
+		grade = "C"
+	case 90:
+		grade = "A"
+	default:
+		grade = "D"
+	}
+	fmt.Println("swith语句grade结果:", grade)
+
+	//switch: type swith
+	var x interface{}
+
+	switch i := x.(type) {
+	case nil:
+		fmt.Println("x的类型是", i)
+	case int:
+		fmt.Println("x是int型")
+	case bool, string, func(int):
+		fmt.Println("x是bool, string, func(int)")
+	default:
+		fmt.Println("未知")
+	}
+
+	//switch: fallthrough 即使匹配了，也会接着向下执行
+	switch true {
+	case true:
+		fmt.Println("1 case 为true")
+		fallthrough
+	case false:
+		fmt.Println("2 case 为false")
+		fallthrough
+	default:
+		fmt.Println("default case")
+	}
+
+	/* loop 循环语句 for, break, continue, goto
+		类似for循环：for init; condition; post { }
+		类似while循环: for condition {}
+		类似迭代list：for {}
+	  执行循序：先init，再check condition，true则执行body；然后再contidon -> body循环
+	*/
+	for a := 0; a < 5; a++ {
+		fmt.Println("for循环,a=", a)
+	}
+
+	var loop1 int
+	var loop2 = 5
+	for loop1 < loop2 {
+		loop1++
+		if loop1 > 4 {
+			break //跳出循环直接终止
+		}
+		fmt.Printf("while循环,loop1=%d", loop1)
+	}
+
+	numbers := [6]int{1, 2, 3, 5}
+	for i, x := range numbers {
+		if i == 3 {
+			continue //跳过i=3
+		}
+		fmt.Printf("第 %d 位 x 的值 = %d\n", i, x)
+	}
+
+	//goto label 无条件到指定label位置，不建议使用，代码不好调试理解
+	for i := 0; i < 5; i++ {
+		if i == 3 {
+			goto LABEL
+		}
+		fmt.Printf("i=%d测试go to label\n", i)
+	}
+LABEL:
+	fmt.Println("这是一个label")
+
+	//函数调用(默认值传递)
+	fmt.Printf("函数调用max结果：%d\n", max(7, 9))
+	result1, result2 := swap("first", "second")
+	fmt.Println("多返还函数swap:", result1, result2)
+
+	//函数引用传递
+	var x2, y2 = 100, 200
+	swapIntRef(&x2, &y2)
+	fmt.Println("函数引用传递，交换后x2,y2分别为", x2, y2)
+
+	//函数变量
+	getSquareRoot := func(x float64) float64 {
+		return math.Sqrt(x)
+	}
+	fmt.Println("调用函数变量getSquareRoot", getSquareRoot(9))
+
+	//调用go方法
+	var c1 Circle
+	c1.radius = 10
+	fmt.Println("调用go的方法，圆面积为:", c1.getArea())
+
+	//调用闭包
+	nextNum := getSequence()
+	fmt.Println("打印闭包getSequence的输出", nextNum(), nextNum(), nextNum())
+	nextNum1 := getSequence()
+	fmt.Println("打印new闭包getSequence的输出", nextNum1(), nextNum1(), nextNum1())
+}
+
+//函数func function_name( [parameter list] ) [return_types] {函数体}
+func max(num1, num2 int) int {
+	var result int
+	if num1 > num2 {
+		result = num1
+	} else {
+		result = num2
+	}
+	return result
+}
+
+//函数多返还
+func swap(a, b string) (string, string) {
+	return b, a
+}
+
+//函数引用传递
+func swapIntRef(a *int, b *int) {
+	var tmp int
+	tmp = *a //a是一个pointer，*a是指向的数值
+	*a = *b
+	*b = tmp
+}
+
+//go语言方法：一个方法就是一个包含了接受者的函数，接受者可以是命名类型或者结构体类型的一个值或者是一个指针
+//一个定义在a对象之外的，a对象的函数
+type Circle struct {
+	radius float64
+}
+
+func (c Circle) getArea() float64 {
+	//c.radius 即为 Circle 类型对象中的属性
+	return 3.14 * c.radius * c.radius
+}
+
+//闭包函数
+func getSequence() func() int {
+	i := 0
+	return func() int {
+		i++
+		return i
+	}
 }
