@@ -276,6 +276,8 @@ LABEL:
 	//delete 元素
 	delete(countryCapMap, "Italy")
 	fmt.Println("delete删除italy之后的map:", countryCapMap)
+
+	// TODO: 语言递归练习http://www.runoob.com/go/go-recursion.html
 }
 
 //函数func function_name( [parameter list] ) [return_types] {函数体}
