@@ -1,8 +1,10 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"math"
+	"time"
 	"unsafe"
 )
 
@@ -66,12 +68,12 @@ func main() {
 
 	//常量左移实验
 	const (
-		i = 1 << iota //左移0位
-		j = 3 << iota //左移1位, 110
-		k             //左移2位, 1100
-		l             ////左移3位11000
+		ii = 1 << iota //左移0位
+		j  = 3 << iota //左移1位, 110
+		k              //左移2位, 1100
+		l              ////左移3位11000
 	)
-	fmt.Println("i=", i, "j=", j, "k=", k, "l=", l)
+	fmt.Println("i=", ii, "j=", j, "k=", k, "l=", l)
 
 	//算数运算符 +-*/% ++ --
 	//关系运算符 == != > < >= <=
@@ -219,8 +221,8 @@ LABEL:
 	var ptr [len(arr5)]*int
 	fmt.Println("指针数组的练习:")
 	for index := 0; index < len(arr5); index++ {
-		ptr[i] = &arr5[index] /* 整数地址赋值给指针数组 */
-		fmt.Printf("a[%d] = %d\n", i, *ptr[i])
+		ptr[index] = &arr5[index] /* 整数地址赋值给指针数组 */
+		fmt.Printf("a[%d] = %d\n", index, *ptr[index])
 	}
 
 	//结构体struct练习
@@ -277,7 +279,51 @@ LABEL:
 	delete(countryCapMap, "Italy")
 	fmt.Println("delete删除italy之后的map:", countryCapMap)
 
-	// TODO: 语言递归练习http://www.runoob.com/go/go-recursion.html
+	//语言递归练习http://www.runoob.com/go/go-recursion.html
+	fmt.Println("递归练习.fibonacci of 10", fibonacci(10))
+	for i := 0; i < 10; i++ {
+		fmt.Printf("%d\t", fibonacci(i))
+	}
+	fmt.Println()
+
+	//interface 接口
+	var phone Phone
+	phone = new(IPhone)
+	phone.call()
+	phone = new(NokiaPhone)
+	phone.call()
+
+	//exception 错误处理
+	if _, err := sqrt(-1); err.Error() != "" {
+		fmt.Println("errMsg is: ", err)
+	}
+
+	//并发 goroutine : go 函数名 {参数列表} 同一个程序中的所有 goroutine 共享同一个地址空间
+	fmt.Println("test go routine")
+	go say("hello") //一个新的线程
+	say("world")
+	//channel 通道 用来传递数据的一个数据结构，用于两个goroutine之间通讯
+	chanArr := []int{7, 2, 8, -9, 4, 0}
+	channel := make(chan int)
+	go sumChan(chanArr[:len(chanArr)/2], channel)
+	go sumChan(chanArr[len(chanArr)/2:], channel)
+	chanx, chany := <-channel, <-channel
+	fmt.Println("sumChan通道sum输出结果:", chanx, chany, chanx+chany)
+
+	//通道缓冲区域，如果缓存满了，发送方被阻塞
+	chanBuffer := make(chan int, 5)
+	chanBuffer <- 2 //因为 ch 是带缓冲的通道，我们可以同时发送两个数据,不用立刻同步读取数据
+	chanBuffer <- 1
+	fmt.Println("通道缓存数据读取", <-chanBuffer, <-chanBuffer)
+
+	//遍历通道 & 关闭通道 v, ok := <-ch, close(chan)
+	// chanBuffer <- 5
+	// chanBuffer <- 5
+	// chanBuffer <- 5
+	// for index := range chanBuffer {
+	// 	fmt.Println("channel buffer loop:", index)
+	// }
+	// close(chanBuffer)
 }
 
 //函数func function_name( [parameter list] ) [return_types] {函数体}
@@ -357,4 +403,54 @@ func printBook(book Books) {
 //slice
 func printSlice(x []int) {
 	fmt.Printf("len=%d, cap=%d, slice=%v\n", len(x), cap(x), x)
+}
+
+//递归 recursion 斐波那契数列
+func fibonacci(n int) int {
+	if n < 2 {
+		return n
+	}
+	return fibonacci(n-2) + fibonacci(n-1)
+}
+
+//interface
+type Phone interface {
+	call()
+}
+
+type NokiaPhone struct{}
+
+func (nokiaPhone NokiaPhone) call() {
+	fmt.Println("Calling from Nokia Phone")
+}
+
+type IPhone struct{}
+
+func (iphone IPhone) call() {
+	fmt.Println("Calling from iphone")
+}
+
+//error 错误处理
+func sqrt(f float32) (float32, error) {
+	if f < 0 {
+		return 0, errors.New("math square root of negative number")
+	}
+	return f, errors.New("")
+}
+
+//go goroutine
+func say(s string) {
+	for i := 0; i < 5; i++ {
+		time.Sleep(10 * time.Millisecond)
+		fmt.Println(s)
+	}
+}
+
+//channel <-用于追定通道方向
+func sumChan(s []int, c chan int) {
+	sum := 0
+	for _, v := range s {
+		sum += v
+	}
+	c <- sum //把sum发送到通道c
 }
