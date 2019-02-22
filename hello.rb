@@ -59,6 +59,7 @@ digits << 10
 digits | [11, 12] #过滤重复元素
 digits - [1, 2]
 digits.reverse! #反转数组
+puts "------------"
 
 # MAP 哈希
 months = Hash.new
@@ -81,7 +82,63 @@ puts "Time.now:" + Time.now.inspect
 puts "把时间输出为array:"
 p time1.to_a
 # time.year .month .wday .yday .hour .zone
+puts "------------"
 
+# range ''..''创建一个包含指定的最高值的范围 和 ''...''三点形式创建一个不包含指定的最高值的范围
+puts "---range练习---"
+digits = 0..9
+puts (1..5)        #==> 1, 2, 3, 4, 5
+puts (1...5)       #==> 1, 2, 3, 4
+puts ('a'..'d')    #==> 'a', 'b', 'c', 'd'
+puts "range转换为array #{(1...10).to_a}"
+puts "range内最小值min: #{(1...10).min}"
+ret = digits.reject { |i| i<5 }
+(1..2).each do |digit|
+  puts "在循环中 #{digit}"
+end
+puts "range内不符合条件的ret有 #{ret}"
+# 作为switch语句范围
+score = 60
+result = case score
+when 0..40
+  "糟糕分数"
+when 41..60
+  "快要及格"
+else
+  "default value"
+end
+puts result
+# 范围检测
+if ((1..10)===5)
+  puts "5在1..10之间"
+end
+puts "------------"
+
+
+# loop 迭代
+puts "---loop测试---"
+array = [1,2,3,4,5]
+array.each do |i|
+  puts i
+end
+# collect迭代器
+puts "collect迭代器测试，常用于对数组的每一个元素做小操作（不用于复制数组一般）"
+collect = Array.new
+collect = array.collect{|x| x*10}
+puts collect
+puts "------------"
+
+# 文件输入输出
+puts "Enter a value:"
+# val = gets #输入文件
+# put val
+print "print"
+print "print\n"
+
+# 打开关闭文件
+# File.open("filename", "mode") do | afile |
+  # process
+# end
 
 def hello
   out = "hello output"
