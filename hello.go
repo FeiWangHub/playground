@@ -324,6 +324,17 @@ LABEL:
 	// 	fmt.Println("channel buffer loop:", index)
 	// }
 	// close(chanBuffer)
+
+	// 测试struct的父子类pointer
+	type Human struct {
+		name string
+		age  int
+	}
+
+	type Dev struct {
+		Human
+		lang string
+	}
 }
 
 //函数func function_name( [parameter list] ) [return_types] {函数体}

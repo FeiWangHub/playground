@@ -140,6 +140,24 @@ print "print\n"
   # process
 # end
 
+# 异常处理
+begin
+  #可能会有异常的代码
+  puts "----异常处理测试练习----"
+  raise "raise 主动抛出异常"
+  puts "raise之后的代码"
+rescue #捕获指定类型的异常，默认StandardException
+  puts "rescue进入捕捉模块" #$! #表现异常信息 $@ #表示异常出现的代码位置
+  # retry #retry语句会从头开始执行begin
+else #如果没有异常 执行else
+ensure #不管有没有异常，进入此代码块
+  puts "ensure模块一定执行block"
+end
+puts "----异常处理结束----"
+puts ""
+
+# Catch Throw异常处理
+
 def hello
   out = "hello output"
   puts out
