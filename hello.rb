@@ -140,8 +140,6 @@ print "print\n"
   # process
 # end
 
-<<<<<<< HEAD
-=======
 # 异常处理
 begin
   #可能会有异常的代码
@@ -160,7 +158,6 @@ puts ""
 
 # Catch Throw异常处理
 
->>>>>>> 7df56303f0b9df4d3451e544e79928b82aedc42c
 def hello
   out = "hello output"
   puts out
