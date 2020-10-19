@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+    <script src="zh-CN.js"></script>
+    <script src="en-US.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <p>{{ $t("message.hello") }}</p>
+    <button @click="switchLang('zh')">改变语言</button>
+</div>
+</body>
+
+<script>
+var messages = {
+    // en: {
+    //     message: {
+    //         hello: 'hello world'
+    //     }
+    // },
+    // zh: {
+    //     message: {
+    //         hello: '你好世界'
+    //     }
+    // }
+    en: enUS,
+    zh: zhCN
+};
+
+var i18n = new VueI18n({
+    locale: 'en', // set locale
+    messages, // set locale messages
+})
+
+var vm = new Vue({
+    i18n,
+    el: '#app',
+    data: {
+        lang: 'en'
+    },
+    methods: {
+      switchLang(lang){
+          this.$i18n.locale = lang;
+      }
+    },
+});
+
+</script>
+
+</html>
