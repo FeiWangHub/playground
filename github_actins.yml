@@ -1,0 +1,86 @@
+name: action name
+
+on:
+  push
+#     branches:
+#       - *
+#       - 50_automate_build_test_env
+#    tags:
+#      - v1
+#    paths:
+#      - 'test/*'
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Set Env Vars
+        id: vars
+        # 引用branchName方法: ${{ steps.vars.outputs.branchName }}
+        run: echo ::set-output name=branchName::${GITHUB_REF#refs/*/}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.vars.outputs.branchName }}
+#           ref: '50_automate_build_test_env'
+
+     - name: Set up JDK 1.8
+       uses: actions/setup-java@v1
+       with:
+         java-version: 1.8
+
+     - name: Build with Maven
+       run: mvn clean package -Dmaven.test.skip=true
+       # echo spring.profiles.active=prod > src/main/resources/config/application.properties
+
+     - name: upload artifact
+       uses: actions/upload-artifact@v1
+       with:
+         name: test_artifact
+         path: target/hyzb_crm-1.0-SNAPSHOT.war
+
+     - name: SFTP Upload War to Aliyun
+       uses: appleboy/scp-action@master
+       env:
+         HOST: ${{ secrets.fei_aliyun_host }}
+         USERNAME: ${{ secrets.fei_aliyun_user }}
+         PORT: 22
+         KEY: ${{ secrets.aliyun_pk }}
+       with:
+         source: "target/hyzb_crm-1.0-SNAPSHOT.war"
+         target: "~/GITHUB-hyzb_crm-1.0-SNAPSHOT.war"
+         tar_tmp_path: "~/"
+         strip_components: 1
+
+     - name: SSH Build in Aliyun Test Env
+       uses: appleboy/ssh-action@master
+       with:
+         host: ${{ secrets.fei_aliyun_host }}
+         username: ${{ secrets.fei_aliyun_user }}
+         key: ${{ secrets.aliyun_pk }}
+         port: 22
+         script: |
+           date
+           echo "!!! Aliyun test env begin !!"
+           echo "add ssh key"
+           eval "$(ssh-agent -s)"
+           ssh-add ~/.ssh/id_rsa_appannie
+
+           echo "!!! Stop Tomcat"
+           service tomcat8 stop
+
+           cd /web/hony/hyzb_crm/
+           git pull origin ${{ github.ref }}:${{ github.ref }}
+           git checkout ${{ github.ref }}
+           mvn clean package -Dmaven.test.skip=true
+           cp target/hyzb_crm-1.0-SNAPSHOT.war /var/lib/tomcat8/webapps/hyzb_crm.war
+
+           echo "!!! Start Tomcat"
+           service tomcat8 start
+
+           date
+           echo "hyzb_crm.war in aliyun test env deploy completed !!"
+
+# pull request comment trigger https://github.com/marketplace/actions/pull-request-comment-trigger
