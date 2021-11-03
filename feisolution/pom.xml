@@ -12,7 +12,7 @@
 	<artifactId>feisolution</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>feisolution</name>
-	<description>Fei&apos;s CSS interview solution</description>
+	<description>Fei CSS interview solution</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
