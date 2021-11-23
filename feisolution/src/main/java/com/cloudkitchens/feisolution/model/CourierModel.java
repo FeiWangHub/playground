@@ -1,10 +1,12 @@
 package com.cloudkitchens.feisolution.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
 @Data
+@EqualsAndHashCode
 public class CourierModel {
 
     private String id;
