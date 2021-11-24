@@ -8,10 +8,13 @@ import java.util.Queue;
 @Data
 public class KitchenModel {
 
-//    private Queue<OrderModel> ordersDB; TODO 不一定需要
     private Queue<OrderModel> dispatchedOrders;
     private Queue<CourierModel> couriersDB;
     private KitchenStrategy kitchenStrategy;
+
+    public KitchenModel(KitchenStrategy strategy){
+        this.kitchenStrategy = strategy;
+    }
 
     /**
      * Kitchen received an order

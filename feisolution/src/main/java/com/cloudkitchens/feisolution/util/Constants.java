@@ -2,6 +2,11 @@ package com.cloudkitchens.feisolution.util;
 
 public class Constants {
 
+    public static final int ORDERS_PER_RECEIVE = 2;
+    public static final int RECEIVE_FREQUENCY_MILLIS = 2000;
+    public static final int COURIER_TRIP_TIME_MIN_SEC = 3;//inclusive
+    public static final int COURIER_TRIP_TIME_MAX_SEC = 15;//inclusive
+
     public static final String ORDERS_JSON = "[\n" +
             "    {\n" +
             "        \"id\": \"a8cfcb76-7f24-4420-a5ba-d46dd77bdffd\", \n" +
