@@ -3,6 +3,7 @@ package com.cloudkitchens.feisolution.model;
 import com.cloudkitchens.feisolution.service.dispatchService.KitchenStrategy;
 import lombok.Data;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 @Data
@@ -14,6 +15,7 @@ public class KitchenModel {
 
     public KitchenModel(KitchenStrategy strategy){
         this.kitchenStrategy = strategy;
+        this.dispatchedOrders = new LinkedList<>();
     }
 
     /**
@@ -30,6 +32,14 @@ public class KitchenModel {
      */
     public void receiveCourier(CourierModel courier){
         this.kitchenStrategy.onReceiveCourier(courier);
+    }
+
+    /**
+     * scan and dispatch ready orders
+     * different strategy defines 'ready' differently
+     */
+    public void scanAndDispatchReadyOrder(){
+        this.kitchenStrategy.scanAndDispatchReadyOrder();
     }
 
     /**

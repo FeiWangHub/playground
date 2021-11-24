@@ -15,6 +15,7 @@ public class OrderModel {
    private int prepTime;
    private String courierId;
    private Date receiveTime;
+   private Date readyTime;//Ready for pickup
    private Date dispatchTime;
    private OrderState state;
 

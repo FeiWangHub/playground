@@ -24,11 +24,11 @@ public class CourierModel {
     }
 
     /**
-     * @return 返还单位为秒,未dispatch的返回null
+     * @return 返还单位为秒,无dispatch和无arrive的返回0
      */
     public Float calWaitingTime(){
         if (this.arriveTime == null || this.dispatchTime == null){
-            return null;
+            return (float) 0;
         }
 
         Float diff = (float) ((this.dispatchTime.getTime() - this.arriveTime.getTime()) / 1000);

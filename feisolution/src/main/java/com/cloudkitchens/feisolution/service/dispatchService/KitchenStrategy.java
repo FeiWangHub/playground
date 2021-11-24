@@ -34,6 +34,12 @@ public abstract class KitchenStrategy {
     };
 
     /**
+     * scan and dispatch all ready orders
+     * different strategy defines 'ready' differently
+     */
+    public abstract void scanAndDispatchReadyOrder();
+
+    /**
      * Dispatch order out
      * @param order Model
      * @param courier Model
