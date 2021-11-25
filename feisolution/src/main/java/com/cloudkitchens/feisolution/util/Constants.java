@@ -4,9 +4,10 @@ public class Constants {
 
     public static final int KITCHEN_RUN_INTERVAL_MILLIS = 500;
     public static final int ORDERS_PER_RECEIVE = 2;
-    public static final int RECEIVE_FREQUENCY_MILLIS = 2000;
+    public static final int ORDER_RECEIVE_FREQUENCY_MILLIS = 1000;
     public static final int COURIER_TRIP_TIME_MIN_SEC = 3;//inclusive
     public static final int COURIER_TRIP_TIME_MAX_SEC = 15;//inclusive
+    public static final int MOCK_COURIER_QTY = 5;//mock quantity of couriers of kitchen
 
     public static final String ORDERS_JSON = "[\n" +
             "    {\n" +

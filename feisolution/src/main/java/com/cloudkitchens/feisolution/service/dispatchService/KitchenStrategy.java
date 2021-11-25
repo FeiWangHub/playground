@@ -1,55 +1,50 @@
 package com.cloudkitchens.feisolution.service.dispatchService;
 
 import com.cloudkitchens.feisolution.model.CourierModel;
-import com.cloudkitchens.feisolution.model.CourierState;
 import com.cloudkitchens.feisolution.model.OrderModel;
 import com.cloudkitchens.feisolution.model.OrderState;
 
-import java.util.Queue;
+import java.util.Date;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+import static com.cloudkitchens.feisolution.model.CourierState.DISPATCHED_TO_KITCHEN;
 
 public abstract class KitchenStrategy {
 
-    /** 已经收到的，尚未dispatch的订单 */
-    private Queue<OrderModel> ordersQueue;
+    /** 已经收到的，尚未pickup的订单 */
+    private ConcurrentLinkedQueue<OrderModel> ordersQueue;
 
-    /** 已经到达kitchen，尚未dispatch的couriers */
-    private Queue<CourierModel> couriersQueue;
+    /** 已收到order，尚未pickup的couriers */
+    private ConcurrentLinkedQueue<CourierModel> couriersQueue;
 
     /**
-     * 接受到新order时 更新状态并相应操作
+     * 接受到新order时 update order state, and dispatch courier
      * @param order OrderModel
      */
     public void onReceiveOrder(OrderModel order){
-        order.setState(OrderState.RECEIVED);
+        Date now = new Date();
+        order.setState(OrderState.RECEIVED, now);
         this.ordersQueue.add(order);
+
+        //DISPATCH AN COURIER
+        CourierModel c = new CourierModel();
+        c.setState(DISPATCHED_TO_KITCHEN, now);
+        this.couriersQueue.add(c);
+
+        this.assignCourierToOrder(order, c);
     };
 
     /**
-     * Couriers到店时 更新状态并相应操作
-     * @param courier CourierModel
+     * assign a courier for order
+     * @param order OrderModel
      */
-    public void onReceiveCourier(CourierModel courier){
-        courier.setState(CourierState.ARRIVED);
-        this.couriersQueue.add(courier);
-    };
+    public abstract void assignCourierToOrder(OrderModel order, CourierModel courier);
 
     /**
-     * scan and dispatch all ready orders
+     * scan and pick-up all ready orders
      * different strategy defines 'ready' differently
      */
-    public abstract void scanAndDispatchReadyOrder();
-
-    /**
-     * Dispatch order out
-     * @param order Model
-     * @param courier Model
-     */
-    public void dispatchOrder(OrderModel order, CourierModel courier){
-        order.setState(OrderState.DISPATCHED);
-        courier.setState(CourierState.DISPATCHED);
-        this.ordersQueue.remove(order);
-        this.couriersQueue.remove(courier);
-    };
+    public abstract void scanAndPickupReadyOrders();
 
     /**
      * Assign order to a courier

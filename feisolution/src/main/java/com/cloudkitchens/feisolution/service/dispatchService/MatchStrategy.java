@@ -6,7 +6,7 @@ package com.cloudkitchens.feisolution.service.dispatchService;
 public class MatchStrategy extends KitchenStrategy {
 
     @Override
-    public void scanAndDispatchReadyOrder() {
+    public void scanAndPickupReadyOrders() {
 
     }
 }

@@ -26,20 +26,13 @@ public class KitchenModel {
         this.kitchenStrategy.onReceiveOrder(order);
     }
 
-    /**
-     * An courier arrives to kitchen
-     * @param courier CourierModel
-     */
-    public void receiveCourier(CourierModel courier){
-        this.kitchenStrategy.onReceiveCourier(courier);
-    }
 
     /**
      * scan and dispatch ready orders
      * different strategy defines 'ready' differently
      */
-    public void scanAndDispatchReadyOrder(){
-        this.kitchenStrategy.scanAndDispatchReadyOrder();
+    public void scanAndPickupReadyOrders(){
+        this.kitchenStrategy.scanAndPickupReadyOrders();
     }
 
     /**

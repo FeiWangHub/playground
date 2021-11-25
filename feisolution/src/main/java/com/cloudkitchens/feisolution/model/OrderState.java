@@ -1,5 +1,7 @@
 package com.cloudkitchens.feisolution.model;
 
 public enum OrderState {
-    RECEIVED, DISPATCHED
+    RECEIVED,
+    READY,
+    PICKED_UP
 }

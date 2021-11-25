@@ -6,7 +6,7 @@ package com.cloudkitchens.feisolution.service.dispatchService;
 public class FIFOStrategy extends KitchenStrategy {
 
     @Override
-    public void scanAndDispatchReadyOrder() {
+    public void scanAndPickupReadyOrders() {
 
     }
 }
