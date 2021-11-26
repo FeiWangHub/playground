@@ -13,11 +13,13 @@ public class OrderModel {
    private String id;
    private String name;
    private int prepTime;
-   private String courierId;
    private Date receiveTime;
    private Date readyTime;//Ready for pickup
    private Date pickedUpTime;
+   private String courierId;
    private OrderState state;
+
+   private float courierWaitTime;//for interview statistic
 
    /**
     * @return 返还单位为秒,未完成的订单返回null
@@ -27,7 +29,7 @@ public class OrderModel {
          return null;
       }
 
-      Float diff = (float) ((this.pickedUpTime.getTime() - this.receiveTime.getTime()) / 1000);
+      Float diff = (float) ((this.pickedUpTime.getTime() - this.readyTime.getTime()) / 1000);
       return diff;
    }
 
@@ -47,7 +49,7 @@ public class OrderModel {
             break;
          case PICKED_UP:
             this.setPickedUpTime(time);
-            System.out.println(String.format("%s: Order %s is picked up by %s.", DateUtil.HHmmssSSS.format(time), this.getId(), this.getCourierId()));
+            System.out.println(String.format("%s: Order %s is picked up by courier %s.", DateUtil.HHmmssSSS.format(time), this.getId(), this.getCourierId()));
             break;
          default:
             break;

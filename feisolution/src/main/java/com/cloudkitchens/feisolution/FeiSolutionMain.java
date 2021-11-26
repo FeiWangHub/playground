@@ -26,6 +26,7 @@ public class FeiSolutionMain {
 
         //start receiving orders, wait until all orders dispatched
         while (totalSize != kitchen.getDispatchedOrders().size()) {
+            System.out.println();
             //1 mock receive certain qty of orders every second
             for (int i = 0; i < Constants.ORDERS_PER_RECEIVE; i++) {
                 if (ordersPool.isEmpty()) {
@@ -38,17 +39,26 @@ public class FeiSolutionMain {
             kitchen.updateCouriersArriveState();
             kitchen.updateOrderReadyState();
 
-            //3 scan and dispatch ready orders
-//            kitchen.scanAndPickupReadyOrders();
-
-            //4 mock time increment
+            //3 mock time increment
             Thread.sleep(Constants.ORDER_RECEIVE_FREQUENCY_SEC * 1000);
-            System.out.println(" ");
-            System.out.println(String.format("完成进度%s/%s", kitchen.getDispatchedOrders().size(), totalSize));
-            System.out.println(String.format("---- Time incremented to %s ----", DateUtil.HHmmssSSS.format(new Date())));
+            System.out.println(String.format("---- Progress %s/%s, Time incremented to %s ----",
+                    kitchen.getDispatchedOrders().size(),
+                    totalSize,
+                    DateUtil.HHmmssSSS.format(new Date())));
         }
 
-        //print all statistics TODO
+        //print all statistics
+        System.out.println();
+        System.out.println("---- Final Statistics -----");
+        float sumFoodWaitTime = 0, sumCourierWaitTime = 0;
+        for(OrderModel o: kitchen.getDispatchedOrders()){
+            sumFoodWaitTime += o.calWaitingTime();
+            sumCourierWaitTime += o.getCourierWaitTime();
+            System.out.println(String.format("Food: %s, Courier %s", o.calWaitingTime(), o.getCourierWaitTime()));
+        }
+
+        System.out.println(String.format("Average Food Wait Time: %s seconds", sumFoodWaitTime/totalSize));
+        System.out.println(String.format("Average Courier Wait Time: %s seconds", sumCourierWaitTime/totalSize));
     }
 
 }
