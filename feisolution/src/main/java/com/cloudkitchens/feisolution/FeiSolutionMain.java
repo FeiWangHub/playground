@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.cloudkitchens.feisolution.model.KitchenModel;
 import com.cloudkitchens.feisolution.model.OrderModel;
 import com.cloudkitchens.feisolution.service.dispatchService.FIFOStrategy;
+import com.cloudkitchens.feisolution.service.dispatchService.MatchStrategy;
 import com.cloudkitchens.feisolution.util.Constants;
 import com.cloudkitchens.feisolution.util.DateUtil;
 
@@ -22,7 +23,8 @@ public class FeiSolutionMain {
         System.out.println(String.format("---- Kitchen Started, time now is %s ----", DateUtil.HHmmssSSS.format(new Date())));
 
         //init Kitchen FIFO
-        KitchenModel kitchen = new KitchenModel(new FIFOStrategy());
+//        KitchenModel kitchen = new KitchenModel(new FIFOStrategy());
+        KitchenModel kitchen = new KitchenModel(new MatchStrategy());
 
         //start receiving orders, wait until all orders dispatched
         while (totalSize != kitchen.getDispatchedOrders().size()) {

@@ -43,7 +43,6 @@ public class FIFOStrategy extends KitchenStrategy {
                     continue;
                 }
 
-                //TODO 抽象下边的代码
                 courier.setState(PICKED_UP_ORDER, now);
                 order.setCourierId(courier.getId());
                 order.setState(PICKED_UP, now);
