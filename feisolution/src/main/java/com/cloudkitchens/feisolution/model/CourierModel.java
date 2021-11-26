@@ -45,14 +45,14 @@ public class CourierModel {
             case DISPATCHED_TO_KITCHEN:
                 this.setDispatchTime(time);
                 this.setEstArriveTime(calMockArriveTime(time));
-                System.out.printf("%s: Courier %s is dispatched to kitchen.", DateUtil.HHmmssSSS.format(time), this.getId());
+                System.out.println(String.format("%s: Courier %s is dispatched to kitchen.", DateUtil.HHmmssSSS.format(time), this.getId()));
                 break;
             case ARRIVED_KITCHEN:
-                System.out.printf("%s: Courier %s arrived kitchen.", DateUtil.HHmmssSSS.format(time), this.getId());
+                System.out.println(String.format("%s: Courier %s arrived kitchen.", DateUtil.HHmmssSSS.format(time), this.getId()));
                 break;
             case PICKED_UP_ORDER:
                 this.setPickUpTime(time);
-                System.out.printf("%s: Courier %s picked up order.", DateUtil.HHmmssSSS.format(time), this.getId());
+                System.out.println(String.format("%s: Courier %s picked up order.", DateUtil.HHmmssSSS.format(time), this.getId()));
                 break;
             default:
                 break;

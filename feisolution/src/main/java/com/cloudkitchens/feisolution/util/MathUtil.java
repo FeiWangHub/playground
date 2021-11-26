@@ -7,7 +7,7 @@ public class MathUtil {
     /**
      * boundary is inclusive
      */
-    public static int getRandomWithinRange(int max, int min){
+    public static int getRandomWithinRange(int min, int max){
         Random rand = new Random();
         return rand.nextInt(max-min+1)+min;
     }

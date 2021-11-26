@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.Date;
-import java.util.UUID;
 
 @Data
 @EqualsAndHashCode
@@ -19,10 +18,6 @@ public class OrderModel {
    private Date readyTime;//Ready for pickup
    private Date pickedUpTime;
    private OrderState state;
-
-   public OrderModel(){
-      this.id = UUID.randomUUID().toString();
-   }
 
    /**
     * @return 返还单位为秒,未完成的订单返回null
@@ -44,15 +39,15 @@ public class OrderModel {
       switch (state) {
          case RECEIVED:
             this.setReceiveTime(time);
-            System.out.printf("%s: Order %s received.", DateUtil.HHmmssSSS.format(time), this.getId());
+            System.out.println(String.format("%s: Order %s received.", DateUtil.HHmmssSSS.format(time), this.getId()));
             break;
          case READY:
             this.setReadyTime(time);
-            System.out.printf("%s: Order %s is ready for pickup.", DateUtil.HHmmssSSS.format(time), this.getId());
+            System.out.println(String.format("%s: Order %s is ready for pickup.", DateUtil.HHmmssSSS.format(time), this.getId()));
             break;
          case PICKED_UP:
             this.setPickedUpTime(time);
-            System.out.printf("%s: Order %s is picked up by %s.", DateUtil.HHmmssSSS.format(time), this.getId(), this.getCourierId());
+            System.out.println(String.format("%s: Order %s is picked up by %s.", DateUtil.HHmmssSSS.format(time), this.getId(), this.getCourierId()));
             break;
          default:
             break;

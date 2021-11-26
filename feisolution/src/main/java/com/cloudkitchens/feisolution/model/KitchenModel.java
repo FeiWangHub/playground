@@ -10,7 +10,6 @@ import java.util.Queue;
 public class KitchenModel {
 
     private Queue<OrderModel> dispatchedOrders;
-    private Queue<CourierModel> couriersDB;
     private KitchenStrategy kitchenStrategy;
 
     public KitchenModel(KitchenStrategy strategy){
@@ -26,13 +25,32 @@ public class KitchenModel {
         this.kitchenStrategy.onReceiveOrder(order);
     }
 
+    /**
+     * check and Update courier's arrive state
+     * (For interview mock purpose, in real world onCourierArrive is an event)
+     */
+    public void updateCouriersArriveState(){
+        this.kitchenStrategy.updateCouriersArriveState();
+        this.scanAndPickupReadyOrders();
+    }
+
+    /**
+     * check and update order's ready state
+     * (For interview mock purpose, in real world onOrderReady is an event)
+     */
+    public void updateOrderReadyState(){
+        this.kitchenStrategy.updateOrderReadyState();
+        this.scanAndPickupReadyOrders();
+    }
 
     /**
      * scan and dispatch ready orders
      * different strategy defines 'ready' differently
      */
     public void scanAndPickupReadyOrders(){
-        this.kitchenStrategy.scanAndPickupReadyOrders();
+        this.dispatchedOrders.addAll(
+            this.kitchenStrategy.scanAndPickupReadyOrders()
+        );
     }
 
     /**

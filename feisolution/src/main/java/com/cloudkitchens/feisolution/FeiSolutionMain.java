@@ -6,19 +6,14 @@ import com.cloudkitchens.feisolution.model.OrderModel;
 import com.cloudkitchens.feisolution.service.dispatchService.FIFOStrategy;
 import com.cloudkitchens.feisolution.util.Constants;
 import com.cloudkitchens.feisolution.util.DateUtil;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-@SpringBootApplication
-public class FeiSolutionApplication {
+public class FeiSolutionMain {
 
     public static void main(String[] args) throws InterruptedException {
-        SpringApplication.run(FeiSolutionApplication.class, args);
-
         //init mock order data
         List<OrderModel> ordersList = JSON.parseArray(Constants.ORDERS_JSON, OrderModel.class);
         LinkedList<OrderModel> ordersPool = new LinkedList<>(ordersList);
@@ -41,9 +36,10 @@ public class FeiSolutionApplication {
 
             //2 update couriers' arrive state
             kitchen.updateCouriersArriveState();
+            kitchen.updateOrderReadyState();
 
             //3 scan and dispatch ready orders
-            kitchen.scanAndPickupReadyOrders();
+//            kitchen.scanAndPickupReadyOrders();
 
             //4 mock time increment
             Thread.sleep(Constants.ORDER_RECEIVE_FREQUENCY_SEC * 1000);
