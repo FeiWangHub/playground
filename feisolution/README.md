@@ -9,8 +9,8 @@ For further reference, please consider the following sections:
 ### Build & run Commands
 * Build with Tests: `mvn clean package`
 * Run Tests: `mvn test`
-* Run FIFO with jar: `java -jar feisolution-1.0.jar TODO`
-* Run Matched with jar: `java -jar feisolution-1.0.jar TODO`
+* Run FIFO strategy: `java -jar feisolution-1.0.jar fifo`
+* Run Matched strategy: `java -jar feisolution-1.0.jar matched`
 
 ### Result Samples
 For interviewer's convenience, I run each strategy 4 times and result as follows:

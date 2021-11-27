@@ -15,16 +15,22 @@ import java.util.List;
 public class FeiSolutionMain {
 
     public static void main(String[] args) throws InterruptedException {
+        System.out.println(String.format("---- Kitchen Started, time now is %s ----", DateUtil.HHmmssSSS.format(new Date())));
+
+        //init Kitchen with user input, use FIFO as default strategy
+        KitchenModel kitchen;
+        if(args.length != 0 && args[0].equals("matched")){
+            kitchen = new KitchenModel(new MatchStrategy());
+            System.out.println("--- using Matched strategy ---");
+        }else{
+            kitchen = new KitchenModel(new FIFOStrategy());
+            System.out.println("--- using FIFO strategy ---");
+        }
+
         //init mock order data
         List<OrderModel> ordersList = JSON.parseArray(Constants.ORDERS_JSON, OrderModel.class);
         LinkedList<OrderModel> ordersPool = new LinkedList<>(ordersList);
         final int totalSize = ordersPool.size();
-
-        System.out.println(String.format("---- Kitchen Started, time now is %s ----", DateUtil.HHmmssSSS.format(new Date())));
-
-        //init Kitchen FIFO
-//        KitchenModel kitchen = new KitchenModel(new FIFOStrategy());
-        KitchenModel kitchen = new KitchenModel(new MatchStrategy());
 
         //start receiving orders, wait until all orders dispatched
         while (totalSize != kitchen.getDispatchedOrders().size()) {
