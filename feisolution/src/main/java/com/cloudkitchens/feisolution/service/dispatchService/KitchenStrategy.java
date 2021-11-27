@@ -4,6 +4,7 @@ import com.cloudkitchens.feisolution.model.CourierModel;
 import com.cloudkitchens.feisolution.model.OrderModel;
 import com.cloudkitchens.feisolution.model.OrderState;
 import com.cloudkitchens.feisolution.util.DateUtil;
+import lombok.Data;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -13,6 +14,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import static com.cloudkitchens.feisolution.model.CourierState.ARRIVED_KITCHEN;
 import static com.cloudkitchens.feisolution.model.CourierState.DISPATCHED_TO_KITCHEN;
 
+@Data
 public abstract class KitchenStrategy {
 
     /** 已经收到的，尚未pickup的订单 */
@@ -86,14 +88,5 @@ public abstract class KitchenStrategy {
      * @return list of orders picked up
      */
     public abstract List<OrderModel> scanAndPickupReadyOrders();
-
-    /**
-     * Assign order to a courier
-     * @param order OrderModel
-     * @param courier_id String
-     */
-    public void assignCourier(OrderModel order, String courier_id){
-        order.setCourierId(courier_id);
-    };
 
 }
