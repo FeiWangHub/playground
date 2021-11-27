@@ -2,7 +2,7 @@ package com.cloudkitchens.feisolution.model;
 
 import com.cloudkitchens.feisolution.service.dispatchService.FIFOStrategy;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 

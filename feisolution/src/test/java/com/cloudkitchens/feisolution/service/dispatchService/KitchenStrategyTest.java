@@ -5,7 +5,7 @@ import com.cloudkitchens.feisolution.model.OrderModel;
 import com.cloudkitchens.feisolution.model.OrderState;
 import com.cloudkitchens.feisolution.util.DateUtil;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
