@@ -6,9 +6,9 @@ For further reference, please consider the following sections:
 * Java JDK version 1.8.0_73
 * Apache Maven Version 3.3.3
 
-### Build & run Commands
+### Build & Run Commands
 * Build with Tests: `mvn clean package`
-* Run Tests: `mvn test`
+* Run Tests only: `mvn test`
 * Run FIFO strategy: `java -jar feisolution-1.0.jar fifo`
 * Run Matched strategy: `java -jar feisolution-1.0.jar matched`
 
