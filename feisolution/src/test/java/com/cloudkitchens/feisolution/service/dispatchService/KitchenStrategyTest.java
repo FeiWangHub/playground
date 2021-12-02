@@ -52,7 +52,7 @@ public class KitchenStrategyTest {
         k.onReceiveOrder(o);
 
         //make order ready
-        Date mockReceiveTime = DateUtil.addSecond(new Date(), -1);
+        Date mockReceiveTime = DateUtil.addSecond(new Date(), -10);
         o.setReadyTime(mockReceiveTime);
         o.setPrepTime(0);
         k.updateOrderReadyState();

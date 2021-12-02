@@ -54,12 +54,12 @@ public class KitchenModel {
     }
 
     /**
-     * switch strategy in runtime
+     * switch strategy in runtime(not supported yet)
      * TODO actually this should also copy the queue data stored in strategy
      * omitted for interview
      * @param k KitchenStrategy
      */
-    public void setKitchenStrategy(KitchenStrategy k){
+    private void setKitchenStrategy(KitchenStrategy k){
         this.kitchenStrategy = k;
     }
 
