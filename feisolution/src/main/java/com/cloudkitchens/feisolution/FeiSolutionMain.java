@@ -17,7 +17,7 @@ public class FeiSolutionMain {
     public static void main(String[] args) throws InterruptedException {
         System.out.println(String.format("---- Kitchen Started, time now is %s ----", DateUtil.HHmmssSSS.format(new Date())));
 
-        //init Kitchen with user input, use FIFO as default strategy
+        //1 init Kitchen with user input, use FIFO as default strategy
         KitchenModel kitchen;
         if(args.length != 0 && args[0].equals("matched")){
             kitchen = new KitchenModel(new MatchStrategy());
@@ -27,15 +27,15 @@ public class FeiSolutionMain {
             System.out.println("--- using FIFO strategy ---");
         }
 
-        //init mock order data
+        //2 init mock order data
         List<OrderModel> ordersList = JSON.parseArray(Constants.ORDERS_JSON, OrderModel.class);
         LinkedList<OrderModel> ordersPool = new LinkedList<>(ordersList);
         final int totalSize = ordersPool.size();
 
-        //start receiving orders, wait until all orders dispatched
+        //3 mock start receiving orders, wait until all orders dispatched
         while (totalSize != kitchen.getDispatchedOrders().size()) {
             System.out.println();
-            //1 mock receive certain qty of orders every second
+            //3.1 mock receive certain qty of orders every second
             for (int i = 0; i < Constants.ORDERS_PER_RECEIVE; i++) {
                 if (ordersPool.isEmpty()) {
                     break;
@@ -43,11 +43,11 @@ public class FeiSolutionMain {
                 kitchen.receiveOrder(ordersPool.pop());
             }
 
-            //2 update couriers' arrive state
+            //3.2 update couriers' arrive state
             kitchen.updateCouriersArriveState();
             kitchen.updateOrderReadyState();
 
-            //3 mock time increment
+            //3.2 mock time increment
             Thread.sleep(Constants.ORDER_RECEIVE_FREQUENCY_SEC * 1000);
             System.out.println(String.format("---- Progress %s/%s, Time incremented to %s ----",
                     kitchen.getDispatchedOrders().size(),
@@ -55,14 +55,18 @@ public class FeiSolutionMain {
                     DateUtil.HHmmssSSS.format(new Date())));
         }
 
-        //print all statistics
+        //4 print all statistics
+        printStatistics(kitchen, totalSize);
+    }
+
+    private static void printStatistics(KitchenModel kitchen, int totalSize) {
         System.out.println();
         System.out.println("---- Final Statistics -----");
         float sumFoodWaitTime = 0, sumCourierWaitTime = 0;
         for(OrderModel o: kitchen.getDispatchedOrders()){
             sumFoodWaitTime += o.calWaitingTime();
             sumCourierWaitTime += o.getCourierWaitTime();
-            System.out.println(String.format("Food: %s, Courier %s", o.calWaitingTime(), o.getCourierWaitTime()));
+            //System.out.println(String.format("Food: %s, Courier %s", o.calWaitingTime(), o.getCourierWaitTime()));
         }
 
         System.out.println(String.format("Average Food Wait Time: %s seconds", sumFoodWaitTime/totalSize));

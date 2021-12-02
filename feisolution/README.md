@@ -11,6 +11,8 @@ For further reference, please consider the following sections:
 * Run Tests only: `mvn test`
 * Run FIFO strategy: `java -jar feisolution-1.0.jar fifo`
 * Run Matched strategy: `java -jar feisolution-1.0.jar matched`
+* (Main entry class: `FeiSolutionMain.java`)
+* (Note: all datetime logged in the console, is "the time when event actually happened", it doesn't print in the order of time for now)
 
 ### Result Samples
 For interviewer's convenience, I run each strategy 4 times and result as follows:
