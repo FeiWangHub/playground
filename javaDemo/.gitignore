@@ -1,0 +1,36 @@
+### Maven Related https://github.com/github/gitignore/blob/master/Maven.gitignore ###
+target/
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+### JetBrain IDEA related https://github.com/JetBrains/idea-gitignore/blob/master/.gitignore ###
+.idea/
+*.iml
+out/
+gen/
+idea-gitignore.jar
+resources/templates.list
+resources/gitignore/*
+build/
+build.properties
+junit*.properties
+IgnoreLexer.java~
+.gradle
+
+### Java Related https://github.com/github/gitignore/blob/master/Java.gitignore ###
+# Compiled class file
+*.class
+*.ctxt
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+
+### OS Related ###
+.DS_Store
+
+### Project Related ###
