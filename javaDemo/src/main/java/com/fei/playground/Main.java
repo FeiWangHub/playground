@@ -6,15 +6,13 @@ import java.util.Date;
 
 public class Main {
 
-    public static void main(String[] args){
+    /**
+     * Fetch the following csv and get top 10 rating movies.
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
         System.out.println(String.format("---- Started, time now is %s ----", DateUtil.HHmmssSSS.format(new Date())));
 
-        //1 init with user input
-        if(args.length != 0 && args[0].equals("matched")){
-
-        }else{
-
-        }
     }
-
 }
