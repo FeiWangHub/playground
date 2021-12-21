@@ -1,4 +1,4 @@
-package com.fei.playground.algorithm;
+package com.fei.playground;
 
 import cn.hutool.http.HttpUtil;
 import com.fei.playground.util.DateUtil;
