@@ -1,0 +1,75 @@
+package com.fei.playground.algorithm;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ * 给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
+ * 示例：
+ * 二叉树：[3,9,20,null,null,15,7],
+ *
+ * 来源：力扣（LeetCode）
+ * 链接：https://leetcode-cn.com/problems/binary-tree-level-order-traversal
+ * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ */
+public class BTreeGetEachLevel {
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if(root==null){
+            return result;
+        }
+
+        //1. find all nodes of current level
+        ArrayList<TreeNode> curLevel = new ArrayList<>();
+        ArrayList<TreeNode> nextLevel = new ArrayList<>();
+        nextLevel.add(root);
+
+        //for each node in current
+        while(nextLevel.size()!=0){
+            curLevel = nextLevel;
+            nextLevel = new ArrayList<TreeNode>();
+            ArrayList<Integer> curLevelInt = new ArrayList<Integer>();
+
+            Iterator<TreeNode> it = curLevel.iterator();
+            while(it.hasNext()){
+                TreeNode n = it.next();
+                curLevelInt.add(n.val);
+
+                //1. pushin left
+                if(n.left != null){
+                    nextLevel.add(n.left);
+                }
+
+                //2. pushin right
+                if(n.right != null){
+                    nextLevel.add(n.right);
+                }
+            }
+            result.add(curLevelInt);
+        }
+
+        return result;
+    }
+
+}

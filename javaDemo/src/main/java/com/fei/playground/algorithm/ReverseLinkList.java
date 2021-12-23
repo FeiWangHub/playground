@@ -45,6 +45,22 @@ public class ReverseLinkList {
         return pre;
     }
 
+    public ListNode reverseListNew(ListNode head) {
+
+        ListNode lastReversed = null;
+        ListNode currToReverse = head;
+        ListNode nextToReverse = null;
+
+        while(currToReverse != null){
+            nextToReverse = currToReverse.next;
+            currToReverse.next = lastReversed;
+            lastReversed = currToReverse;
+            currToReverse = nextToReverse;
+        }
+
+        return lastReversed;
+    }
+
     public static void main(String[] args) {
         // [1,2,3,4,5]
     }
