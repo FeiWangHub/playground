@@ -1,6 +1,7 @@
 package com.cloudkitchens.feisolution.service.dispatchService;
 
 import com.cloudkitchens.feisolution.model.CourierState;
+import com.cloudkitchens.feisolution.model.KitchenModel;
 import com.cloudkitchens.feisolution.model.OrderModel;
 import com.cloudkitchens.feisolution.model.OrderState;
 import org.junit.Assert;
@@ -13,59 +14,59 @@ public class FIFOStrategyTest {
 
     @Test
     public void testScanAndPickupReadyOrders_noOrderReady(){
-        FIFOStrategy f = new FIFOStrategy();
+        KitchenModel k = new KitchenModel(new FIFOStrategy());
 
         //make sure order not ready
         OrderModel o = new OrderModel();
-        f.onReceiveOrder(o);
+        k.receiveOrder(o);
         o.setState(OrderState.RECEIVED, new Date());
-        List<OrderModel> result =  f.scanAndPickupReadyOrders();
+        List<OrderModel> result =  k.scanAndPickupReadyOrders();
 
         Assert.assertEquals(result.size(), 0);
 
-        Assert.assertEquals(f.getCouriersQueue().size(), 1);
-        Assert.assertEquals(f.getOrdersQueue().size(), 1);
-        Assert.assertEquals(f.getOrdersQueue().peek().getState(), OrderState.RECEIVED);
+        Assert.assertEquals(k.getCouriersQueue().size(), 1);
+        Assert.assertEquals(k.getOrdersQueue().size(), 1);
+        Assert.assertEquals(k.getOrdersQueue().peek().getState(), OrderState.RECEIVED);
     }
 
     @Test
     public void testScanAndPickupReadyOrders_noCourierReady(){
-        FIFOStrategy f = new FIFOStrategy();
+        KitchenModel k = new KitchenModel(new FIFOStrategy());
 
         //order is ready but courier is not arrived
         OrderModel o = new OrderModel();
-        f.onReceiveOrder(o);
+        k.receiveOrder(o);
         o.setState(OrderState.READY, new Date());
-        f.getCouriersQueue().peek().setState(CourierState.DISPATCHED_TO_KITCHEN, new Date());
-        List<OrderModel> result =  f.scanAndPickupReadyOrders();
+        k.getCouriersQueue().peek().setState(CourierState.DISPATCHED_TO_KITCHEN, new Date());
+        List<OrderModel> result =  k.scanAndPickupReadyOrders();
 
         Assert.assertEquals(result.size(), 0);
 
-        Assert.assertEquals(f.getCouriersQueue().size(), 1);
-        Assert.assertEquals(f.getOrdersQueue().size(), 1);
-        Assert.assertEquals(f.getOrdersQueue().peek().getState(), OrderState.READY);
+        Assert.assertEquals(k.getCouriersQueue().size(), 1);
+        Assert.assertEquals(k.getOrdersQueue().size(), 1);
+        Assert.assertEquals(k.getOrdersQueue().peek().getState(), OrderState.READY);
     }
 
     @Test
     public void testScanAndPickupReadyOrders_1CourierArrived(){
-        FIFOStrategy f = new FIFOStrategy();
+        KitchenModel k = new KitchenModel(new FIFOStrategy());
 
         // 2 orders are ready, and couriers is arrived
         OrderModel o1 = new OrderModel();
         OrderModel o2 = new OrderModel();
-        f.onReceiveOrder(o1);
-        f.onReceiveOrder(o2);
+        k.receiveOrder(o1);
+        k.receiveOrder(o2);
         o1.setState(OrderState.READY, new Date());
         o2.setState(OrderState.READY, new Date());
-        f.getCouriersQueue().peek().setState(CourierState.ARRIVED_KITCHEN, new Date());
-        List<OrderModel> result =  f.scanAndPickupReadyOrders();
+        k.getCouriersQueue().peek().setState(CourierState.ARRIVED_KITCHEN, new Date());
+        List<OrderModel> result =  k.scanAndPickupReadyOrders();
 
         Assert.assertEquals(result.size(), 1);
 
-        Assert.assertEquals(f.getCouriersQueue().size(), 1);//1 picked, and 1 gone
-        Assert.assertEquals(f.getCouriersQueue().peek().getState(), CourierState.DISPATCHED_TO_KITCHEN);
-        Assert.assertEquals(f.getOrdersQueue().size(), 1);
-        Assert.assertEquals(f.getOrdersQueue().peek().getState(), OrderState.READY);
+        Assert.assertEquals(k.getCouriersQueue().size(), 1);//1 picked, and 1 gone
+        Assert.assertEquals(k.getCouriersQueue().peek().getState(), CourierState.DISPATCHED_TO_KITCHEN);
+        Assert.assertEquals(k.getOrdersQueue().size(), 1);
+        Assert.assertEquals(k.getOrdersQueue().peek().getState(), OrderState.READY);
     }
 
 }

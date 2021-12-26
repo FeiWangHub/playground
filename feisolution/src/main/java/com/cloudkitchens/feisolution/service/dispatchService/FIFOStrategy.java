@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static com.cloudkitchens.feisolution.model.CourierState.ARRIVED_KITCHEN;
 import static com.cloudkitchens.feisolution.model.CourierState.PICKED_UP_ORDER;
@@ -20,26 +21,30 @@ import static com.cloudkitchens.feisolution.model.OrderState.READY;
  * If there are no available orders, couriers wait for the next available one.
  * When there are multiple couriers waiting, the next available order is assigned to the earliest​ a​rrived courier.
  */
-public class FIFOStrategy extends KitchenStrategy {
+public class FIFOStrategy implements KitchenStrategy {
 
     @Override
-    public synchronized List<OrderModel> scanAndPickupReadyOrders() {
+    public void afterReceiveOrder(OrderModel order, CourierModel courier) {
+    }
+
+    @Override
+    public List<OrderModel> scanAndPickupReadyOrders(ConcurrentLinkedQueue<OrderModel> ordersQueue, ConcurrentLinkedQueue<CourierModel> couriersQueue) {
         ArrayList<OrderModel> pickedUpOrders = new ArrayList<>();
         Date now = new Date();
 
-        Iterator<CourierModel> courier_it = this.couriersQueue.iterator();
-        Iterator<OrderModel> order_it = this.ordersQueue.iterator();
+        Iterator<CourierModel> courier_it = couriersQueue.iterator();
+        Iterator<OrderModel> order_it = ordersQueue.iterator();
 
-        while(courier_it.hasNext() && order_it.hasNext()){
+        while (courier_it.hasNext() && order_it.hasNext()) {
             CourierModel courier = courier_it.next();
-            if(courier.getState() != ARRIVED_KITCHEN){
+            if (courier.getState() != ARRIVED_KITCHEN) {
                 continue;
             }
 
             //try find a ready order
-            while (order_it.hasNext()){
+            while (order_it.hasNext()) {
                 OrderModel order = order_it.next();
-                if(order.getState() != READY){
+                if (order.getState() != READY) {
                     continue;
                 }
 

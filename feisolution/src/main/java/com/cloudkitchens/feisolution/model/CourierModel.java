@@ -16,7 +16,7 @@ public class CourierModel {
 
     private String id;
     private Date dispatchTime;//order received time
-    private Date estArriveTime;//estimated return time, following uniform distribution
+    private Date estArriveTime;//estimated time of arriving kitchen, following uniform distribution
     private Date pickUpTime;//order picked up time
     private CourierState state;
 
@@ -63,6 +63,7 @@ public class CourierModel {
     private void setState(CourierState state){}
 
     /**
+     * TODO 拆分到UTIL
      * 随机分配预期时间
      * @param orderReceiveTime order receive time
      * @return arrive time

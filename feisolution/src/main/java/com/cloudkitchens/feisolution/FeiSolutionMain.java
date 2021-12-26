@@ -12,6 +12,14 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 3. 订单信息放在kitchen，不在strategy中 done
+ * 4. 重新梳理synchronized，也许不需要用ConcurrentLinkedQueue
+ * 5. maybe 新起一个线程模拟订单到达，一个线程监控courier，一个监控
+ * 6. maybe 尝试多个线程访问厨房测试
+ * 7 调换所有assertEquals中 expected和actual的位置
+ * TODO 是否要将kitchen的updateOrderReadyState 改成onCourierArrived和onOrderReady? 变成事件，完全模拟现实?
+ */
 public class FeiSolutionMain {
 
     public static void main(String[] args) throws InterruptedException {
@@ -46,6 +54,7 @@ public class FeiSolutionMain {
             //3.2 update couriers' arrive state
             kitchen.updateCouriersArriveState();
             kitchen.updateOrderReadyState();
+            kitchen.scanAndPickupReadyOrders();
 
             //3.2 mock time increment
             Thread.sleep(Constants.ORDER_RECEIVE_FREQUENCY_SEC * 1000);
