@@ -17,7 +17,7 @@ public class CourierModelTest {
         co.setEstArriveTime(now);
         co.setPickUpTime(nowPlus1);
 
-        Assert.assertEquals(new Float(1), co.calWaitingTime());
+        Assert.assertEquals(new Long(1000), co.calWaitingTime());
     }
 
 }

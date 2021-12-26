@@ -13,11 +13,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 3. 订单信息放在kitchen，不在strategy中 done
+ * 2021.12.24日志
+ * - 输出的统计时间单位 从秒改为毫秒
+ * - 改进策略模式的代码结构，将KitchenStrategy从抽象类改为接口
+ * - 修复UT中assertEquals(expected, actual)的参数位置
+ * -
  * 4. 重新梳理synchronized，也许不需要用ConcurrentLinkedQueue
  * 5. maybe 新起一个线程模拟订单到达，一个线程监控courier，一个监控
  * 6. maybe 尝试多个线程访问厨房测试
- * 7 调换所有assertEquals中 expected和actual的位置
+ * TODO If there are multiple orders available, pick up an arbitrary order.
  * TODO 是否要将kitchen的updateOrderReadyState 改成onCourierArrived和onOrderReady? 变成事件，完全模拟现实?
  */
 public class FeiSolutionMain {
@@ -75,11 +79,11 @@ public class FeiSolutionMain {
         for(OrderModel o: kitchen.getDispatchedOrders()){
             sumFoodWaitTime += o.calWaitingTime();
             sumCourierWaitTime += o.getCourierWaitTime();
-            //System.out.println(String.format("Food: %s, Courier %s", o.calWaitingTime(), o.getCourierWaitTime()));
+            System.out.println(String.format("Food: %s, Courier %s", o.calWaitingTime(), o.getCourierWaitTime()));
         }
 
-        System.out.println(String.format("Average Food Wait Time: %s seconds", sumFoodWaitTime/totalSize));
-        System.out.println(String.format("Average Courier Wait Time: %s seconds", sumCourierWaitTime/totalSize));
+        System.out.println(String.format("Average Food Wait Time: %s milliseconds", sumFoodWaitTime/totalSize));
+        System.out.println(String.format("Average Courier Wait Time: %s milliseconds", sumCourierWaitTime/totalSize));
     }
 
 }

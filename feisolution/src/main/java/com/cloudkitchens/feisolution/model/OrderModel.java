@@ -10,54 +10,57 @@ import java.util.Date;
 @EqualsAndHashCode
 public class OrderModel {
 
-   private String id;
-   private String name;
-   private int prepTime;
-   private Date receiveTime;
-   private Date readyTime;//Ready for pickup
-   private Date pickedUpTime;
-   private String courierId;
-   private OrderState state;
+    private String id;
+    private String name;
+    private int prepTime;
+    private Date receiveTime;
+    private Date readyTime;//Ready for pickup
+    private Date pickedUpTime;
+    private String courierId;
+    private OrderState state;
 
-   private float courierWaitTime;//for interview statistic
+    private Long courierWaitTime;//for interview statistic
 
-   /**
-    * @return 返还单位为秒,未完成的订单返回null
-    */
-   public Float calWaitingTime(){
-      if (this.readyTime == null || this.pickedUpTime == null){
-         return null;
-      }
+    /**
+     * @return 返还单位为毫秒, 未完成的订单返回null
+     */
+    public Long calWaitingTime() {
+        if (this.readyTime == null || this.pickedUpTime == null) {
+            return null;
+        }
 
-      Float diff = (float) ((this.pickedUpTime.getTime() - this.readyTime.getTime()) / 1000);
-      return diff;
-   }
+        Long diff = this.pickedUpTime.getTime() - this.readyTime.getTime();
+        return diff;
+    }
 
-   /**
-    * 更新状态和相关时间
-    */
-   public void setState(OrderState state, Date time){
-      this.state = state;
-      switch (state) {
-         case RECEIVED:
-            this.setReceiveTime(time);
-            System.out.println(String.format("%s: Order %s received.", DateUtil.HHmmssSSS.format(time), this.getId()));
-            break;
-         case READY:
-            this.setReadyTime(time);
-            System.out.println(String.format("%s: Order %s is ready for pickup.", DateUtil.HHmmssSSS.format(time), this.getId()));
-            break;
-         case PICKED_UP:
-            this.setPickedUpTime(time);
-            System.out.println(String.format("%s: Order %s is picked up by courier %s.", DateUtil.HHmmssSSS.format(time), this.getId(), this.getCourierId()));
-            break;
-         default:
-            break;
-      }
-   }
+    /**
+     * 更新状态和相关时间
+     */
+    public void setState(OrderState state, Date time) {
+        this.state = state;
+        switch (state) {
+            case RECEIVED:
+                this.setReceiveTime(time);
+                System.out.println(String.format("%s: Order %s received.", DateUtil.HHmmssSSS.format(time), this.getId()));
+                break;
+            case READY:
+                this.setReadyTime(time);
+                System.out.println(String.format("%s: Order %s is ready for pickup.", DateUtil.HHmmssSSS.format(time), this.getId()));
+                break;
+            case PICKED_UP:
+                this.setPickedUpTime(time);
+                System.out.println(String.format("%s: Order %s is picked up by courier %s.", DateUtil.HHmmssSSS.format(time), this.getId(), this.getCourierId()));
+                break;
+            default:
+                break;
+        }
+    }
 
-   /** must use setState(OrderState state, Date time){ */
-   private void setState(OrderState state){}
+    /**
+     * must use setState(OrderState state, Date time){
+     */
+    private void setState(OrderState state) {
+    }
 
 }
 

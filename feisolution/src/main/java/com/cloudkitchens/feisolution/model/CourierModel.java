@@ -27,12 +27,12 @@ public class CourierModel {
     /**
      * @return 返还单位为秒,无estArriveTime和无arrive的返回null
      */
-    public Float calWaitingTime(){
+    public Long calWaitingTime(){
         if (this.estArriveTime == null || this.pickUpTime == null){
             return null;
         }
 
-        Float diff = (float) ((this.pickUpTime.getTime() - this.estArriveTime.getTime()) / 1000);
+        Long diff = this.pickUpTime.getTime() - this.estArriveTime.getTime();
         return diff;
     }
 

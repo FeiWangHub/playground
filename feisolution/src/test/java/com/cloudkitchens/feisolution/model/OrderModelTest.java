@@ -17,7 +17,7 @@ public class OrderModelTest {
         o.setReadyTime(now);
         o.setPickedUpTime(nowPlus1);
 
-        Assert.assertEquals(new Float(1), o.calWaitingTime());
+        Assert.assertEquals(new Long(1000), o.calWaitingTime());
     }
 
     @Test
