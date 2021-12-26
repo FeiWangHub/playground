@@ -17,7 +17,7 @@ public class OrderModelTest {
         o.setReadyTime(now);
         o.setPickedUpTime(nowPlus1);
 
-        Assert.assertEquals(o.calWaitingTime(), new Float(1));
+        Assert.assertEquals(new Float(1), o.calWaitingTime());
     }
 
     @Test
@@ -30,18 +30,18 @@ public class OrderModelTest {
 
         //received
         o.setState(OrderState.RECEIVED, receivedTime);
-        Assert.assertEquals(o.getState(), OrderState.RECEIVED);
-        Assert.assertEquals(o.getReceiveTime(), receivedTime);
+        Assert.assertEquals(OrderState.RECEIVED, o.getState());
+        Assert.assertEquals(receivedTime, o.getReceiveTime());
 
         //ready
         o.setState(OrderState.READY, readyTime);
-        Assert.assertEquals(o.getState(), OrderState.READY);
-        Assert.assertEquals(o.getReadyTime(), readyTime);
+        Assert.assertEquals(OrderState.READY, o.getState());
+        Assert.assertEquals(readyTime, o.getReadyTime());
 
         //picked_up
         o.setState(OrderState.PICKED_UP, pickupTime);
-        Assert.assertEquals(o.getState(), OrderState.PICKED_UP);
-        Assert.assertEquals(o.getPickedUpTime(), pickupTime);
+        Assert.assertEquals(OrderState.PICKED_UP, o.getState());
+        Assert.assertEquals(pickupTime, o.getPickedUpTime());
     }
 
 }

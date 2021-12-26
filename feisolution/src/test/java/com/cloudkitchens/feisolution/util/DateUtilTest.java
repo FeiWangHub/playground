@@ -11,7 +11,7 @@ public class DateUtilTest {
     public void testAddSecond(){
         Date now = new Date();
         Date result = DateUtil.addSecond(now, 10);
-        Assert.assertEquals(result.getTime(), now.getTime() + 10 * 1000);
+        Assert.assertEquals(now.getTime() + 10 * 1000, result.getTime());
     }
 
 }

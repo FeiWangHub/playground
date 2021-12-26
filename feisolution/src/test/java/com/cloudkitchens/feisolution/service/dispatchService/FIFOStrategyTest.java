@@ -22,11 +22,11 @@ public class FIFOStrategyTest {
         o.setState(OrderState.RECEIVED, new Date());
         List<OrderModel> result =  k.scanAndPickupReadyOrders();
 
-        Assert.assertEquals(result.size(), 0);
+        Assert.assertEquals(0, result.size());
 
-        Assert.assertEquals(k.getCouriersQueue().size(), 1);
-        Assert.assertEquals(k.getOrdersQueue().size(), 1);
-        Assert.assertEquals(k.getOrdersQueue().peek().getState(), OrderState.RECEIVED);
+        Assert.assertEquals(1, k.getCouriersQueue().size());
+        Assert.assertEquals(1, k.getOrdersQueue().size());
+        Assert.assertEquals(OrderState.RECEIVED, k.getOrdersQueue().peek().getState());
     }
 
     @Test
@@ -40,11 +40,11 @@ public class FIFOStrategyTest {
         k.getCouriersQueue().peek().setState(CourierState.DISPATCHED_TO_KITCHEN, new Date());
         List<OrderModel> result =  k.scanAndPickupReadyOrders();
 
-        Assert.assertEquals(result.size(), 0);
+        Assert.assertEquals(0, result.size());
 
-        Assert.assertEquals(k.getCouriersQueue().size(), 1);
-        Assert.assertEquals(k.getOrdersQueue().size(), 1);
-        Assert.assertEquals(k.getOrdersQueue().peek().getState(), OrderState.READY);
+        Assert.assertEquals(1, k.getCouriersQueue().size());
+        Assert.assertEquals(1, k.getOrdersQueue().size());
+        Assert.assertEquals(OrderState.READY, k.getOrdersQueue().peek().getState());
     }
 
     @Test
@@ -61,12 +61,12 @@ public class FIFOStrategyTest {
         k.getCouriersQueue().peek().setState(CourierState.ARRIVED_KITCHEN, new Date());
         List<OrderModel> result =  k.scanAndPickupReadyOrders();
 
-        Assert.assertEquals(result.size(), 1);
+        Assert.assertEquals(1, result.size());
 
-        Assert.assertEquals(k.getCouriersQueue().size(), 1);//1 picked, and 1 gone
-        Assert.assertEquals(k.getCouriersQueue().peek().getState(), CourierState.DISPATCHED_TO_KITCHEN);
-        Assert.assertEquals(k.getOrdersQueue().size(), 1);
-        Assert.assertEquals(k.getOrdersQueue().peek().getState(), OrderState.READY);
+        Assert.assertEquals(1, k.getCouriersQueue().size());//1 picked, and 1 gone
+        Assert.assertEquals(CourierState.DISPATCHED_TO_KITCHEN, k.getCouriersQueue().peek().getState());
+        Assert.assertEquals(1, k.getOrdersQueue().size());
+        Assert.assertEquals(OrderState.READY, k.getOrdersQueue().peek().getState());
     }
 
 }

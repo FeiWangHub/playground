@@ -25,11 +25,11 @@ public class KitchenModelTest {
         OrderModel o = new OrderModel();
         k.receiveOrder(o);
 
-        Assert.assertEquals(k.getOrdersQueue().size(), 1);
-        Assert.assertEquals(k.getCouriersQueue().size(), 1);
+        Assert.assertEquals(1, k.getOrdersQueue().size());
+        Assert.assertEquals(1, k.getCouriersQueue().size());
 
-        Assert.assertEquals(k.getOrdersQueue().peek().getState(), OrderState.RECEIVED);
-        Assert.assertEquals(k.getCouriersQueue().peek().getState(), CourierState.DISPATCHED_TO_KITCHEN);
+        Assert.assertEquals(OrderState.RECEIVED, k.getOrdersQueue().peek().getState());
+        Assert.assertEquals(CourierState.DISPATCHED_TO_KITCHEN, k.getCouriersQueue().peek().getState());
     }
 
     @Test
@@ -43,7 +43,7 @@ public class KitchenModelTest {
         k.getCouriersQueue().peek().setEstArriveTime(mockArriveTime);
         k.updateCouriersArriveState();
 
-        Assert.assertEquals(k.getCouriersQueue().peek().getState(), CourierState.ARRIVED_KITCHEN);
+        Assert.assertEquals(CourierState.ARRIVED_KITCHEN, k.getCouriersQueue().peek().getState());
     }
 
     @Test
