@@ -25,7 +25,7 @@ public class CourierModel {
     }
 
     /**
-     * @return 返还单位为秒,无estArriveTime和无arrive的返回null
+     * @return 返还单位为毫秒,无estArriveTime和无arrive的返回null
      */
     public Long calWaitingTime(){
         if (this.estArriveTime == null || this.pickUpTime == null){
