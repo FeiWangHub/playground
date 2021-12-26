@@ -31,7 +31,6 @@ public class MatchStrategy implements KitchenStrategy {
     @Override
     public List<OrderModel> scanAndPickupReadyOrders(ConcurrentLinkedQueue<OrderModel> ordersQueue, ConcurrentLinkedQueue<CourierModel> couriersQueue) {
         ArrayList<OrderModel> pickedUpOrders = new ArrayList<>();
-        Date now = new Date();
 
         Iterator<CourierModel> courier_it = couriersQueue.iterator();
 
@@ -50,8 +49,11 @@ public class MatchStrategy implements KitchenStrategy {
                     continue;
                 }
 
-                courier.setState(PICKED_UP_ORDER, now);
-                order.setState(PICKED_UP, now);
+                Date pickupTime = order.getReadyTime().after(courier.getEstArriveTime())
+                        ? order.getReadyTime()
+                        : courier.getEstArriveTime();
+                courier.setState(PICKED_UP_ORDER, pickupTime);
+                order.setState(PICKED_UP, pickupTime);
                 order.setCourierWaitTime(courier.calWaitingTime());
 
                 pickedUpOrders.add(order);

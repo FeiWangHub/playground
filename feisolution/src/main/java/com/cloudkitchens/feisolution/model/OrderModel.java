@@ -19,7 +19,8 @@ public class OrderModel {
     private String courierId;
     private OrderState state;
 
-    private Long courierWaitTime;//for interview statistic
+    private Date estReadyTime;///for interview purpose
+    private Long courierWaitTime;//for interview purpose
 
     /**
      * @return 返还单位为毫秒, 未完成的订单返回null
@@ -41,6 +42,7 @@ public class OrderModel {
         switch (state) {
             case RECEIVED:
                 this.setReceiveTime(time);
+                this.setEstReadyTime(calEstReadyTime());
                 System.out.println(String.format("%s: Order %s received.", DateUtil.HHmmssSSS.format(time), this.getId()));
                 break;
             case READY:
@@ -60,6 +62,11 @@ public class OrderModel {
      * must use setState(OrderState state, Date time){
      */
     private void setState(OrderState state) {
+    }
+
+    //for interview mock purpose
+    private Date calEstReadyTime(){
+         return DateUtil.addSecond(this.getReceiveTime(), this.getPrepTime());
     }
 
 }

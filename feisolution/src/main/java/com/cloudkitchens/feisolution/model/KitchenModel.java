@@ -57,6 +57,8 @@ public class KitchenModel {
                 c.setState(ARRIVED_KITCHEN, c.getEstArriveTime());
             }
         }
+
+        this.scanAndPickupReadyOrders();
     }
 
     /**
@@ -67,11 +69,12 @@ public class KitchenModel {
         Date now = new Date();
         while(it.hasNext()){
             OrderModel o = it.next();
-            Date readyTime = DateUtil.addSecond(o.getReceiveTime(), o.getPrepTime());
-            if (o.getState() == OrderState.RECEIVED && now.after(readyTime)){
-                o.setState(OrderState.READY, readyTime);
+            if (o.getState() == OrderState.RECEIVED && now.after(o.getEstReadyTime())){
+                o.setState(OrderState.READY, o.getEstReadyTime());
             }
         }
+
+        this.scanAndPickupReadyOrders();
     }
 
     /**

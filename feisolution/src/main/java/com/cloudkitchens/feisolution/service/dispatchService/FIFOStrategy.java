@@ -30,7 +30,6 @@ public class FIFOStrategy implements KitchenStrategy {
     @Override
     public List<OrderModel> scanAndPickupReadyOrders(ConcurrentLinkedQueue<OrderModel> ordersQueue, ConcurrentLinkedQueue<CourierModel> couriersQueue) {
         ArrayList<OrderModel> pickedUpOrders = new ArrayList<>();
-        Date now = new Date();
 
         Iterator<CourierModel> courier_it = couriersQueue.iterator();
         Iterator<OrderModel> order_it = ordersQueue.iterator();
@@ -48,9 +47,12 @@ public class FIFOStrategy implements KitchenStrategy {
                     continue;
                 }
 
-                courier.setState(PICKED_UP_ORDER, now);
+                Date pickupTime = order.getReadyTime().after(courier.getEstArriveTime())
+                        ? order.getReadyTime()
+                        : courier.getEstArriveTime();
+                courier.setState(PICKED_UP_ORDER, pickupTime);
                 order.setCourierId(courier.getId());
-                order.setState(PICKED_UP, now);
+                order.setState(PICKED_UP, pickupTime);
                 order.setCourierWaitTime(courier.calWaitingTime());
 
                 pickedUpOrders.add(order);

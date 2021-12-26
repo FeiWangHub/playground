@@ -12,12 +12,15 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 /**
  * 2021.12.24日志
  * - 输出的统计时间单位 从秒改为毫秒
  * - 改进策略模式的代码结构，将KitchenStrategy从抽象类改为接口
- * - 修复UT中assertEquals(expected, actual)的参数位置
- * -
+ * - 修复UT中assertEquals(expected, actual)的参数前后顺序
+ * - pickup的时间记录更加精准，不在受测试运行的interval影响
+ *
  * 4. 重新梳理synchronized，也许不需要用ConcurrentLinkedQueue
  * 5. maybe 新起一个线程模拟订单到达，一个线程监控courier，一个监控
  * 6. maybe 尝试多个线程访问厨房测试
@@ -39,29 +42,36 @@ public class FeiSolutionMain {
             System.out.println("--- using FIFO strategy ---");
         }
 
-        //2 init mock order data
+        //2 init mock order data, mock receive certain qty of orders every second
         List<OrderModel> ordersList = JSON.parseArray(Constants.ORDERS_JSON, OrderModel.class);
         LinkedList<OrderModel> ordersPool = new LinkedList<>(ordersList);
         final int totalSize = ordersPool.size();
+        new Thread(() -> {
+            while (!ordersPool.isEmpty()) {
+                for (int i = 0; i < Constants.ORDERS_PER_RECEIVE; i++) {
+                    if (ordersPool.isEmpty()) {
+                        break;
+                    }
+                    kitchen.receiveOrder(ordersPool.pop());
+                }
+                try {
+                    sleep(Constants.ORDER_RECEIVE_FREQUENCY_SEC * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
         //3 mock start receiving orders, wait until all orders dispatched
         while (totalSize != kitchen.getDispatchedOrders().size()) {
             System.out.println();
-            //3.1 mock receive certain qty of orders every second
-            for (int i = 0; i < Constants.ORDERS_PER_RECEIVE; i++) {
-                if (ordersPool.isEmpty()) {
-                    break;
-                }
-                kitchen.receiveOrder(ordersPool.pop());
-            }
 
-            //3.2 update couriers' arrive state
+            //3.1 update couriers' arrive state
             kitchen.updateCouriersArriveState();
             kitchen.updateOrderReadyState();
-            kitchen.scanAndPickupReadyOrders();
 
             //3.2 mock time increment
-            Thread.sleep(Constants.ORDER_RECEIVE_FREQUENCY_SEC * 1000);
+            sleep(1000);
             System.out.println(String.format("---- Progress %s/%s, Time incremented to %s ----",
                     kitchen.getDispatchedOrders().size(),
                     totalSize,
