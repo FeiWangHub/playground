@@ -15,16 +15,15 @@ import java.util.List;
 import static java.lang.Thread.sleep;
 
 /**
- * 2021.12.24日志
+ * 2021.12.24更新日志
  * - 输出的统计时间单位 从秒改为毫秒
  * - 改进策略模式的代码结构，将KitchenStrategy从抽象类改为接口
  * - 修复UT中assertEquals(expected, actual)的参数前后顺序
  * - pickup的时间记录更加精准，不在受测试运行的interval影响
  *
+ * 3. TODO FIFO时 如果多个couriers等待，最早到的拿到order；如果多个orders等待，courier随机哪一个order
  * 4. 重新梳理synchronized，也许不需要用ConcurrentLinkedQueue
  * 5. maybe 新起一个线程模拟订单到达，一个线程监控courier，一个监控
- * 6. maybe 尝试多个线程访问厨房测试
- * TODO If there are multiple orders available, pick up an arbitrary order.
  * TODO 是否要将kitchen的updateOrderReadyState 改成onCourierArrived和onOrderReady? 变成事件，完全模拟现实?
  */
 public class FeiSolutionMain {
@@ -88,8 +87,8 @@ public class FeiSolutionMain {
         float sumFoodWaitTime = 0, sumCourierWaitTime = 0;
         for(OrderModel o: kitchen.getDispatchedOrders()){
             sumFoodWaitTime += o.calWaitingTime();
-            sumCourierWaitTime += o.getCourierWaitTime();
-            System.out.println(String.format("Food: %s, Courier %s", o.calWaitingTime(), o.getCourierWaitTime()));
+            sumCourierWaitTime += o.getCourier().calWaitingTime();
+            System.out.println(String.format("Food: %s, Courier %s", o.calWaitingTime(), o.getCourier().calWaitingTime()));
         }
 
         System.out.println(String.format("Average Food Wait Time: %s milliseconds", sumFoodWaitTime/totalSize));

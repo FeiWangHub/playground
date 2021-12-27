@@ -51,9 +51,8 @@ public class FIFOStrategy implements KitchenStrategy {
                         ? order.getReadyTime()
                         : courier.getEstArriveTime();
                 courier.setState(PICKED_UP_ORDER, pickupTime);
-                order.setCourierId(courier.getId());
+                order.setCourier(courier);
                 order.setState(PICKED_UP, pickupTime);
-                order.setCourierWaitTime(courier.calWaitingTime());
 
                 pickedUpOrders.add(order);
 

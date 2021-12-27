@@ -25,7 +25,7 @@ public class MatchStrategy implements KitchenStrategy {
      */
     @Override
     public void afterReceiveOrder(OrderModel order, CourierModel courier) {
-        order.setCourierId(courier.getId());
+        order.setCourier(courier);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class MatchStrategy implements KitchenStrategy {
             Iterator<OrderModel> order_it = ordersQueue.iterator();
             while (order_it.hasNext()) {
                 OrderModel order = order_it.next();
-                if (order.getState() != READY || !order.getCourierId().equals(courier.getId())) {
+                if (order.getState() != READY || !order.getCourier().getId().equals(courier.getId())) {
                     continue;
                 }
 
@@ -54,7 +54,6 @@ public class MatchStrategy implements KitchenStrategy {
                         : courier.getEstArriveTime();
                 courier.setState(PICKED_UP_ORDER, pickupTime);
                 order.setState(PICKED_UP, pickupTime);
-                order.setCourierWaitTime(courier.calWaitingTime());
 
                 pickedUpOrders.add(order);
 

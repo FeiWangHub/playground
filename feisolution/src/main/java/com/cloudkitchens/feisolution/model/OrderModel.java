@@ -16,11 +16,10 @@ public class OrderModel {
     private Date receiveTime;
     private Date readyTime;//Ready for pickup
     private Date pickedUpTime;
-    private String courierId;
     private OrderState state;
+    private CourierModel courier;
 
     private Date estReadyTime;///for interview purpose
-    private Long courierWaitTime;//for interview purpose
 
     /**
      * @return 返还单位为毫秒, 未完成的订单返回null
@@ -51,7 +50,7 @@ public class OrderModel {
                 break;
             case PICKED_UP:
                 this.setPickedUpTime(time);
-                System.out.println(String.format("%s: Order %s is picked up by courier %s.", DateUtil.HHmmssSSS.format(time), this.getId(), this.getCourierId()));
+                System.out.println(String.format("%s: Order %s is picked up by courier %s.", DateUtil.HHmmssSSS.format(time), this.getId(), this.getCourier().getId()));
                 break;
             default:
                 break;

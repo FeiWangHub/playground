@@ -26,7 +26,9 @@ public class OrderModelTest {
         Date readyTime = DateUtil.addSecond(receivedTime, 1);
         Date pickupTime = DateUtil.addSecond(receivedTime, 2);
 
+        CourierModel c = new CourierModel();
         OrderModel o = new OrderModel();
+        o.setCourier(c);
 
         //received
         o.setState(OrderState.RECEIVED, receivedTime);
