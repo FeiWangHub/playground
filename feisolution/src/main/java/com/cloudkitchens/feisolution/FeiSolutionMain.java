@@ -70,7 +70,7 @@ public class FeiSolutionMain {
             kitchen.updateOrderReadyState();
 
             //3.2 mock time increment
-            sleep(1000);
+            sleep(3000);
             System.out.println(String.format("---- Progress %s/%s, Time incremented to %s ----",
                     kitchen.getDispatchedOrders().size(),
                     totalSize,

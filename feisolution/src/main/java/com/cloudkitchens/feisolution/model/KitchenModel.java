@@ -1,7 +1,6 @@
 package com.cloudkitchens.feisolution.model;
 
-import com.cloudkitchens.feisolution.service.dispatchService.KitchenStrategy;
-import com.cloudkitchens.feisolution.util.DateUtil;
+import com.cloudkitchens.feisolution.service.dispatchService.DispatchStrategy;
 import lombok.Data;
 
 import java.util.*;
@@ -19,10 +18,10 @@ public class KitchenModel {
     protected ConcurrentLinkedQueue<CourierModel> couriersQueue;
 
     private Queue<OrderModel> dispatchedOrders;
-    private KitchenStrategy kitchenStrategy;
+    private DispatchStrategy dispatchStrategy;
 
-    public KitchenModel(KitchenStrategy strategy){
-        this.kitchenStrategy = strategy;
+    public KitchenModel(DispatchStrategy strategy){
+        this.dispatchStrategy = strategy;
         this.ordersQueue = new ConcurrentLinkedQueue<>();
         this.couriersQueue = new ConcurrentLinkedQueue<>();
         this.dispatchedOrders = new LinkedList<>();
@@ -42,7 +41,7 @@ public class KitchenModel {
         c.setState(DISPATCHED_TO_KITCHEN, now);
         this.couriersQueue.add(c);
 
-        this.kitchenStrategy.afterReceiveOrder(order, c);
+        this.dispatchStrategy.afterReceiveOrder(order, c);
     };
 
     /**
@@ -83,7 +82,7 @@ public class KitchenModel {
      * @return orders picked up
      */
     public synchronized List<OrderModel> scanAndPickupReadyOrders(){
-        List<OrderModel> ordersPickedUp = this.kitchenStrategy.scanAndPickupReadyOrders(this.ordersQueue, this.couriersQueue);
+        List<OrderModel> ordersPickedUp = this.dispatchStrategy.scanAndPickupReadyOrders(this.ordersQueue, this.couriersQueue);
         this.dispatchedOrders.addAll(ordersPickedUp);
         return ordersPickedUp;
     }
@@ -94,8 +93,8 @@ public class KitchenModel {
      * omitted for interview
      * @param k KitchenStrategy
      */
-    private void setKitchenStrategy(KitchenStrategy k){
-        this.kitchenStrategy = k;
+    private void setDispatchStrategy(DispatchStrategy k){
+        this.dispatchStrategy = k;
     }
 
 }

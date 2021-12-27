@@ -18,7 +18,7 @@ import static com.cloudkitchens.feisolution.model.OrderState.READY;
  * Matched dispatch strategy
  * A courier is dispatched for a specific order and may only pick up that order
  */
-public class MatchStrategy implements KitchenStrategy {
+public class MatchStrategy implements DispatchStrategy {
 
     /**
      * Assign order to specific Courier

@@ -13,7 +13,7 @@ public class KitchenModelTest {
     public void testConstructor(){
         KitchenModel k = new KitchenModel(new FIFOStrategy());
 
-        Assert.assertNotNull(k.getKitchenStrategy());
+        Assert.assertNotNull(k.getDispatchStrategy());
         Assert.assertNotNull(k.getDispatchedOrders());
         Assert.assertNotNull(k.getCouriersQueue());
         Assert.assertNotNull(k.getOrdersQueue());
@@ -50,10 +50,10 @@ public class KitchenModelTest {
     public void testUpdateOrderReadyState(){
         KitchenModel k = new KitchenModel(new FIFOStrategy());
         OrderModel o = new OrderModel();
+        o.setPrepTime(-10);
         k.receiveOrder(o);
 
         //make order ready
-        o.setPrepTime(-10);
         k.updateOrderReadyState();
         k.scanAndPickupReadyOrders();
 

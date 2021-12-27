@@ -21,7 +21,7 @@ import static com.cloudkitchens.feisolution.model.OrderState.READY;
  * If there are no available orders, couriers wait for the next available one.
  * When there are multiple couriers waiting, the next available order is assigned to the earliest​ a​rrived courier.
  */
-public class FIFOStrategy implements KitchenStrategy {
+public class FIFOStrategy implements DispatchStrategy {
 
     @Override
     public void afterReceiveOrder(OrderModel order, CourierModel courier) {

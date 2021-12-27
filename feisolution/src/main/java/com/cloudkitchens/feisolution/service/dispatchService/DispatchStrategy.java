@@ -6,7 +6,7 @@ import com.cloudkitchens.feisolution.model.OrderModel;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public interface KitchenStrategy {
+public interface DispatchStrategy {
 
     /**
      * Hook after receive order and dispatched courier
