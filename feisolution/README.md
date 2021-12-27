@@ -20,10 +20,10 @@ For interviewer's convenience, I run each strategy 4 times and result as follows
 #### FIFO Results
 | # | Average Food Wait Time(ms) | Average Courier Wait Time(ms) |
 | :-----: | :----: | :----: |
-| 1 | 0.36363637 | 0.8484849 |
-| 2 | 0.6060606 | 0.45454547 |
-| 3 | 0.41666666 | 0.97727275 |
-| 4 | 0.75757575 | 0.50757575 |
+| 1 | 1145 | 152 |
+| 2 | 515 | 757 |
+| 3 | 728 | 456 |
+| 4 | 720 | 470 |
 
 #### Match Results
 | # | Average Food Wait Time(ms) | Average Courier Wait Time(ms) |

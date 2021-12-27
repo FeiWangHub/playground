@@ -12,6 +12,10 @@ import static com.cloudkitchens.feisolution.model.OrderState.PICKED_UP;
 @Data
 public class KitchenDispatcher {
 
+//    /** 已经收到的，尚未pickup的订单 */
+//    protected ConcurrentLinkedQueue<OrderModel> ordersQueue;
+//    /** 已收到order，尚未pickup的couriers */
+//    protected ConcurrentLinkedQueue<CourierModel> couriersQueue;
     /** 已经收到的，尚未pickup的订单 */
     protected ConcurrentLinkedQueue<OrderModel> ordersQueue;
     /** 已收到order，尚未pickup的couriers */
@@ -45,10 +49,18 @@ public class KitchenDispatcher {
         this.dispatchStrategy.afterReceiveOrder(order, c);
     };
 
+    /**
+     * when an order is prepared
+     * @param order OrderModel, state should be READY
+     */
     public synchronized void onOrderReady(OrderModel order){
         this.dispatchStrategy.onOrderReady(order, this);
     }
 
+    /**
+     * when a courier arrived kitchen
+     * @param courier CourierModel, state should be ARRIVED_KITCHEN
+     */
     public synchronized void onCourierArrived(CourierModel courier){
         this.dispatchStrategy.onCourierArrived(courier, this);
     }
