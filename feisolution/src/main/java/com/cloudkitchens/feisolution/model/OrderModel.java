@@ -19,7 +19,8 @@ public class OrderModel {
     private OrderState state;
     private CourierModel courier;
 
-    private Date estReadyTime;///for interview purpose
+    private CourierModel courierDispatchedByThisOrder;//for interview simulation purpose
+    private Date estReadyTime;//for interview purpose
 
     /**
      * @return 返还单位为毫秒, 未完成的订单返回null
@@ -64,8 +65,8 @@ public class OrderModel {
     }
 
     //for interview mock purpose
-    private Date calEstReadyTime(){
-         return DateUtil.addSecond(this.getReceiveTime(), this.getPrepTime());
+    private Date calEstReadyTime() {
+        return DateUtil.addSecond(this.getReceiveTime(), this.getPrepTime());
     }
 
 }

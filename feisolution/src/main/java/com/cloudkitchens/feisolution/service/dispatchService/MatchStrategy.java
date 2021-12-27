@@ -1,17 +1,12 @@
 package com.cloudkitchens.feisolution.service.dispatchService;
 
 import com.cloudkitchens.feisolution.model.CourierModel;
+import com.cloudkitchens.feisolution.model.KitchenDispatcher;
 import com.cloudkitchens.feisolution.model.OrderModel;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static com.cloudkitchens.feisolution.model.CourierState.ARRIVED_KITCHEN;
-import static com.cloudkitchens.feisolution.model.CourierState.PICKED_UP_ORDER;
-import static com.cloudkitchens.feisolution.model.OrderState.PICKED_UP;
 import static com.cloudkitchens.feisolution.model.OrderState.READY;
 
 /**
@@ -29,40 +24,30 @@ public class MatchStrategy implements DispatchStrategy {
     }
 
     @Override
-    public List<OrderModel> scanAndPickupReadyOrders(ConcurrentLinkedQueue<OrderModel> ordersQueue, ConcurrentLinkedQueue<CourierModel> couriersQueue) {
-        ArrayList<OrderModel> pickedUpOrders = new ArrayList<>();
+    public void onOrderReady(OrderModel order, KitchenDispatcher kitchenDis) {
+        if (READY != order.getState()) return;
 
-        Iterator<CourierModel> courier_it = couriersQueue.iterator();
-
-
-        while (courier_it.hasNext() && !ordersQueue.isEmpty()) {
+        Iterator<CourierModel> courier_it = kitchenDis.getCouriersQueue().iterator();
+        while (courier_it.hasNext()) {
             CourierModel courier = courier_it.next();
-            if (courier.getState() != ARRIVED_KITCHEN) {
-                continue;
-            }
-
-            //try find the matched and ready order
-            Iterator<OrderModel> order_it = ordersQueue.iterator();
-            while (order_it.hasNext()) {
-                OrderModel order = order_it.next();
-                if (order.getState() != READY || !order.getCourier().getId().equals(courier.getId())) {
-                    continue;
-                }
-
-                Date pickupTime = order.getReadyTime().after(courier.getEstArriveTime())
-                        ? order.getReadyTime()
-                        : courier.getEstArriveTime();
-                courier.setState(PICKED_UP_ORDER, pickupTime);
-                order.setState(PICKED_UP, pickupTime);
-
-                pickedUpOrders.add(order);
-
-                ordersQueue.remove(order);
-                courier_it.remove();
+            if (ARRIVED_KITCHEN == courier.getState() && order.getCourier().getId().equals(courier.getId())) {
+                kitchenDis.onOrderPickedUp(order, courier);
                 break;
             }
         }
+    }
 
-        return pickedUpOrders;
+    @Override
+    public void onCourierArrived(CourierModel courier, KitchenDispatcher kitchenDis) {
+        if (ARRIVED_KITCHEN != courier.getState()) return;
+
+        Iterator<OrderModel> order_it = kitchenDis.getOrdersQueue().iterator();
+        while (order_it.hasNext()) {
+            OrderModel order = order_it.next();
+            if (READY == order.getState() && order.getCourier().getId().equals(courier.getId())) {
+                kitchenDis.onOrderPickedUp(order, courier);
+                break;
+            }
+        }
     }
 }

@@ -1,10 +1,8 @@
 package com.cloudkitchens.feisolution.service.dispatchService;
 
 import com.cloudkitchens.feisolution.model.CourierModel;
+import com.cloudkitchens.feisolution.model.KitchenDispatcher;
 import com.cloudkitchens.feisolution.model.OrderModel;
-
-import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public interface DispatchStrategy {
 
@@ -16,16 +14,17 @@ public interface DispatchStrategy {
     void afterReceiveOrder(OrderModel order, CourierModel courier);
 
     /**
-     * scan and pick-up all ready orders
-     * different strategy defines 'ready' differently
-     *
-     * @param ordersQueue   current orders pool
-     * @param couriersQueue current couriers queue
-     * @return list of orders picked up
+     * Event of an order become ready
+     * @param order an order just become ready
+     * @param kitchenDis current kitchen dispatcher
      */
-    List<OrderModel> scanAndPickupReadyOrders(
-            ConcurrentLinkedQueue<OrderModel> ordersQueue,
-            ConcurrentLinkedQueue<CourierModel> couriersQueue
-    );
+    void onOrderReady(OrderModel order, KitchenDispatcher kitchenDis);
+
+    /**
+     * Event of a courier arrived kitchen
+     * @param courier the courier arrived kitchen
+     * @param kitchenDis current kitchen dispatcher
+     */
+    void onCourierArrived(CourierModel courier, KitchenDispatcher kitchenDis);
 
 }
