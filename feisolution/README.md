@@ -18,7 +18,7 @@ For further reference, please consider the following sections:
 For interviewer's convenience, I run each strategy 4 times and result as follows:
 
 #### FIFO Results
-| # | Average Food Wait Time | Average Courier Wait Time |
+| # | Average Food Wait Time(ms) | Average Courier Wait Time(ms) |
 | :-----: | :----: | :----: |
 | 1 | 0.36363637 | 0.8484849 |
 | 2 | 0.6060606 | 0.45454547 |
@@ -26,9 +26,9 @@ For interviewer's convenience, I run each strategy 4 times and result as follows
 | 4 | 0.75757575 | 0.50757575 |
 
 #### Match Results
-| # | Average Food Wait Time | Average Courier Wait Time |
+| # | Average Food Wait Time(ms) | Average Courier Wait Time(ms) |
 | :-----: | :----: | :----: |
-| 1 | 1.8636364 | 2.3181818 |
-| 2 | 2.371212 | 1.8333334 |
-| 3 | 1.7575758 | 2.3863637 |
-| 4 | 2.1969697 | 2.2878788 |
+| 1 | 2303 | 2022 |
+| 2 | 2393 | 2166 |
+| 3 | 1924 | 2825 |
+| 4 | 2212 | 1969 |

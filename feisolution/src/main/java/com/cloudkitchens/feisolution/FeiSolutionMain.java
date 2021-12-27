@@ -20,7 +20,6 @@ import static java.lang.Thread.sleep;
  * - FIFO模式时，现在会正确的匹配"最早到来的courier"或"随机的order"
  * - 使用Timer，让order-ready和courier-arrived等事件，在准确的时间点上发生
  *
- * 3. 考虑去掉order的readyTime
  * 4. 重新梳理synchronized，也许不需要用ConcurrentLinkedQueue
  */
 public class FeiSolutionMain {
@@ -38,8 +37,6 @@ public class FeiSolutionMain {
             System.out.println("--- using FIFO strategy ---");
         }
 
-//        KitchenDispatcher kitchen = new KitchenDispatcher(new MatchStrategy());//TODO DELETE
-
         //2 init mock order data, mock receive 2 orders every second
         List<OrderModel> ordersList = JSON.parseArray(Constants.ORDERS_JSON, OrderModel.class);
         LinkedList<OrderModel> ordersPool = new LinkedList<>(ordersList);
@@ -55,7 +52,7 @@ public class FeiSolutionMain {
                     OrderModel order = ordersPool.pop();
                     kitchen.receiveOrder(order);
 
-                    //TODO 设置order ready和
+                    //mock the "order get ready" event
                     timer.schedule(
                             new TimerTask() {
                                 @Override
@@ -66,6 +63,7 @@ public class FeiSolutionMain {
                             },order.getEstReadyTime()
                     );
 
+                    //mock the "courier arrived kitchen" event
                     timer.schedule(new TimerTask() {
                         @Override
                         public void run() {
@@ -76,22 +74,24 @@ public class FeiSolutionMain {
                     }, order.getCourierDispatchedByThisOrder().getEstArriveTime());
 
                 }
+
+                //receive order every 1 second
                 try {
                     sleep(Constants.ORDER_RECEIVE_FREQUENCY_SEC * 1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                System.out.println();
+                System.out.println(String.format("---- Progress %s/%s, Time incremented to %s ----",
+                        kitchen.getDispatchedOrders().size(),
+                        totalSize,
+                        DateUtil.HHmmssSSS.format(new Date())));
             }
         }).start();
 
         //3 checking progress
         while (totalSize != kitchen.getDispatchedOrders().size()) {
             sleep(2000);
-            System.out.println();
-            System.out.println(String.format("---- Progress %s/%s, Time incremented to %s ----",
-                    kitchen.getDispatchedOrders().size(),
-                    totalSize,
-                    DateUtil.HHmmssSSS.format(new Date())));
         }
 
         //4 print all statistics
@@ -101,7 +101,6 @@ public class FeiSolutionMain {
 
     private static void printStatistics(KitchenDispatcher kitchen, int totalSize) {
         System.out.println();
-        System.out.println("---- Final Statistics -----");
         float sumFoodWaitTime = 0, sumCourierWaitTime = 0;
         for(OrderModel o: kitchen.getDispatchedOrders()){
             sumFoodWaitTime += o.calWaitingTime();
@@ -109,6 +108,8 @@ public class FeiSolutionMain {
             System.out.println(String.format("Food waited %s ms, Courier waited %s ms", o.calWaitingTime(), o.getCourier().calWaitingTime()));
         }
 
+        System.out.println();
+        System.out.println("---- Final Statistics -----");
         System.out.println(String.format("Average Food Wait Time: %s milliseconds", sumFoodWaitTime/totalSize));
         System.out.println(String.format("Average Courier Wait Time: %s milliseconds", sumCourierWaitTime/totalSize));
     }
