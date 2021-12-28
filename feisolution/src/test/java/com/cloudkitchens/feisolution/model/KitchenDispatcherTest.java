@@ -59,12 +59,4 @@ public class KitchenDispatcherTest {
         Assert.assertEquals(mockReadyTime.getTime(), courier.getPickUpTime().getTime());
     }
 
-
-    @Test
-    public void testThreadSafe(){
-        //TODO
-        //use 100 thread, keep receive/dispatch order. the total of orders should be always equals
-
-    }
-
 }

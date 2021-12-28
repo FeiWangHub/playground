@@ -11,10 +11,6 @@ import static com.cloudkitchens.feisolution.model.OrderState.PICKED_UP;
 @Data
 public class KitchenDispatcher {
 
-//    /** 已经收到的，尚未pickup的订单 */
-//    protected ConcurrentLinkedQueue<OrderModel> ordersQueue;
-//    /** 已收到order，尚未pickup的couriers */
-//    protected ConcurrentLinkedQueue<CourierModel> couriersQueue;
     /** 已经收到的，尚未pickup的订单 */
     protected LinkedList<OrderModel> ordersQueue;
     /** 已收到order，尚未pickup的couriers */

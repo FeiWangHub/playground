@@ -53,14 +53,13 @@ public class FeiSolutionMain {
                     kitchen.receiveOrder(order);
 
                     //mock the "order get ready" event
-                    timer.schedule(
-                            new TimerTask() {
-                                @Override
-                                public void run() {
-                                    order.setState(OrderState.READY, order.getEstReadyTime());
-                                    kitchen.onOrderReady(order);
-                                }
-                            },order.getEstReadyTime()
+                    timer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                order.setState(OrderState.READY, order.getEstReadyTime());
+                                kitchen.onOrderReady(order);
+                            }
+                        },order.getEstReadyTime()
                     );
 
                     //mock the "courier arrived kitchen" event
