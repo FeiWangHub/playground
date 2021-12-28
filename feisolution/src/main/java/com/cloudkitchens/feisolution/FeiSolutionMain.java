@@ -12,7 +12,7 @@ import java.util.*;
 import static java.lang.Thread.sleep;
 
 /**
- * 2021.12.24更新改版日志
+ * 更新改版日志
  * - 重新梳理KitchenDispatcher的线程安全
  * - 输出的统计时间单位 从秒改为毫秒
  * - 改进策略模式的代码结构，将KitchenStrategy从抽象类改为接口
