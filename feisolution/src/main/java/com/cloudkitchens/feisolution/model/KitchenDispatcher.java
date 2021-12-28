@@ -17,17 +17,17 @@ public class KitchenDispatcher {
 //    /** 已收到order，尚未pickup的couriers */
 //    protected ConcurrentLinkedQueue<CourierModel> couriersQueue;
     /** 已经收到的，尚未pickup的订单 */
-    protected ConcurrentLinkedQueue<OrderModel> ordersQueue;
+    protected LinkedList<OrderModel> ordersQueue;
     /** 已收到order，尚未pickup的couriers */
-    protected ConcurrentLinkedQueue<CourierModel> couriersQueue;
+    protected LinkedList<CourierModel> couriersQueue;
 
     private Queue<OrderModel> dispatchedOrders;
     private DispatchStrategy dispatchStrategy;
 
     public KitchenDispatcher(DispatchStrategy strategy){
         this.dispatchStrategy = strategy;
-        this.ordersQueue = new ConcurrentLinkedQueue<>();
-        this.couriersQueue = new ConcurrentLinkedQueue<>();
+        this.ordersQueue = new LinkedList<>();
+        this.couriersQueue = new LinkedList<>();
         this.dispatchedOrders = new LinkedList<>();
     }
 
