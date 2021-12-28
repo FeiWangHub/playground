@@ -13,14 +13,13 @@ import static java.lang.Thread.sleep;
 
 /**
  * 2021.12.24更新改版日志
+ * - 重新梳理KitchenDispatcher的线程安全
  * - 输出的统计时间单位 从秒改为毫秒
  * - 改进策略模式的代码结构，将KitchenStrategy从抽象类改为接口
  * - 修复UT中assertEquals(expected, actual)的参数前后顺序
  * - pickup的时间记录更加精准，不在受测试运行的interval影响
  * - FIFO模式时，现在会正确的匹配"最早到来的courier"或"随机的order"
- * - 使用Timer，让order-ready和courier-arrived等事件，在准确的时间点上发生
- *
- * 4. 重新梳理synchronized，也许不需要用ConcurrentLinkedQueue
+ * - 使用Timer，让order-ready和courier-arrived等事件，在相对准确的时间点上发生
  */
 public class FeiSolutionMain {
 
@@ -81,7 +80,7 @@ public class FeiSolutionMain {
                     e.printStackTrace();
                 }
                 System.out.println();
-                System.out.println(String.format("---- Progress %s/%s, Time incremented to %s ----",
+                System.out.println(String.format("------- Progress %s/%s, Time incremented to %s -------",
                         kitchen.getFinishedOrders().size(),
                         totalSize,
                         DateUtil.HHmmssSSS.format(new Date())));
