@@ -79,8 +79,15 @@ public class KitchenDispatcher {
     }
 
     /**
+     * The length of ordersQueue and couriersQueue should always be same
+     * Used for UT
+     */
+    public synchronized boolean isOrderAndCourierQueueEqual(){
+        return this.ordersQueue.size() == this.couriersQueue.size();
+    }
+
+    /**
      * switch strategy in runtime(not supported yet)
-     * omitted for interview
      * @param k KitchenStrategy
      */
     private void setDispatchStrategy(DispatchStrategy k){}
