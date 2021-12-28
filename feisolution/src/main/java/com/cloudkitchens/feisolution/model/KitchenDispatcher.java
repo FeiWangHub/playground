@@ -11,10 +11,8 @@ import static com.cloudkitchens.feisolution.model.OrderState.PICKED_UP;
 @Data
 public class KitchenDispatcher {
 
-    /** 已经收到的，尚未pickup的订单 */
-    protected LinkedList<OrderModel> ordersQueue;
-    /** 已收到order，尚未pickup的couriers */
-    protected LinkedList<CourierModel> couriersQueue;
+    protected LinkedList<OrderModel> ordersQueue;/** orders received, but not picked up yet */
+    protected LinkedList<CourierModel> couriersQueue;/** couriers dispatched|arrived, but haven't picked up order yet*/
 
     private Queue<OrderModel> finishedOrders;
     private DispatchStrategy dispatchStrategy;
@@ -27,7 +25,7 @@ public class KitchenDispatcher {
     }
 
     /**
-     * 接受到新order时 update order state, and dispatch courier
+     * Receive new order, update order state, and dispatch courier
      * @param order OrderModel
      */
     public synchronized void receiveOrder(OrderModel order){

@@ -23,7 +23,7 @@ public class OrderModel {
     private Date estReadyTime;//for interview purpose
 
     /**
-     * @return 返还单位为毫秒, 未完成的订单返回null
+     * @return in milliseconds, return null if readyTime or pickedUpTime is null
      */
     public Long calWaitingTime() {
         if (this.readyTime == null || this.pickedUpTime == null) {
@@ -35,7 +35,9 @@ public class OrderModel {
     }
 
     /**
-     * 更新状态和相关时间
+     * Update state of Order and corresponding time
+     * @param state new state
+     * @param time event time
      */
     public void setState(OrderState state, Date time) {
         this.state = state;

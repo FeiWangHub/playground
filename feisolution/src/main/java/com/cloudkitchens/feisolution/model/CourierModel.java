@@ -25,7 +25,7 @@ public class CourierModel {
     }
 
     /**
-     * @return 返还单位为毫秒,无estArriveTime和无arrive的返回null
+     * @return in milliseconds, return null if estArriveTime or pickUpTime is null
      */
     public Long calWaitingTime(){
         if (this.estArriveTime == null || this.pickUpTime == null){
@@ -37,7 +37,9 @@ public class CourierModel {
     }
 
     /**
-     * 更新状态和相关时间
+     * Update state of Courier and corresponding time
+     * @param state new state
+     * @param time event time
      */
     public void setState(CourierState state, Date time){
         this.state = state;
