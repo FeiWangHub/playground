@@ -48,6 +48,7 @@ public class CourierModel {
                 System.out.println(String.format("%s: Courier %s is dispatched to kitchen.", DateUtil.HHmmssSSS.format(time), this.getId()));
                 break;
             case ARRIVED_KITCHEN:
+                this.setEstArriveTime(time);
                 System.out.println(String.format("%s: Courier %s arrived kitchen.", DateUtil.HHmmssSSS.format(time), this.getId()));
                 break;
             case PICKED_UP_ORDER:
@@ -63,12 +64,11 @@ public class CourierModel {
     private void setState(CourierState state){}
 
     /**
-     * TODO 拆分到UTIL
      * 随机分配预期时间
      * @param orderReceiveTime order receive time
      * @return arrive time
      */
-    private Date calMockArriveTime(Date orderReceiveTime) {
+    public Date calMockArriveTime(Date orderReceiveTime) {
         Calendar cl = Calendar.getInstance();
         cl.setTime(orderReceiveTime);
         cl.add(Calendar.SECOND, MathUtil.getRandomWithinRange(Constants.COURIER_TRIP_TIME_MIN_SEC,

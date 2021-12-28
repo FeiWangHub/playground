@@ -3,16 +3,24 @@ package com.cloudkitchens.feisolution.model;
 import com.cloudkitchens.feisolution.service.dispatchService.FIFOStrategy;
 import com.cloudkitchens.feisolution.util.DateUtil;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
 public class KitchenDispatcherTest {
 
+    KitchenDispatcher k;
+    OrderModel order;
+
+    @BeforeEach
+    public void setUp(){
+        k = new KitchenDispatcher(new FIFOStrategy());
+        order = new OrderModel();
+    }
+
     @Test
     public void testConstructor(){
-        KitchenDispatcher k = new KitchenDispatcher(new FIFOStrategy());
-
         Assert.assertNotNull(k.getDispatchStrategy());
         Assert.assertNotNull(k.getDispatchedOrders());
         Assert.assertNotNull(k.getCouriersQueue());
@@ -21,9 +29,7 @@ public class KitchenDispatcherTest {
 
     @Test
     public void testReceiveOrder(){
-        KitchenDispatcher k = new KitchenDispatcher(new FIFOStrategy());
-        OrderModel o = new OrderModel();
-        k.receiveOrder(o);
+        k.receiveOrder(order);
 
         Assert.assertEquals(1, k.getOrdersQueue().size());
         Assert.assertEquals(1, k.getCouriersQueue().size());
@@ -33,50 +39,32 @@ public class KitchenDispatcherTest {
     }
 
     @Test
-    public void testUpdateCouriersArriveState(){
-//        KitchenDispatcher k = new KitchenDispatcher(new FIFOStrategy());
-//        OrderModel o = new OrderModel();
-//        k.receiveOrder(o);
-//
-//        //make order arrived
-//        Date mockArriveTime = DateUtil.addSecond(new Date(), -1);
-//        k.getCouriersQueue().peek().setEstArriveTime(mockArriveTime);
-//        k.updateCouriersArriveState();
-//
-//        Assert.assertEquals(CourierState.ARRIVED_KITCHEN, k.getCouriersQueue().peek().getState());
+    public void testOnOrderPickedUp(){
+        k.receiveOrder(order);
+        CourierModel courier = order.getCourierDispatchedByThisOrder();
+        order.setCourier(courier);
+
+        //mock ready and arrived state
+        Date mockReadyTime = new Date();
+        Date mockArriveTime = DateUtil.addSecond(mockReadyTime, -1);
+        order.setState(OrderState.READY, mockReadyTime);
+        courier.setState(CourierState.ARRIVED_KITCHEN, mockArriveTime);
+
+        k.onOrderPickedUp(order, courier);
+
+        Assert.assertEquals(1, k.getDispatchedOrders().size());
+        Assert.assertEquals(0, k.getCouriersQueue().size());
+        Assert.assertEquals(0, k.getOrdersQueue().size());
+        Assert.assertEquals(mockReadyTime.getTime(), order.getPickedUpTime().getTime());
+        Assert.assertEquals(mockReadyTime.getTime(), courier.getPickUpTime().getTime());
     }
 
-    @Test
-    public void testUpdateOrderReadyState(){
-//        KitchenDispatcher k = new KitchenDispatcher(new FIFOStrategy());
-//        OrderModel o = new OrderModel();
-//        o.setPrepTime(-10);
-//        k.receiveOrder(o);
-//
-//        //make order ready
-//        k.updateOrderReadyState();
-//        k.scanAndPickupReadyOrders();
-//
-//        Assert.assertEquals(OrderState.READY, k.getOrdersQueue().peek().getState());
-    }
 
     @Test
-    public void testScanAndPickupReadyOrders(){
-//        KitchenDispatcher k = new KitchenDispatcher(new FIFOStrategy());
-//
-//        //make sure ready order are added into dispatched orders
-//        OrderModel o1 = new OrderModel();
-//        OrderModel o2 = new OrderModel();
-//        k.receiveOrder(o1);
-//        k.receiveOrder(o2);
-//        o1.setState(OrderState.READY, new Date());
-//        o2.setState(OrderState.READY, new Date());
-//        //1 courier arrived
-//        k.getCouriersQueue().peek().setState(CourierState.ARRIVED_KITCHEN, new Date());
-//        k.updateOrderReadyState();
-//        k.scanAndPickupReadyOrders();
-//
-//        Assert.assertEquals(1, k.getDispatchedOrders().size());
+    public void testThreadSafe(){
+        //TODO
+        //use 100 thread, keep receive/dispatch order. the total of orders should be always equals
+
     }
 
 }
