@@ -16,7 +16,7 @@ public class CourierModel {
 
     private String id;
     private Date dispatchTime;//order received time
-    private Date estArriveTime;//estimated return time, following uniform distribution
+    private Date estArriveTime;//estimated time of arriving kitchen, following uniform distribution
     private Date pickUpTime;//order picked up time
     private CourierState state;
 
@@ -25,19 +25,21 @@ public class CourierModel {
     }
 
     /**
-     * @return 返还单位为秒,无estArriveTime和无arrive的返回null
+     * @return in milliseconds, return null if estArriveTime or pickUpTime is null
      */
-    public Float calWaitingTime(){
+    public Long calWaitingTime(){
         if (this.estArriveTime == null || this.pickUpTime == null){
             return null;
         }
 
-        Float diff = (float) ((this.pickUpTime.getTime() - this.estArriveTime.getTime()) / 1000);
+        Long diff = this.pickUpTime.getTime() - this.estArriveTime.getTime();
         return diff;
     }
 
     /**
-     * 更新状态和相关时间
+     * Update state of Courier and corresponding time
+     * @param state new state
+     * @param time event time
      */
     public void setState(CourierState state, Date time){
         this.state = state;
@@ -48,6 +50,7 @@ public class CourierModel {
                 System.out.println(String.format("%s: Courier %s is dispatched to kitchen.", DateUtil.HHmmssSSS.format(time), this.getId()));
                 break;
             case ARRIVED_KITCHEN:
+                this.setEstArriveTime(time);
                 System.out.println(String.format("%s: Courier %s arrived kitchen.", DateUtil.HHmmssSSS.format(time), this.getId()));
                 break;
             case PICKED_UP_ORDER:
@@ -67,7 +70,7 @@ public class CourierModel {
      * @param orderReceiveTime order receive time
      * @return arrive time
      */
-    private Date calMockArriveTime(Date orderReceiveTime) {
+    public Date calMockArriveTime(Date orderReceiveTime) {
         Calendar cl = Calendar.getInstance();
         cl.setTime(orderReceiveTime);
         cl.add(Calendar.SECOND, MathUtil.getRandomWithinRange(Constants.COURIER_TRIP_TIME_MIN_SEC,
