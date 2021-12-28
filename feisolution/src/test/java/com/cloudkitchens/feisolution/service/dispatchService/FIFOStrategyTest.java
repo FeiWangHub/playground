@@ -1,72 +1,101 @@
 package com.cloudkitchens.feisolution.service.dispatchService;
 
-import com.cloudkitchens.feisolution.model.CourierState;
-import com.cloudkitchens.feisolution.model.KitchenDispatcher;
-import com.cloudkitchens.feisolution.model.OrderModel;
-import com.cloudkitchens.feisolution.model.OrderState;
+import com.cloudkitchens.feisolution.model.*;
+import com.cloudkitchens.feisolution.util.DateUtil;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
-import java.util.List;
 
 public class FIFOStrategyTest {
 
-    @Test
-    public void testScanAndPickupReadyOrders_noOrderReady(){
-//        KitchenDispatcher k = new KitchenDispatcher(new FIFOStrategy());
-//
-//        //make sure order not ready
-//        OrderModel o = new OrderModel();
-//        k.receiveOrder(o);
-//        o.setState(OrderState.RECEIVED, new Date());
-//        List<OrderModel> result =  k.scanAndPickupReadyOrders();
-//
-//        Assert.assertEquals(0, result.size());
-//
-//        Assert.assertEquals(1, k.getCouriersQueue().size());
-//        Assert.assertEquals(1, k.getOrdersQueue().size());
-//        Assert.assertEquals(OrderState.RECEIVED, k.getOrdersQueue().peek().getState());
+    KitchenDispatcher k;
+    OrderModel order;
+    CourierModel courier;
+
+    @BeforeEach
+    public void setUp(){
+        k = new KitchenDispatcher(new FIFOStrategy());
+        order = new OrderModel();
+        courier = new CourierModel();
     }
 
     @Test
-    public void testScanAndPickupReadyOrders_noCourierReady(){
-//        KitchenDispatcher k = new KitchenDispatcher(new FIFOStrategy());
-//
-//        //order is ready but courier is not arrived
-//        OrderModel o = new OrderModel();
-//        k.receiveOrder(o);
-//        o.setState(OrderState.READY, new Date());
-//        k.getCouriersQueue().peek().setState(CourierState.DISPATCHED_TO_KITCHEN, new Date());
-//        List<OrderModel> result =  k.scanAndPickupReadyOrders();
-//
-//        Assert.assertEquals(0, result.size());
-//
-//        Assert.assertEquals(1, k.getCouriersQueue().size());
-//        Assert.assertEquals(1, k.getOrdersQueue().size());
-//        Assert.assertEquals(OrderState.READY, k.getOrdersQueue().peek().getState());
+    public void testOnOrderReady_noCourier(){
+        k.receiveOrder(order);
+        order.setState(OrderState.READY, new Date());
+
+        //no courier arrived
+        k.onOrderReady(order);
+        Assert.assertEquals(OrderState.READY, order.getState());
+        Assert.assertEquals(1, k.getOrdersQueue().size());
+        Assert.assertEquals(1, k.getCouriersQueue().size());
+        Assert.assertEquals(0, k.getFinishedOrders().size());
     }
 
     @Test
-    public void testScanAndPickupReadyOrders_1CourierArrived(){
-//        KitchenDispatcher k = new KitchenDispatcher(new FIFOStrategy());
-//
-//        // 2 orders are ready, and couriers is arrived
-//        OrderModel o1 = new OrderModel();
-//        OrderModel o2 = new OrderModel();
-//        k.receiveOrder(o1);
-//        k.receiveOrder(o2);
-//        o1.setState(OrderState.READY, new Date());
-//        o2.setState(OrderState.READY, new Date());
-//        k.getCouriersQueue().peek().setState(CourierState.ARRIVED_KITCHEN, new Date());
-//        List<OrderModel> result =  k.scanAndPickupReadyOrders();
-//
-//        Assert.assertEquals(1, result.size());
-//
-//        Assert.assertEquals(1, k.getCouriersQueue().size());//1 picked, and 1 gone
-//        Assert.assertEquals(CourierState.DISPATCHED_TO_KITCHEN, k.getCouriersQueue().peek().getState());
-//        Assert.assertEquals(1, k.getOrdersQueue().size());
-//        Assert.assertEquals(OrderState.READY, k.getOrdersQueue().peek().getState());
+    public void testOnOrderReady_manyCourierArrived(){
+        //mock many courier arrived waiting
+        CourierModel c1 = new CourierModel();
+        CourierModel c2 = new CourierModel();
+
+        Date earliestTime = new Date();
+        courier.setState(CourierState.ARRIVED_KITCHEN, earliestTime);
+        c1.setState(CourierState.ARRIVED_KITCHEN, DateUtil.addSecond(earliestTime, 1));
+        c2.setState(CourierState.ARRIVED_KITCHEN, DateUtil.addSecond(earliestTime, 2));
+
+        k.getCouriersQueue().add(courier);
+        k.getCouriersQueue().add(c1);
+        k.getCouriersQueue().add(c2);
+
+        order.setState(OrderState.READY, new Date());
+        k.onOrderReady(order);
+
+        Assert.assertEquals(OrderState.PICKED_UP, order.getState());
+        Assert.assertNotNull(order.getCourier());
+        Assert.assertEquals(earliestTime, order.getCourier().getEstArriveTime());
+        Assert.assertEquals(0, k.getOrdersQueue().size());
+        Assert.assertEquals(2, k.getCouriersQueue().size());
+        Assert.assertEquals(1, k.getFinishedOrders().size());
+    }
+
+    @Test
+    public void testOnCourierArrived_noOrderReady(){
+        k.receiveOrder(order);
+        courier = order.getCourierDispatchedByThisOrder();
+        courier.setState(CourierState.ARRIVED_KITCHEN, new Date());
+        k.onCourierArrived(courier);
+
+        Assert.assertEquals(CourierState.ARRIVED_KITCHEN, courier.getState());
+        Assert.assertEquals(OrderState.RECEIVED, order.getState());
+        Assert.assertEquals(1, k.getOrdersQueue().size());
+        Assert.assertEquals(1, k.getCouriersQueue().size());
+        Assert.assertEquals(0, k.getFinishedOrders().size());
+    }
+
+    @Test
+    public void testOnCourierArrived_manyOrderReady(){
+        OrderModel o1 = new OrderModel();
+        OrderModel o2 = new OrderModel();
+        k.receiveOrder(order);
+        k.receiveOrder(o1);
+        k.receiveOrder(o2);
+
+        Date now = new Date();
+        order.setState(OrderState.READY, now);
+        o1.setState(OrderState.READY, now);
+        o2.setState(OrderState.READY, now);
+
+        courier = order.getCourierDispatchedByThisOrder();
+        courier.setState(CourierState.ARRIVED_KITCHEN, now);
+        k.onCourierArrived(courier);
+
+        Assert.assertEquals(OrderState.PICKED_UP, order.getState());
+        Assert.assertNotNull(order.getCourier());
+        Assert.assertEquals(2, k.getOrdersQueue().size());
+        Assert.assertEquals(2, k.getCouriersQueue().size());
+        Assert.assertEquals(1, k.getFinishedOrders().size());
     }
 
 }

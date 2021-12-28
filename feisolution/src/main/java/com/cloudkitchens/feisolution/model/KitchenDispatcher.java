@@ -4,7 +4,6 @@ import com.cloudkitchens.feisolution.service.dispatchService.DispatchStrategy;
 import lombok.Data;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static com.cloudkitchens.feisolution.model.CourierState.*;
 import static com.cloudkitchens.feisolution.model.OrderState.PICKED_UP;
@@ -21,14 +20,14 @@ public class KitchenDispatcher {
     /** 已收到order，尚未pickup的couriers */
     protected LinkedList<CourierModel> couriersQueue;
 
-    private Queue<OrderModel> dispatchedOrders;
+    private Queue<OrderModel> finishedOrders;
     private DispatchStrategy dispatchStrategy;
 
     public KitchenDispatcher(DispatchStrategy strategy){
         this.dispatchStrategy = strategy;
         this.ordersQueue = new LinkedList<>();
         this.couriersQueue = new LinkedList<>();
-        this.dispatchedOrders = new LinkedList<>();
+        this.finishedOrders = new LinkedList<>();
     }
 
     /**
@@ -77,7 +76,7 @@ public class KitchenDispatcher {
         courier.setState(PICKED_UP_ORDER, pickupTime);
         order.setState(PICKED_UP, pickupTime);
 
-        this.getDispatchedOrders().add(order);
+        this.getFinishedOrders().add(order);
 
         this.getOrdersQueue().remove(order);
         this.getCouriersQueue().remove(courier);

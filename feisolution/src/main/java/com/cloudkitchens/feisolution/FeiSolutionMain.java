@@ -83,14 +83,14 @@ public class FeiSolutionMain {
                 }
                 System.out.println();
                 System.out.println(String.format("---- Progress %s/%s, Time incremented to %s ----",
-                        kitchen.getDispatchedOrders().size(),
+                        kitchen.getFinishedOrders().size(),
                         totalSize,
                         DateUtil.HHmmssSSS.format(new Date())));
             }
         }).start();
 
         //3 checking progress
-        while (totalSize != kitchen.getDispatchedOrders().size()) {
+        while (totalSize != kitchen.getFinishedOrders().size()) {
             sleep(2000);
         }
 
@@ -102,7 +102,7 @@ public class FeiSolutionMain {
     private static void printStatistics(KitchenDispatcher kitchen, int totalSize) {
         System.out.println();
         float sumFoodWaitTime = 0, sumCourierWaitTime = 0;
-        for(OrderModel o: kitchen.getDispatchedOrders()){
+        for(OrderModel o: kitchen.getFinishedOrders()){
             sumFoodWaitTime += o.calWaitingTime();
             sumCourierWaitTime += o.getCourier().calWaitingTime();
             System.out.println(String.format("Food waited %s ms, Courier waited %s ms", o.calWaitingTime(), o.getCourier().calWaitingTime()));

@@ -22,7 +22,7 @@ public class KitchenDispatcherTest {
     @Test
     public void testConstructor(){
         Assert.assertNotNull(k.getDispatchStrategy());
-        Assert.assertNotNull(k.getDispatchedOrders());
+        Assert.assertNotNull(k.getFinishedOrders());
         Assert.assertNotNull(k.getCouriersQueue());
         Assert.assertNotNull(k.getOrdersQueue());
     }
@@ -52,7 +52,7 @@ public class KitchenDispatcherTest {
 
         k.onOrderPickedUp(order, courier);
 
-        Assert.assertEquals(1, k.getDispatchedOrders().size());
+        Assert.assertEquals(1, k.getFinishedOrders().size());
         Assert.assertEquals(0, k.getCouriersQueue().size());
         Assert.assertEquals(0, k.getOrdersQueue().size());
         Assert.assertEquals(mockReadyTime.getTime(), order.getPickedUpTime().getTime());
