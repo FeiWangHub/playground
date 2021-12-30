@@ -1,4 +1,4 @@
-package com.fei.playground.algorithm.MultiThread;
+package com.fei.playground.algorithm;
 
 import java.util.*;
 
@@ -17,12 +17,12 @@ import java.util.*;
  * 链接：https://leetcode-cn.com/problems/lru-cache
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class LRUCache {
+public class M_LRUCache {
 
     int capacity;
     LinkedHashMap<Integer, Integer> cache;
 
-    public LRUCache(int capacity) {
+    public M_LRUCache(int capacity) {
         this.capacity = capacity;
         cache = new LinkedHashMap<Integer, Integer>(capacity, 0.75f, true) {
             @Override
