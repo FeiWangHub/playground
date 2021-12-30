@@ -78,6 +78,18 @@ public class LoopListMapStream {
         Random random = new Random();
         random.ints().limit(10).forEach(System.out::println);
 
+        //forEach 把里所有字符串转换小写
+        List<String> strArrays = Arrays.asList("Abc","B", "CD");
+        strArrays = strArrays.stream().map(s->s.toLowerCase()).sorted().collect(Collectors.toList());
+
+        //自定义排序 按长度ASC排序
+        strArrays = strArrays.stream().sorted(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.length() - o2.length();
+            }
+        }).collect(Collectors.toList());
+
         //map 获取对应的平方数
         List<Integer> numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
         List<Integer> squaresList = numbers.stream().map( i -> i*i).distinct().collect(Collectors.toList());

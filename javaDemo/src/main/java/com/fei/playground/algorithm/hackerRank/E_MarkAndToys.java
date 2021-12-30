@@ -1,6 +1,6 @@
 package com.fei.playground.algorithm.hackerRank;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * Sorting
