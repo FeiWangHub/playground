@@ -1,4 +1,4 @@
-package com.fei.playground.algorithm.hackerRank;
+package com.fei.playground.algorithm.amazon;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -9,6 +9,12 @@ import java.util.stream.Collectors;
  */
 public class H_AmazonDemo {
 
+    /**
+     * 用户敲至少2个字符之后开始返回suggestion，最多返还3个选项
+      * @param repository
+     * @param customerQuery
+     * @return
+     */
     public static List<List<String>> searchSuggestions(List<String> repository, String customerQuery) {
         // Write your code here
 
@@ -38,7 +44,8 @@ public class H_AmazonDemo {
     }
 
     /**
-     * define whether user
+     * define whether 判断用户的shopping列表 是否符合codeList的pattern；
+     * 符合的话中将返回1；Anything可以代表任意；codeList的group和group之间可以任意数量
      * @param codeList
      * @param shoppingCart
      * @return
