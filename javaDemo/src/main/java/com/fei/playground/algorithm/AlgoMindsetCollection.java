@@ -25,6 +25,14 @@ public class AlgoMindsetCollection {
 
     /**
      * 动态规划 求解决策过程最优化的过程
+     *
+     * 动规五部曲分别为： https://github.com/youngyangyang04/leetcode-master/blob/master/problems/动态规划总结篇.md
+     * 1确定dp数组（dp table）以及下标的含义
+     * 2确定递推公式
+     * 3dp数组如何初始化
+     * 4确定遍历顺序
+     * 5举例推导dp数组
+     *
      * https://www.jianshu.com/p/e8da6139f84b?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation
      * 动态规划问世以来，在经济管理、生产调度、工程技术和最优控制等方面得到了广泛的应用。例如最短路线、库存管理、资源分配、设备更新、排序、装载等问题，用动态规划方法比用其它方法求解更为方便
      * 动态规划算法通常用于求解具有某种最优性质的问题。在这类问题中，可能会有许多可行解。每一个解都对应于一个值，我们希望找到具有最优值的解。动态规划算法与分治法类似，其基本思想也是将待求解问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解。

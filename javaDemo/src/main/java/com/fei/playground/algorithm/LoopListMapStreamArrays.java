@@ -3,7 +3,7 @@ package com.fei.playground.algorithm;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class LoopListMapStream {
+public class LoopListMapStreamArrays {
 
     public void loopMap(){
         // 循环遍历Map的4中方法
@@ -130,7 +130,41 @@ public class LoopListMapStream {
 
     }
 
+    /**
+     * Arrays常用函数
+     */
+    public void loopArrays(){
+        int[] arrInt = {55,44,33,22,11};
+
+        //使用toString方法遍历数组，省可以替代自己编写的for循环
+        String str = Arrays.toString(arrInt);
+        System.out.println(str);
+
+        //sort, 默认asc (如果是自定义类型，那么自定义的类必须有comparable或者Comparator接口的支持)
+        Arrays.sort(arrInt);
+        System.out.println(Arrays.toString(arrInt));
+
+        //binarySearch 二分法查找 适用排列的数组
+        Arrays.sort(arrInt);
+        int num = Arrays.binarySearch(arrInt, 44);
+
+        //asList 创建List
+        List<Integer> asList = Arrays.asList(1,2,3,4);
+
+        //copyOf(arr, int newLength) 复制 copyOfRange(arr, from, to) 截取,to exclusive
+        int[] copyOf = Arrays.copyOf(arrInt, arrInt.length);
+        int[] copyOfRange = Arrays.copyOfRange(arrInt, 0, 1);//截取1个
+
+        //fill 填充
+        int[] fillArr = new int[10];
+        Arrays.fill(fillArr, -1);
+        System.out.println(Arrays.toString(fillArr));
+    }
+
+
     public static void main(String[] args) {
+
+
 
     }
 
