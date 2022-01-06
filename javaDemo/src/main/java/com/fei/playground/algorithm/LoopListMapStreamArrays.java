@@ -162,10 +162,18 @@ public class LoopListMapStreamArrays {
     }
 
 
+
     public static void main(String[] args) {
-
-
-
+        List<String> strArrays = Arrays.asList("Abc","B", "CD");
+        strArrays = strArrays.stream().map(s->s.toLowerCase()).sorted().collect(Collectors.toList());
+        Collections.sort(strArrays);
+        //自定义排序
+        strArrays = strArrays.stream().sorted(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.length() - o2.length();
+            }
+        }).collect(Collectors.toList());
+        System.out.println(strArrays);
     }
-
 }

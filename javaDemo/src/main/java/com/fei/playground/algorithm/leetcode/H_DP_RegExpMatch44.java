@@ -32,7 +32,7 @@ public class H_DP_RegExpMatch44 {
                 if (p.charAt(i - 1) == s.charAt(j - 1) || p.charAt(i - 1) == '?') { //如果当前匹配，去看次此字符串的上一个字符位，是否匹配
                     dp[i][j] = dp[i - 1][j - 1];
                 } else if (p.charAt(i - 1) == '*') { //如果当前是星号，去看
-                    dp[i][j] = dp[i - 1][j] | dp[i][j - 1];
+                    dp[i][j] = dp[i - 1][j] | dp[i][j - 1];//注意这里是 | TODO 这里还没理解
                 }
             }
         }
