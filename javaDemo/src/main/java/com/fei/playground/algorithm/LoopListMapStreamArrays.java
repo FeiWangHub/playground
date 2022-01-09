@@ -159,9 +159,22 @@ public class LoopListMapStreamArrays {
         int[] fillArr = new int[10];
         Arrays.fill(fillArr, -1);
         System.out.println(Arrays.toString(fillArr));
+
+        //array转化为list 1 asList
+        //Arrays.asList(strArray)返回值是java.util.Arrays类中一个私有静态内部类java.util.Arrays.ArrayList，它并非java.util.ArrayList类
+        //类具有 set()，get()，contains()等方法，但是不具有添加add()或删除remove()方法,所以调用add()方法会报错
+        String[] strArr = new String[]{"a","b","c"};
+        List<String> resultList = new ArrayList<>(Arrays.asList(strArr));
+
+        //array转化为list 2 Collections.addAll
+        Integer[] intArr = {1,2,3};
+        List<Integer> intList = new ArrayList<>(intArr.length);
+        Collections.addAll(intList, intArr);
+
+        //array转化为list 3 stream 支持int float类型
+        long[] longArr = {1,2,3};
+        List<Long> longList = Arrays.stream(longArr).boxed().collect(Collectors.toList());
     }
-
-
 
     public static void main(String[] args) {
         List<String> strArrays = Arrays.asList("Abc","B", "CD");
@@ -175,5 +188,8 @@ public class LoopListMapStreamArrays {
             }
         }).collect(Collectors.toList());
         System.out.println(strArrays);
+
+        int[][] grid = new int[20][20];
+
     }
 }
