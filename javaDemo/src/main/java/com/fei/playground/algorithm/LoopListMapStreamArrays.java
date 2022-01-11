@@ -176,6 +176,8 @@ public class LoopListMapStreamArrays {
         List<Long> longList = Arrays.stream(longArr).boxed().collect(Collectors.toList());
     }
 
+
+
     public static void main(String[] args) {
         List<String> strArrays = Arrays.asList("Abc","B", "CD");
         strArrays = strArrays.stream().map(s->s.toLowerCase()).sorted().collect(Collectors.toList());

@@ -5,7 +5,7 @@ package com.fei.playground.algorithm.leetcode;
  * 原则是，遍历时，结果应该是递增的
  * https://leetcode-cn.com/problems/validate-binary-search-tree/
  */
-public class M_TreeBSTIsValid {
+public class M_TreeBSTIsValid98 {
 
     Integer max = null;
     boolean isValid = true;
