@@ -1,4 +1,4 @@
-package com.fei.playground.algorithm.other;
+package com.fei.playground.algorithm.company;
 
 import java.util.*;
 import java.util.stream.Collectors;

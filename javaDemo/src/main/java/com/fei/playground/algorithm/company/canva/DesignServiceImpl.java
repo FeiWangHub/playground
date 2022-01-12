@@ -1,4 +1,4 @@
-package com.fei.playground.algorithm.other.canva;
+package com.fei.playground.algorithm.company.canva;
 
 import java.util.ArrayList;
 import java.util.HashMap;
