@@ -1,4 +1,4 @@
-package com.fei.playground;
+package com.fei.playground.algorithm.other;
 
 import com.fei.playground.util.DateUtil;
 import lombok.AllArgsConstructor;

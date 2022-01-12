@@ -1,4 +1,4 @@
-package com.fei.playground.algorithm.amazon;
+package com.fei.playground.algorithm.other;
 
 import java.util.Stack;
 
