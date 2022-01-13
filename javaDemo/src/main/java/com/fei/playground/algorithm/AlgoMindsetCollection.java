@@ -1,8 +1,5 @@
 package com.fei.playground.algorithm;
 
-import com.fei.playground.algorithm.leetcode.M_BackTrack_Permutation46;
-import com.fei.playground.algorithm.leetcode.M_BackTrack_PermutationII47;
-
 /**
  * 各种算法思路
  */
@@ -46,10 +43,12 @@ public class AlgoMindsetCollection {
     public void DP_DynamicProgramming(){
 //        M_DP_MaxArraySum test = new M_DP_MaxArraySum();
 //        M_DP_Abbrevation ab = new M_DP_Abbrevation();
+//        M_DP_DecodeWays_91 deco = new M_DP_DecodeWays_91();
     }
 
     /**
      * 回溯 ：原始状态下走完分支之后，重置状态到原始状态重新走下一个分支
+     * 适用类型：有多少种排列、组合的方案（只问方案数量，不问具体方案类型的，可以用动态规划）
      *
      * 思路模型：
      * 1.Base Case 就是出口(叶子节点)的处理逻辑 一般回溯似乎都是DFS，最先执行叶子节点

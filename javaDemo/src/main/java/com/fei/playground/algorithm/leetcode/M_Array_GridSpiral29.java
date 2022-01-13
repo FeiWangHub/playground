@@ -3,6 +3,7 @@ package com.fei.playground.algorithm.leetcode;
 /**
  * 顺时针打印二维数组
  * https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/
+ * 同螺旋矩阵题目 54 https://leetcode-cn.com/problems/spiral-matrix/submissions/
  */
 public class M_Array_GridSpiral29 {
 
@@ -55,7 +56,6 @@ public class M_Array_GridSpiral29 {
             circleIdx++;
         }
         return result;
-
     }
 
 }
