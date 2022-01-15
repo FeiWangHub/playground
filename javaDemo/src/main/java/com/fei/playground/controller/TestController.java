@@ -1,5 +1,6 @@
 package com.fei.playground.controller;
 
+import com.fei.playground.dao.UserMapper;
 import com.fei.playground.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,8 @@ public class TestController {
 
     @Autowired
     TestService testServcie;
+    @Autowired
+    UserMapper userMapper;
 
     @ResponseBody
     @RequestMapping("/hello")
@@ -19,4 +22,9 @@ public class TestController {
         return testServcie.helloWorld();
     }
 
+    @ResponseBody
+    @RequestMapping("/testMybatis")
+    public String testMybatis(){
+        return userMapper.selectAllUser().toString();
+    }
 }
