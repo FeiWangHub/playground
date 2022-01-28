@@ -1,6 +1,6 @@
 package com.fei.playground.service;
 
-public interface TestService {
+public interface SpringBootTestService {
 
     String helloWorld();
 

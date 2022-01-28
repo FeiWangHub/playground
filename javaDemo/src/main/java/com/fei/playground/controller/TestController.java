@@ -1,7 +1,7 @@
 package com.fei.playground.controller;
 
 import com.fei.playground.dao.UserMapper;
-import com.fei.playground.service.TestService;
+import com.fei.playground.service.SpringBootTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TestController {
 
     @Autowired
-    TestService testServcie;
+    SpringBootTestService springBootTestService;
     @Autowired
     UserMapper userMapper;
 
     @ResponseBody
     @RequestMapping("/hello")
     public String helloWorld(){
-        return testServcie.helloWorld();
+        return springBootTestService.helloWorld();
     }
 
     @ResponseBody
