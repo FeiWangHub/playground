@@ -7,7 +7,7 @@ package com.fei.playground.algorithm.leetcode;
  * https://leetcode-cn.com/problems/minimum-path-sum/
  * 解题思路 在每个位置上记录上它的处境的最小值 https://www.ixigua.com/6932297206066053644?logTag=7eecfb84fe44f38e97ca
  */
-public class M_DP_MinPathSum64 {
+public class M_DP_MinPathSum64_TODO {
 
     public int minPathSum(int[][] grid) {
         int r = grid.length;

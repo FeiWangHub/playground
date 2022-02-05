@@ -2,12 +2,14 @@ package com.fei.playground.service;
 
 import com.fei.playground.dao.TestDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 @Service
+@Primary//主bean
 public class SpringBootTestServiceImpl implements SpringBootTestService {
 
     @Autowired
