@@ -17,6 +17,7 @@ public class SpringBootTestServiceImpl implements SpringBootTestService {
 
     @Override
     public String helloWorld() {
+        System.out.println("Inside SpringBootTestServiceImpl: Hello World!");
         return "hello world";
     }
 

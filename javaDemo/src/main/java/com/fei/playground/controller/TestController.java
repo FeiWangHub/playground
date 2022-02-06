@@ -25,6 +25,12 @@ public class TestController {
     }
 
     @ResponseBody
+    @RequestMapping("/pointCut")
+    public String pointCut(){
+        return springBootTestService.helloWorld();
+    }
+
+    @ResponseBody
     @RequestMapping("/testMybatis")
     public String testMybatis(){
         return userMapper.selectAllUser().toString();
