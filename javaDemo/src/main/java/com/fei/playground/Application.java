@@ -3,6 +3,7 @@ package com.fei.playground;
 import com.fei.playground.model.TestFactoryBean;
 import com.fei.playground.service.SpringBootTestService;
 import com.fei.playground.service.SpringBootTestServiceImpl;
+import com.fei.playground.util.ResourceUtil;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
