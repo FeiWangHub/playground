@@ -2,7 +2,6 @@ package com.fei.playground.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +19,7 @@ public class ResourceUtil {
     }
 
     public Resource getFile(String path){
-//        return applicationContext.getResource("file:///Users/Fei/xxx");
-        return applicationContext.getResource("file:///"+path);
+        return applicationContext.getResource("file:///"+path);// Users/Fei/xxx
     }
 
     public Resource getClassPathFile(String path){

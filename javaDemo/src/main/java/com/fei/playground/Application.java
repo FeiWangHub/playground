@@ -4,12 +4,15 @@ import com.fei.playground.model.TestFactoryBean;
 import com.fei.playground.service.SpringBootTestService;
 import com.fei.playground.service.SpringBootTestServiceImpl;
 import com.fei.playground.util.ResourceUtil;
+import com.fei.playground.util.SpringContextUtil;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.function.Supplier;
@@ -19,7 +22,8 @@ import java.util.function.Supplier;
 public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        ApplicationContext appContext = SpringApplication.run(Application.class, args);
+        SpringContextUtil.setApplicationContext(appContext);
 
 //        //手动获取Spring创建的bean
 //        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class);
