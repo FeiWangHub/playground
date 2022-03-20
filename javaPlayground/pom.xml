@@ -14,17 +14,34 @@
     <name>demo</name>
     <description>Fei Demo of Spring Boot</description>
     <properties>
-        <!--        <tomcat.version>7.0.82</tomcat.version>-->
-        <java.version>1.8</java.version>
+        <!--<tomcat.version>7.0.82</tomcat.version>-->
+        <java.version>11</java.version>
         <junit.version>4.12</junit.version>
         <mybatis.version>2.2.0</mybatis.version>
         <hutool.version>5.3.4</hutool.version>
         <quartz.version>2.3.2</quartz.version>
         <fastjson.version>1.2.7</fastjson.version>
         <elasticsearch.version>7.14.1</elasticsearch.version>
-    </properties>
-    <dependencies>
+        <graphql-dgs-platform-dependencies.verison>4.9.15</graphql-dgs-platform-dependencies.verison><!-- Netflix DGS -->
 
+        <!-- Maven Plugins -->
+        <graphqlcodegen-maven-plugin.version>1.16</graphqlcodegen-maven-plugin.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.netflix.graphql.dgs</groupId>
+                <artifactId>graphql-dgs-platform-dependencies</artifactId>
+                <!-- The DGS BOM/platform dependency. This is the only place you set version of DGS -->
+                <version>${graphql-dgs-platform-dependencies.verison}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -119,6 +136,17 @@
             <scope>test</scope>
         </dependency>
         <!--Testing end-->
+
+        <!-- Netflix DGS (GraphQL)-->
+        <dependency>
+            <groupId>com.netflix.graphql.dgs</groupId>
+            <artifactId>graphql-dgs-spring-boot-starter</artifactId>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.netflix.graphql.dgs</groupId>-->
+<!--            <artifactId>graphql-dgs-extended-scalars</artifactId>-->
+<!--        </dependency>-->
+
     </dependencies>
 
     <build>
@@ -130,13 +158,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>com.fei.playground.Application</mainClass>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
@@ -145,6 +166,47 @@
                     </excludes>
                 </configuration>
             </plugin>
+
+            <!-- graphql code generator -->
+<!--            <plugin>-->
+<!--                <groupId>io.github.deweyjose</groupId>-->
+<!--                <artifactId>graphqlcodegen-maven-plugin</artifactId>-->
+<!--                <version>${graphqlcodegen-maven-plugin.version}</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    <schemaPaths>-->
+<!--                        <param>src/main/resources/schema/schema.graphqls</param>-->
+<!--                    </schemaPaths>-->
+<!--                    <packageName>com.fei.playground.graphql.generated</packageName>-->
+<!--                    <generateBoxedTypes>true</generateBoxedTypes>-->
+<!--                    <writeToFiles>true</writeToFiles>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 

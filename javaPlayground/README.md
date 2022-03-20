@@ -1,3 +1,7 @@
+# Fei Playground
+### DGS GraphQL iQL page
+http://localhost:8080/graphiql
+
 # Fei's CSS Kitchen Solution
 
 ### Build Environment Requirement
