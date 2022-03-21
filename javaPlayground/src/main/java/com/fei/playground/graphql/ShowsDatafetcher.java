@@ -1,5 +1,6 @@
 package com.fei.playground.graphql;
 
+import com.fei.playground.graphql.generated.types.Show;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
