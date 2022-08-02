@@ -1,6 +1,6 @@
 package com.fei.playground.algorithm.company;
 
-import com.fei.playground.algorithm.leetcode.TreeNode;
+import com.fei.playground.algorithm.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Arrays;

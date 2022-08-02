@@ -1,5 +1,7 @@
 package com.fei.playground.algorithm.leetcode;
 
+import com.fei.playground.algorithm.TreeNode;
+
 /**
  * 判断当前是否是valid BST
  * 原则是，遍历时，结果应该是递增的

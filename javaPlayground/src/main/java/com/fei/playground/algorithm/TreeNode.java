@@ -1,4 +1,4 @@
-package com.fei.playground.algorithm.leetcode;
+package com.fei.playground.algorithm;
 
 public class TreeNode {
     public int val;

@@ -1,6 +1,6 @@
 package com.fei.playground.algorithm.company;
 
-import com.fei.playground.algorithm.leetcode.TreeNode;
+import com.fei.playground.algorithm.TreeNode;
 import com.fei.playground.util.DateUtil;
 
 import java.util.Date;
