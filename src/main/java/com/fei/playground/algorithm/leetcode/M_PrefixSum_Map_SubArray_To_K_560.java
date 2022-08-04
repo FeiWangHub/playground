@@ -36,7 +36,6 @@ public class M_PrefixSum_Map_SubArray_To_K_560 {
     public int subarraySumAnswer(int[] nums, int k) {
         int len = nums.length;
         int[] sums = new int[len + 1];
-        int curSum = 0;
 
         for (int i = 1; i <= len; i++) {
             sums[i] = sums[i - 1] + nums[i - 1];
