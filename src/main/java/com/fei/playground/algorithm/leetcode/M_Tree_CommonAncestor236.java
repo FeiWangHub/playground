@@ -83,4 +83,30 @@ public class M_Tree_CommonAncestor236 {
         }
     }
 
+    /**
+     * 2022手撸 100% 93.4%
+     */
+    TreeNode res = null;
+    public TreeNode lowestCommonAncestor2022(TreeNode root, TreeNode p, TreeNode q) {
+        dfs(root, p.val, q.val);
+        return res;
+    }
+
+    public boolean dfs(TreeNode root, int p, int q){
+        if(root == null) return false;
+
+        boolean leftContain = dfs(root.left, p, q);
+        boolean rightContain = dfs(root.right, p, q);
+
+        if(root.val != p && root.val != q && leftContain && rightContain){
+            //分布在左右两边
+            res = root;
+        } else if ((root.val ==p || root.val == q) && (leftContain || rightContain)){
+            //本节点+左或右节点
+            res = root;
+        }
+
+        return (root.val ==p || root.val == q) || leftContain || rightContain;
+    }
+
 }
