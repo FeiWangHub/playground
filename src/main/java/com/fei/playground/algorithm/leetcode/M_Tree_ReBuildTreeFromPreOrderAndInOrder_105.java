@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
  * https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
  *
  * 给定两个整数数组preorder 和 inorder，其中preorder 是二叉树的先序遍历， inorder是同一棵树的中序遍历，请构造二叉树并返回其根节点。
+ * （前序能确定当前root是谁，中序能根据根节点划分左右子树）
  */
 public class M_Tree_ReBuildTreeFromPreOrderAndInOrder_105 {
 
