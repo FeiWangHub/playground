@@ -1,0 +1,28 @@
+spring:
+#  profiles:
+#    active: dev
+  datasource:
+#    url: jdbc:mysql://db4free.net:3306/feimysql4free?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://39.100.78.62:3306/feiwanghub
+    username: feiwanghub
+    password: 3k7AHrs6rHHpCKJM
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      connection-test-query: SELECT 1 FROM DUAL
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: SpringBootDemoHikariCP
+      max-lifetime: 60000
+      connection-timeout: 30000
+  activiti:
+    #true 启动时更新所有表 适合开发测试
+    database-schema-update: true
+    #监测历史信息是否存在，activiti7默认不生成历史信息表
+    db-history-used: true
+    history-level: 
+
+server:
+  port: 8080

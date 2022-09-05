@@ -2,6 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <modules>
+        <module>springboot-activiti</module>
+        <module>springboot-graphql-dgs</module>
+    </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -9,7 +14,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.fei</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>playground</artifactId>
     <version>0.0.1</version>
     <name>demo</name>
     <description>Fei Demo of Spring Boot</description>
@@ -25,6 +30,8 @@
         <graphql-dgs-platform-dependencies.verison>4.9.15</graphql-dgs-platform-dependencies.verison><!-- Netflix DGS -->
 
         <!-- Maven Plugins -->
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <graphqlcodegen-maven-plugin.version>1.16</graphqlcodegen-maven-plugin.version>
     </properties>
 
@@ -138,10 +145,10 @@
         <!--Testing end-->
 
         <!-- Netflix DGS (GraphQL)-->
-        <dependency>
-            <groupId>com.netflix.graphql.dgs</groupId>
-            <artifactId>graphql-dgs-spring-boot-starter</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.netflix.graphql.dgs</groupId>-->
+<!--            <artifactId>graphql-dgs-spring-boot-starter</artifactId>-->
+<!--        </dependency>-->
 <!--        <dependency>-->
 <!--            <groupId>com.netflix.graphql.dgs</groupId>-->
 <!--            <artifactId>graphql-dgs-extended-scalars</artifactId>-->
@@ -167,45 +174,45 @@
                 </configuration>
             </plugin>
 
-            <!-- graphql code generator -->
-            <plugin>
-                <groupId>io.github.deweyjose</groupId>
-                <artifactId>graphqlcodegen-maven-plugin</artifactId>
-                <version>${graphqlcodegen-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <schemaPaths>
-                        <param>src/main/resources/schema/schema.graphqls</param>
-                    </schemaPaths>
-                    <packageName>com.fei.playground.graphql.generated</packageName>
-                    <generateBoxedTypes>true</generateBoxedTypes>
-                    <writeToFiles>true</writeToFiles>
-                </configuration>
-            </plugin>
+<!--            &lt;!&ndash; graphql code generator &ndash;&gt;-->
+<!--            <plugin>-->
+<!--                <groupId>io.github.deweyjose</groupId>-->
+<!--                <artifactId>graphqlcodegen-maven-plugin</artifactId>-->
+<!--                <version>${graphqlcodegen-maven-plugin.version}</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    <schemaPaths>-->
+<!--                        <param>src/main/resources/schema/schema.graphqls</param>-->
+<!--                    </schemaPaths>-->
+<!--                    <packageName>com.fei.playground.graphql.generated</packageName>-->
+<!--                    <generateBoxedTypes>true</generateBoxedTypes>-->
+<!--                    <writeToFiles>true</writeToFiles>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
 
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>${project.build.directory}/generated-sources</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.codehaus.mojo</groupId>-->
+<!--                <artifactId>build-helper-maven-plugin</artifactId>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>generate-sources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>add-source</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <sources>-->
+<!--                                <source>${project.build.directory}/generated-sources</source>-->
+<!--                            </sources>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
 
         </plugins>
     </build>

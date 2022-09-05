@@ -1,4 +1,4 @@
-package com.fei.playground.graphql;
+package com.fei.graphql.dgs;
 
 import com.fei.playground.graphql.generated.types.Show;
 import com.netflix.graphql.dgs.DgsComponent;
