@@ -66,11 +66,11 @@ public class M_RestAPI_AuthorArticles {
         int totalPages = 1;
         String url = "https://jsonmock.hackerrank.com/api/articles?author=epaga&page=%s";
         while(curPage <= totalPages){
-            String resp = httpGetRequest(String.format(url, curPage));
-            JSONObject jo = (JSONObject) JSON.parse(resp);
+            String respStr = httpGetRequest(String.format(url, curPage));
+            JSONObject respJsonObj = (JSONObject) JSON.parse(respStr);
 
-            totalPages = Integer.parseInt(jo.get("total_pages").toString());
-            JSONArray jsonDataArray = jo.getJSONArray("data");
+            totalPages = Integer.parseInt(respJsonObj.get("total_pages").toString());
+            JSONArray jsonDataArray = respJsonObj.getJSONArray("data");
             Iterator<Object> it = jsonDataArray.iterator();
             while (it.hasNext()){
                 JSONObject item = (JSONObject) it.next();
@@ -93,13 +93,13 @@ public class M_RestAPI_AuthorArticles {
         System.out.println("!!!Debug URL: " + url);
         CloseableHttpClient httpClient = null;
         CloseableHttpResponse response = null;
-        String resp = null;
+        String respBodyStr = null;
         try {
             httpClient = HttpClients.createDefault();
             HttpGet httpGet = new HttpGet(url);
             response = httpClient.execute(httpGet);
-            resp = EntityUtils.toString(response.getEntity());
-            System.out.println("!!!Debug resp: " + resp);
+            respBodyStr = EntityUtils.toString(response.getEntity());
+            System.out.println("!!!Debug resp: " + respBodyStr);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -119,7 +119,7 @@ public class M_RestAPI_AuthorArticles {
                 }
             }
         }
-        return resp;
+        return respBodyStr;
     }
 
     public static void main(String[] args) {
