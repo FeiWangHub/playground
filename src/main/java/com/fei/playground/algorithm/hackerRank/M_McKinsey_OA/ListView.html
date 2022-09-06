@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <input type="text" id="inputText">
+    <input type="button" onclick="onBtnClicked()" value="insert">
+</div>
+<ol id="list">
+</ol>
+
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>
+    let count = 0;
+
+    function onBtnClicked() {
+        //如果有jquery
+        // let input = $('#inputText').val();
+        let inputBox = document.getElementById("inputText");
+        let input = inputBox.value;
+        if (!input) {
+            alert("Please provide the valid input.");
+            return;
+        }
+        count++;
+
+        let li = document.createElement("li");
+        li.innerHTML = input;
+        li.style.color = count % 3 === 0 ? "red" : "black";
+        // $('#list').append(li);
+        document.getElementById("list").append(li);
+        inputBox.value = null;
+    }
+</script>
+</body>
+</html>

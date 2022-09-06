@@ -90,6 +90,20 @@
             <version>${hutool.version}</version>
         </dependency>
 
+        <!-- Http Client -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
+        </dependency>
+
+        <!-- JSON Simple -->
+<!--        <dependency>-->
+<!--            <groupId>com.googlecode.json-simple</groupId>-->
+<!--            <artifactId>json-simple</artifactId>-->
+<!--            <version>1.1.1</version>-->
+<!--        </dependency>-->
+
         <!-- Aliyun OSS https://github.com/aliyun/aliyun-oss-java-sdk-->
 <!--        <dependency>-->
 <!--            <groupId>com.aliyun.oss</groupId>-->
@@ -142,6 +156,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <!--Testing end-->
 
         <!-- Netflix DGS (GraphQL)-->

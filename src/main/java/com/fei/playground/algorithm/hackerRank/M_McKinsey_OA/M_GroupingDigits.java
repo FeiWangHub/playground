@@ -26,6 +26,9 @@ package com.fei.playground.algorithm.hackerRank.M_McKinsey_OA;
  */
 public class M_GroupingDigits {
 
+    /**
+     * 双指针解法，代码可优化
+     */
     static int minMoves(int[] arr) {
         int ans1 = 0;
         int ans2 = 0;
@@ -52,6 +55,45 @@ public class M_GroupingDigits {
     public static void main(String[] args) {
         int[] arr = {0,0,1,0,0,1};
         System.out.println(M_GroupingDigits.minMoves(arr));
+//        System.out.println(M_GroupingDigits.minMovesNeedValid(arr));
+    }
+
+    /**
+     * 未验证的python翻转解法
+     */
+//    def minMoves(arr):
+//    count1 = 0
+//    dis = 0
+//            for num in arr:
+//            if num ==1:
+//    count1+=1
+//            if num==0:
+//    dis+=count1
+//
+//            count0 = len(arr) - count1
+//    rev_dis = count1 * count0 - dis
+//  return min(dis, rev_dis)
+
+    /**
+     * 尚未验证双循环解法
+     * Java O(N)
+     */
+    public static int minMovesNeedValid(int[] input) {
+        int n = input.length;
+        if (n <= 1)
+            return 0;
+        int[] oneOrZeroAtLeft = new int[2];
+
+        for (int k = 0; k<2; k++) {
+            int first = 0;
+            for (int i =0; i<n; i++) {
+                if (input[i] == k) {
+                    oneOrZeroAtLeft[k] += Math.abs(i-first);
+                    first ++;
+                }
+            }
+        }
+        return Math.min(oneOrZeroAtLeft[0], oneOrZeroAtLeft[1]);
     }
 
 }
