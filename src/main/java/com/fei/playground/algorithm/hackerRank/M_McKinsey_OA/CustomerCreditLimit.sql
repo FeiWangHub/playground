@@ -74,3 +74,9 @@ select name, salary
 from professor
 where salary > (select min(salary) from professor)
 and department_id != (select id from department where name='Arts');
+
+-- Student Subject
+SELECT A.ID, E.SUBJECT, COUNT(E.SUBJECT)
+FROM student A
+inner join examination E ON A.ID = E.STUDENTID
+GROUP BY A.ID, E.SUBJECT;
