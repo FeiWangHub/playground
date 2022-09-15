@@ -1,6 +1,6 @@
 package com.fei.playground.algorithm.leetcode;
 
-public class E_Search_FristBadVersion_278 {
+public class E_Search_FirstBadVersion_278 {
 
     /**
      * 标准简洁的二分法
@@ -12,9 +12,9 @@ public class E_Search_FristBadVersion_278 {
         while (lo < hi) {
             int mid = lo + (hi - lo) / 2;
             if (isBadVersion(mid)) {
-                hi = mid;
+                hi = mid;//go left
             } else {
-                lo = mid + 1;
+                lo = mid + 1;//go right 这里必须+1不然mid会永远等于low，死循环
             }
         }
         return hi;
