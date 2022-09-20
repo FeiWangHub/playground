@@ -1,9 +1,11 @@
 package com.fei.playground.algorithm.leetcode;
 
-public class E_Search_FirstBadVersion_278 {
+public class E_BinarySearch_FirstBadVersion_278 {
 
     /**
      * 标准简洁的二分法
+     * 二分法 不单单是可以找到"相等"的目标
+     * 还可以找到"大于/小于某个值的 的分界线、临界点"，它找到的是high"第一个小于等于某临界值的点"
      */
     int firstBadVersion_valid(int n) {
         int lo = 1;

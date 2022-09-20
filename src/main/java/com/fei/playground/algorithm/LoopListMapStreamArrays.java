@@ -135,6 +135,7 @@ public class LoopListMapStreamArrays {
      */
     public void loopArrays(){
         int[] arrInt = {55,44,33,22,11};
+        Integer[] arrINT = {55,44,33,22,11};
 
         //使用toString方法遍历数组，省可以替代自己编写的for循环
         String str = Arrays.toString(arrInt);
@@ -145,7 +146,8 @@ public class LoopListMapStreamArrays {
         System.out.println(Arrays.toString(arrInt));
 
         //binarySearch 二分法查找 适用排列的数组
-        Arrays.sort(arrInt);
+        Arrays.sort(arrInt);//默认ASC
+        Arrays.sort(arrINT, Collections.reverseOrder());//反向DESC排序
         int num = Arrays.binarySearch(arrInt, 44);
 
         //asList 创建List
@@ -174,6 +176,38 @@ public class LoopListMapStreamArrays {
         //array转化为list 3 stream 支持int float类型
         long[] longArr = {1,2,3};
         List<Long> longList = Arrays.stream(longArr).boxed().collect(Collectors.toList());
+    }
+
+    public static void listToArray(){
+        // Creating a LinkedList of string type by
+        // declaring object of List
+        List<String> list = new LinkedList<String>();
+
+        // Adding custom element to LinkedList
+        // using add() method
+        list.add("Geeks");
+        list.add("for");
+        list.add("Geeks");
+        list.add("Practice");
+
+        // Storing it inside array of strings
+        String[] arr = new String[list.size()];
+
+        //1. use for loop
+        for (int i = 0; i < list.size(); i++)
+            arr[i] = list.get(i);
+
+        //2. toArray()
+        arr = list.toArray(new String[0]);
+
+        //3. Stream API
+        arr = list.stream().toArray(String[] ::new);
+        arr = list.toArray(String[]::new);
+    }
+
+    public void arrayToList(){
+        Integer[] arr = new Integer[]{1,2,3,4,5};
+        List<Integer> integers = Arrays.asList(arr);
     }
 
     public static void main(String[] args) {
