@@ -35,7 +35,7 @@ import java.util.List;
  * satisfying teamAli]≤teamBli]where O <j <n and O < i < m, in the given
  * order.
  */
-public class TODO_M_BinarySearch_FootballScore {
+public class M_BinarySearch_FootballScore {
 
     /**
      * 二分法 不单单是可以找到"相等"的目标
