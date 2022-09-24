@@ -25,7 +25,6 @@ public class RangeList {
      */
     public void add(int start, int end) {
         if (start >= end) return;
-
         //5种情况
         //1.独立新区间
         //2.与前面区间相连
@@ -33,34 +32,24 @@ public class RangeList {
         //4.与前后都相连
         //5.包含了一个或多个现有区间
 
-        Map.Entry<Integer, Integer> ceilingEntry = rangesMap.ceilingEntry(start);
-        Map.Entry<Integer, Integer> floorEntry = rangesMap.floorEntry(start);
-        System.out.println(String.format("ceilingEntry: %s, floorEntry: %s;", ceilingEntry, floorEntry));
+        Map.Entry<Integer, Integer> leftRange = rangesMap.floorEntry(start);
+        Map.Entry<Integer, Integer> rightRange = rangesMap.ceilingEntry(start);
+        System.out.println(String.format("rightRange: %s, leftRange: %s;", rightRange, leftRange));
 
-        //1.最大的新区间
-//        if (ceilingEntry == null) {//
-//            rangesMap.put(start, end);
-//            return;
-//        }
+        //1. Range to add already contained in previous range
+        if (leftRange != null && leftRange.getKey() <= start && leftRange.getValue() >= end) return;
 
-        //现有区间 TODO ceiling是不是也要检查
-        if (floorEntry != null
-                && floorEntry.getKey() <= start
-                && floorEntry.getValue() >= end) {
-            return;
-        }
-
-        //2.检查floorEntry是否有mergable，如果有，merge
-        if (floorEntry != null && start <= floorEntry.getValue()) {
-            start = floorEntry.getKey();
-            rangesMap.remove(floorEntry.getKey());
+        //2. Merge with left side range if mergable
+        if (leftRange != null && start <= leftRange.getValue()) {
+            start = leftRange.getKey();
+            rangesMap.remove(leftRange.getKey());
         }
 
         //3.持续向后检查ceiling是否可以merge
-        while (ceilingEntry != null && ceilingEntry.getKey() <= end) {//有overlap
-            end = Math.max(end, ceilingEntry.getValue());
-            rangesMap.remove(ceilingEntry.getKey());
-            ceilingEntry = rangesMap.ceilingEntry(start);
+        while (rightRange != null && rightRange.getKey() <= end) {//有overlap
+            end = Math.max(end, rightRange.getValue());
+            rangesMap.remove(rightRange.getKey());
+            rightRange = rangesMap.ceilingEntry(start);
         }
 
         rangesMap.put(start, end);
@@ -73,14 +62,44 @@ public class RangeList {
      * @param end   end of range, exclusive
      */
     public void remove(int start, int end) {
+        if (start >= end) return;
 
+        Map.Entry<Integer, Integer> leftRange = rangesMap.floorEntry(start);
+        Map.Entry<Integer, Integer> rightRange = rangesMap.ceilingEntry(start);
+        System.out.println(String.format("rightRange: %s, leftRange: %s;", rightRange, leftRange));
+
+        //1 一个区间被完整移除
+        //2 一个区间被后半部分、前半部分、中间部分被移除
+        //3 没有任何移除
+        if (leftRange != null && start != leftRange.getKey() && start < leftRange.getValue()) {
+            rangesMap.remove(leftRange.getKey());
+            if (end < leftRange.getValue()) {
+                // 1 从中间 把一个区间瓜分两半
+                this.add(leftRange.getKey(), start);
+                this.add(end, leftRange.getValue());
+            } else {
+                //2 左边部分删除尾部 || 完全删除
+                this.add(leftRange.getKey(), start);
+            }
+        }
+
+        //向右寻找
+        while (rightRange != null && rightRange.getKey() < end) {
+            rangesMap.remove(rightRange.getKey());// 3.1 右边完全删除
+            if (rightRange.getValue() > end) {
+                // 3.2 右边部分删除
+                this.add(end, rightRange.getValue());
+                break;
+            }
+            rightRange = rangesMap.ceilingEntry(start);
+        }
     }
 
     public void print() {
         rangesMap.forEach((key, value) -> {
             System.out.printf("[%s,%s)%n", key, value);
         });
-        System.out.println("----End---");
+        System.out.println("----End---");//TODO delete
     }
 
     public static void main(String[] args) {
@@ -104,17 +123,17 @@ public class RangeList {
         r.add(3, 8);
         r.print();
 
-//        r.remove(10, 10);
-//        r.print();
+        r.remove(10, 10);
+        r.print();
 
-//        r.remove(10, 11);
-//        r.print();
+        r.remove(10, 11);
+        r.print();
 
-//        r.remove(15, 17);
-//        r.print();
+        r.remove(15, 17);
+        r.print();
 
-//        r.remove(3, 19);
-//        r.print();
+        r.remove(3, 19);
+        r.print();
     }
 
 }
