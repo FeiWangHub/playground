@@ -3,6 +3,10 @@ package com.fei.playground.algorithm.company.jerryai;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * A pair of integers define a range, for example: [1, 5). This range includes integers: 1, 2, 3, and 4.
+ * A range list is an aggregate of these ranges: [1, 5), [10, 11), [100,201)
+ */
 public class RangeList {
 
     /**
@@ -19,6 +23,7 @@ public class RangeList {
 
     /**
      * Adds a range to the list
+     * (According to requirement, the input should be Array<number>)
      *
      * @param range int[], range[0] is start of range, inclusive; range[1] is end of range, exclusive.
      */
@@ -51,6 +56,7 @@ public class RangeList {
 
     /**
      * Removes a range from the list
+     * (According to requirement, the input should be Array<number>)
      *
      * @param range int[], range[0] is start of range, inclusive; range[1] is end of range, exclusive.
      */
@@ -117,49 +123,4 @@ public class RangeList {
         System.out.println(strBuilder);
         return strBuilder.toString();
     }
-
-    public static void main(String[] args) {
-        RangeList r = new RangeList();
-
-        r.add(new int[]{1, 5});
-        r.print();
-        System.out.println("-------- End of add[1, 5) --------");
-
-        r.add(new int[]{10, 20});
-        r.print();
-        System.out.println("-------- End of add[10, 20) --------");
-
-        r.add(new int[]{20, 20});
-        r.print();
-        System.out.println("-------- End of add[20, 20) --------");
-
-        r.add(new int[]{20, 21});
-        r.print();
-        System.out.println("-------- End of add[20, 21) --------");
-
-        r.add(new int[]{2, 4});
-        r.print();
-        System.out.println("-------- End of add[2, 4) --------");
-
-        r.add(new int[]{3, 8});
-        r.print();
-        System.out.println("-------- End of add[3, 8) --------");
-
-        r.remove(new int[]{10, 10});
-        r.print();
-        System.out.println("-------- End of remove[10, 10) --------");
-
-        r.remove(new int[]{10, 11});
-        r.print();
-        System.out.println("-------- End of remove[10, 11) --------");
-
-        r.remove(new int[]{15, 17});
-        r.print();
-        System.out.println("-------- End of remove[15, 17) --------");
-
-        r.remove(new int[]{3, 19});
-        r.print();
-        System.out.println("-------- End of remove[3, 19) --------");
-    }
-
 }
