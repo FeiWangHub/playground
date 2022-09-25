@@ -86,16 +86,28 @@ public class RangeList {
     }
 
     /**
-     * Prints out the list of ranges in the range list
+     * Prints and return the list of ranges in the range list
+     * Prints and return empty string if no ranges in list
+     * @return example "[1,5) [10,20)"
      */
-    public void print() {
+    public String print() {
+        if (rangesMap.size() == 0) {
+            System.out.println();
+            return "";
+        }
+
+        StringBuilder strBuilder = new StringBuilder();
         rangesMap.forEach((key, value) -> {
-            System.out.printf("[%s,%s)%n", key, value);
+            strBuilder.append(String.format("[%s,%s) ", key, value));
         });
+        strBuilder.deleteCharAt(strBuilder.length() - 1);
+        System.out.println(strBuilder);
+        return strBuilder.toString();
     }
 
     public static void main(String[] args) {
         RangeList r = new RangeList();
+
         r.add(1, 5);
         r.print();
         System.out.println("-------- End of add[1, 5) --------");
