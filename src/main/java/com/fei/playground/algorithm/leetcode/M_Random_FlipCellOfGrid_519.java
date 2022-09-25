@@ -6,7 +6,7 @@ import java.util.Random;
 
 /**
  * 给你一个 m x n 的二元矩阵 matrix ，且所有值被初始化为 0 。
- * 请你设计一个算法，随机选取一个满足 matrix[i][j] == 0 的下标 (i, j) ，并将它的值变为 1 。
+ * 请你设计一个算法，随机选取一个满足matrix[i][j] == 0 的下标(i, j) ，并将它的值变为 1 。
  * 所有满足 matrix[i][j] == 0 的下标 (i, j) 被选取的概率应当均等。
  */
 public class M_Random_FlipCellOfGrid_519 {

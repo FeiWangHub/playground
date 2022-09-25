@@ -2,6 +2,9 @@ package com.fei.playground.algorithm.leetcode;
 
 /**
  * 有序数组 二分法查找
+ * 给定一个n个元素有序的（升序）整型数组nums 和一个目标值target ，
+ * 写一个函数搜索nums中的 target，如果目标值存在返回下标，否则返回 -1。
+ *
  * https://leetcode-cn.com/problems/binary-search/
  */
 public class E_Search_BinarySearch_704 {

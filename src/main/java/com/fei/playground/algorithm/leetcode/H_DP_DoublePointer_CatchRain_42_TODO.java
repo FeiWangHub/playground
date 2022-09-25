@@ -2,7 +2,7 @@ package com.fei.playground.algorithm.leetcode;
 
 /**
  * TODO 好像常见 需要练
- * Trapping Rain Water
+ * Trapping Rain Water 接雨水
  * https://leetcode-cn.com/problems/trapping-rain-water/
  */
 public class H_DP_DoublePointer_CatchRain_42_TODO {

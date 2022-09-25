@@ -2,7 +2,7 @@ package com.fei.playground.algorithm.leetcode;
 
 /**
  * https://leetcode-cn.com/problems/wildcard-matching/
- * 此题类似Amazon的DEMO中的Coupon Code题
+ * 此题类似Amazon的DEMO中的Coupon Code题 常规表达式 regular expression
  */
 public class H_DP_RegExpMatch44 {
 
