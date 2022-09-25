@@ -9,8 +9,8 @@ public class RangeListTest {
     public static void main(String[] args) {
         RangeListTest test = new RangeListTest();
         test.testAddRemoveAndPrint();
-        test.testIsValidInput();
-        test.testPrintWhenListEmpty();
+        //test.testIsValidInput();
+        //test.testPrintWhenListEmpty();
     }
 
     public void testIsValidInput() {
