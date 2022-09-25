@@ -20,11 +20,12 @@ public class RangeList {
     /**
      * Adds a range to the list
      *
-     * @param start of range input, inclusive
-     * @param end   of range input, exclusive
+     * @param range int[], range[0] is start of range, inclusive; range[1] is end of range, exclusive.
      */
-    public void add(int start, int end) {
-        if (start >= end) return;
+    public void add(int[] range) {
+        if (!isValidInput(range)) return;
+        int start = range[0];
+        int end = range[1];
 
         Map.Entry<Integer, Integer> leftRange = rangesMap.floorEntry(start);
         Map.Entry<Integer, Integer> rightRange = rangesMap.ceilingEntry(start);
@@ -51,11 +52,12 @@ public class RangeList {
     /**
      * Removes a range from the list
      *
-     * @param start of range input, inclusive
-     * @param end   of range input, exclusive
+     * @param range int[], range[0] is start of range, inclusive; range[1] is end of range, exclusive.
      */
-    public void remove(int start, int end) {
-        if (start >= end) return;
+    public void remove(int[] range) {
+        if (!isValidInput(range)) return;
+        int start = range[0];
+        int end = range[1];
 
         Map.Entry<Integer, Integer> leftRange = rangesMap.floorEntry(start);
         Map.Entry<Integer, Integer> rightRange = rangesMap.ceilingEntry(start);
@@ -65,11 +67,11 @@ public class RangeList {
             rangesMap.remove(leftRange.getKey());
             if (end < leftRange.getValue()) {
                 // 1.1 split the range into 2 parts
-                this.add(leftRange.getKey(), start);
-                this.add(end, leftRange.getValue());
+                this.add(new int[]{leftRange.getKey(), start});
+                this.add(new int[]{end, leftRange.getValue()});
             } else {
                 //1.2 completely remove the range, or partially remove the tail part
-                this.add(leftRange.getKey(), start);
+                this.add(new int[]{leftRange.getKey(), start});
             }
         }
 
@@ -78,7 +80,7 @@ public class RangeList {
             rangesMap.remove(rightRange.getKey());// 2.1 completely remove the range
             if (rightRange.getValue() > end) {
                 // 2.2 partially remove the head of the range
-                this.add(end, rightRange.getValue());
+                this.add(new int[]{end, rightRange.getValue()});
                 break;
             }
             rightRange = rangesMap.ceilingEntry(start);
@@ -86,8 +88,19 @@ public class RangeList {
     }
 
     /**
+     * validate input for Add and Remove function
+     *
+     * @param inputRange expect int[] of length 2
+     * @return true if inputRange is of length 2, and start index inputRange[0] is less than inputRange[1]
+     */
+    public boolean isValidInput(int[] inputRange) {
+        return inputRange.length == 2 && inputRange[0] < inputRange[1];
+    }
+
+    /**
      * Prints and return the list of ranges in the range list
      * Prints and return empty string if no ranges in list
+     *
      * @return example "[1,5) [10,20)"
      */
     public String print() {
@@ -108,43 +121,43 @@ public class RangeList {
     public static void main(String[] args) {
         RangeList r = new RangeList();
 
-        r.add(1, 5);
+        r.add(new int[]{1, 5});
         r.print();
         System.out.println("-------- End of add[1, 5) --------");
 
-        r.add(10, 20);
+        r.add(new int[]{10, 20});
         r.print();
         System.out.println("-------- End of add[10, 20) --------");
 
-        r.add(20, 20);
+        r.add(new int[]{20, 20});
         r.print();
         System.out.println("-------- End of add[20, 20) --------");
 
-        r.add(20, 21);
+        r.add(new int[]{20, 21});
         r.print();
         System.out.println("-------- End of add[20, 21) --------");
 
-        r.add(2, 4);
+        r.add(new int[]{2, 4});
         r.print();
         System.out.println("-------- End of add[2, 4) --------");
 
-        r.add(3, 8);
+        r.add(new int[]{3, 8});
         r.print();
         System.out.println("-------- End of add[3, 8) --------");
 
-        r.remove(10, 10);
+        r.remove(new int[]{10, 10});
         r.print();
         System.out.println("-------- End of remove[10, 10) --------");
 
-        r.remove(10, 11);
+        r.remove(new int[]{10, 11});
         r.print();
         System.out.println("-------- End of remove[10, 11) --------");
 
-        r.remove(15, 17);
+        r.remove(new int[]{15, 17});
         r.print();
         System.out.println("-------- End of remove[15, 17) --------");
 
-        r.remove(3, 19);
+        r.remove(new int[]{3, 19});
         r.print();
         System.out.println("-------- End of remove[3, 19) --------");
     }
