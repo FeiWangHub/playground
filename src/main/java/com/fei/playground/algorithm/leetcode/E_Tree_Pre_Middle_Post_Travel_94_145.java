@@ -25,8 +25,8 @@ public class E_Tree_Pre_Middle_Post_Travel_94_145 {
      */
     public void travel_pre(TreeNode root, LinkedList<Integer> res) {
         if (root == null) return;
-        travel_pre(root.left, res);
         res.add(root.val);
+        travel_pre(root.left, res);
         travel_pre(root.right, res);
     }
 
