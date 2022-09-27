@@ -17,6 +17,7 @@ public class M_BackTrack_Subset_78 {
 
     /**
      * 手写回溯 25% 7.4%
+     * 全排列 目测复杂度O(N!)
      */
     public List<List<Integer>> subsets(int[] nums) {
         result.add(new LinkedList<>());

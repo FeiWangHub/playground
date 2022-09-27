@@ -50,4 +50,27 @@ public class M_BackTrack_CombinationOfSum_39 {
         }
     }
 
+    /**
+     * 95% 5% 手撸
+     * 2022.9
+     */
+    public List<List<Integer>> combinationSum_mine(int[] candidates, int target) {
+        dfs(candidates, 0, target);
+        return result;
+    }
+
+    public void dfs(int[] candidates, int curIdx ,int curTarget){
+        if(curIdx >= candidates.length) return;
+        if(curTarget < 0) return;
+        if(curTarget == 0){
+            result.add(new LinkedList<>(curPath));
+            return;
+        }
+
+        curPath.add(candidates[curIdx]);
+        dfs(candidates, curIdx, curTarget - candidates[curIdx]);
+        curPath.removeLast();
+        dfs(candidates, curIdx+1, curTarget);
+    }
+
 }
