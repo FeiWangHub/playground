@@ -15,6 +15,7 @@ public class M_BackTrack_Combination_77 {
 
     /**
      * 我的第一个解法
+     * 带减枝 70% 9.59%
      */
     public static List<List<Integer>> combine(int n, int k) {
         results = new LinkedList<>();
@@ -25,6 +26,11 @@ public class M_BackTrack_Combination_77 {
     }
 
     public static void backtrack(int n, int curIdx) {
+        // 剪枝：temp 长度加上区间 [cur, n] 的长度小于 k，不可能构造出长度为 k 的 temp
+        if (curList.size() + (n - curIdx + 1) < targetLen) {
+            return;
+        }
+
         //end
         if (curList.size() == targetLen) {
             results.add(new LinkedList<>(curList));
