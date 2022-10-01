@@ -13,11 +13,39 @@ import java.util.stream.Collectors;
  */
 public class M_BackTrack_Permutation46 {
 
-    List<List<Integer>> result = new ArrayList<>();
+    /**
+     * boolean[标记法] 100% 87.97%
+     */
+    boolean[] vis;
+    public List<List<Integer>> permute_official(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        List<Integer> perm = new ArrayList<Integer>();
+        vis = new boolean[nums.length];
+        backtrack(nums, ans, 0, perm);
+        return ans;
+    }
+
+    public void backtrack(int[] nums, List<List<Integer>> ans, int idx, List<Integer> perm) {
+        if (idx == nums.length) {
+            ans.add(new ArrayList<Integer>(perm));
+            return;
+        }
+        for (int i = 0; i < nums.length; ++i) {
+            if (vis[i]) {
+                continue;
+            }
+            perm.add(nums[i]);
+            vis[i] = true;
+            backtrack(nums, ans, idx + 1, perm);
+            vis[i] = false;
+            perm.remove(idx);
+        }
+    }
 
     /**
      * 我的复杂度为n!的递归解法
      */
+    List<List<Integer>> result = new ArrayList<>();
     public List<List<Integer>> permute(int[] nums) {
         //新版swap递归 击败5% 85%
         dfsNew(nums, 0);
