@@ -15,7 +15,7 @@ import java.util.HashSet;
  *
  * https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/
  */
-public class M_Tree_CommonAncestor236 {
+public class M_Tree_CommonAncestor_236_offer68 {
 
     HashMap<TreeNode, TreeNode> node2father = new HashMap<>();
     HashSet<TreeNode> pPathSet = new HashSet<>();

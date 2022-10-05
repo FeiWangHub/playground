@@ -9,7 +9,7 @@ import com.fei.playground.algorithm.TreeNode;
  * 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大
  * （一个节点也可以是它自己的祖先）。”
  */
-public class E_Tree_BST_LowestCommonAncestor235 {
+public class E_Tree_BST_LowestCommonAncestor235_offer68 {
 
     /**
      * 手撕 32% 64%
