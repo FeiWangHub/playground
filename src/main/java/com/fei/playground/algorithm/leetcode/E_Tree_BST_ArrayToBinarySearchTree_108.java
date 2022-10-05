@@ -9,7 +9,7 @@ import com.fei.playground.algorithm.TreeNode;
  * <p>
  * https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/
  */
-public class E_Tree_ArrayToBinarySearchTree_108 {
+public class E_Tree_BST_ArrayToBinarySearchTree_108 {
 
     /**
      * 手撕 二分 100% 76%

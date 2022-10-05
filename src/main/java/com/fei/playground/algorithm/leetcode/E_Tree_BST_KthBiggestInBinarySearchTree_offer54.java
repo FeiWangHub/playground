@@ -7,7 +7,7 @@ import com.fei.playground.algorithm.TreeNode;
  * 给定一棵二叉搜索树，请找出其中第 k 大的节点的值。
  * https://leetcode.cn/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/
  */
-public class E_Tree_KthBiggestInBinarySearchTree_offer54 {
+public class E_Tree_BST_KthBiggestInBinarySearchTree_offer54 {
 
     int res, k;
 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * 如果一棵二叉搜索树中，每个节点的两棵子树高度差不超过 1 ，我们就称这棵二叉搜索树是平衡的 。
  * https://leetcode.cn/problems/balance-a-binary-search-tree/
  */
-public class M_Tree_BalanceABinarySearchTree_1382 {
+public class M_Tree_BST_BalanceABinarySearchTree_1382 {
 
     /**
      * 手撕 99% 16%
