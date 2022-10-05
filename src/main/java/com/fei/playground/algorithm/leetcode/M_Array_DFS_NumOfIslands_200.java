@@ -8,6 +8,7 @@ import java.util.Queue;
  * 给你一个由'1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。
  * 岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。
  * 此外，你可以假设该网格的四条边均被水包围。
+ * https://leetcode-cn.com/problems/number-of-islands/
  */
 public class M_Array_DFS_NumOfIslands_200 {
 
@@ -38,7 +39,7 @@ public class M_Array_DFS_NumOfIslands_200 {
         if (row < 0 || row >= rows || col < 0 || col >= cols || grid[row][col] != '1') {
             return;
         }
-        ;
+
         grid[row][col] = '2';
 
         //上下左右
