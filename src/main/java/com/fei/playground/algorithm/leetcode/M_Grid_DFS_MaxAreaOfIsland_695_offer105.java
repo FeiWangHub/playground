@@ -9,7 +9,7 @@ package com.fei.playground.algorithm.leetcode;
  * 计算并返回 grid 中最大的岛屿面积。如果没有岛屿，则返回面积为 0 。
  * https://leetcode.cn/problems/max-area-of-island/
  */
-public class M_Grid_DFS_MaxAreaOfIsland_695 {
+public class M_Grid_DFS_MaxAreaOfIsland_695_offer105 {
 
     /**
      * 手写DFS 100% 54%
