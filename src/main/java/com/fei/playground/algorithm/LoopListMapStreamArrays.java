@@ -197,7 +197,7 @@ public class LoopListMapStreamArrays {
         for (int i = 0; i < list.size(); i++)
             arr[i] = list.get(i);
 
-        //2. toArray()
+        //2. listToArray()
         arr = list.toArray(new String[0]);
 
         //3. Stream API

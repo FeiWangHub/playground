@@ -20,7 +20,7 @@ public class E_Tree_Pre_Middle_Post_Travel_94_145 {
 
     public List<Integer> inorderTraversal(TreeNode root) {
         LinkedList<Integer> res = new LinkedList<>();
-        travel_middle(root, res);
+        travel_middle_inOrder(root, res);
 //        travel_pre(root, res);
 //        travel_post(root, res);
         return res;
@@ -32,11 +32,11 @@ public class E_Tree_Pre_Middle_Post_Travel_94_145 {
      * 1 前序遍历的第一个元素U一定是树的根节点
      * 2.(当你知道了左子树的总数量为n): (根节点idx+1) -> (根节点idx+n-1) = 左子树的先序遍历
      */
-    public void travel_pre(TreeNode root, LinkedList<Integer> res) {
+    public void travel_preOrder(TreeNode root, LinkedList<Integer> res) {
         if (root == null) return;
         res.add(root.val);
-        travel_pre(root.left, res);
-        travel_pre(root.right, res);
+        travel_preOrder(root.left, res);
+        travel_preOrder(root.right, res);
     }
 
     /**
@@ -45,11 +45,11 @@ public class E_Tree_Pre_Middle_Post_Travel_94_145 {
      * 1.遍历结果中，根节点在中间，root左边部分一定是左子树，root右边部分是右子树
      * 2.当你知道了root是哪个，就能找出，左子树的中序遍历，和，右子树的后序遍历
      */
-    public void travel_middle(TreeNode root, LinkedList<Integer> res) {
+    public void travel_middle_inOrder(TreeNode root, LinkedList<Integer> res) {
         if (root == null) return;
-        travel_middle(root.left, res);
+        travel_middle_inOrder(root.left, res);
         res.add(root.val);
-        travel_middle(root.right, res);
+        travel_middle_inOrder(root.right, res);
     }
 
     /**
@@ -57,10 +57,10 @@ public class E_Tree_Pre_Middle_Post_Travel_94_145 {
      * 1.最后一个数字是根节点
      * 2.当给你知道左子树数量n，右子树数量m，那么遍历数组中，左子树是[0->n-1]，右子树是[n->n+m-1] TODO 待验证
      */
-    public void travel_post(TreeNode root, LinkedList<Integer> res) {
+    public void travel_postOrder(TreeNode root, LinkedList<Integer> res) {
         if (root == null) return;
-        travel_post(root.left, res);
-        travel_post(root.right, res);
+        travel_postOrder(root.left, res);
+        travel_postOrder(root.right, res);
         res.add(root.val);
     }
 }
