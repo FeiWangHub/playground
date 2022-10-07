@@ -15,6 +15,7 @@ public class M_BackTrack_Permutation46 {
 
     /**
      * boolean[标记法] 100% 87.97%
+     * 时间复杂度 O(n!) 阶乘？
      */
     boolean[] vis;
     public List<List<Integer>> permute_official(int[] nums) {
