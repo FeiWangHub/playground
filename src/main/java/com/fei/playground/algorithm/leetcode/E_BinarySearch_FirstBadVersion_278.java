@@ -11,15 +11,32 @@ public class E_BinarySearch_FirstBadVersion_278 {
         int lo = 1;
         int hi = n;
 
-        while (lo < hi) {
-            int mid = lo + (hi - lo) / 2;
+        while (lo < hi) {// 循环直至区间左右端点相同 左闭右开
+            int mid = lo + (hi - lo) / 2;// 防止计算时溢出
             if (isBadVersion(mid)) {
-                hi = mid;//go left
+                hi = mid;//go left 答案在区间[left, mid]中
             } else {
-                lo = mid + 1;//go right 这里必须+1不然mid会永远等于low，死循环
+                lo = mid + 1;//go right 答案在区间[mid+1, right]中
             }
         }
+        //此时有 left == right，区间缩为一个点，即为答案
         return hi;
+    }
+
+    /**
+     * 手撕左闭右闭版本，结束时，i和j交错
+     */
+    public int firstBadVersion_leftRightClose(int n) {
+        int lo = 1, hi = n, mid = 0;
+        while (lo <= hi) {
+            mid = lo + (hi - lo) / 2;
+            if(isBadVersion(mid)){//go left
+                hi = mid - 1;
+            }else{
+                lo = mid + 1;
+            }
+        }
+        return lo;
     }
 
     /**

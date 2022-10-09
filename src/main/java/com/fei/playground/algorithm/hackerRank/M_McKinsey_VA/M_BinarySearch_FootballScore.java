@@ -57,7 +57,7 @@ public class M_BinarySearch_FootballScore {
                     low = mid + 1;//go right
                 }
             }
-            result.add(low);
+            result.add(low);//循环结束时，low和high位置交错
         }
         return result;
     }
