@@ -21,6 +21,9 @@ import java.util.PriorityQueue;
  */
 public class M_Array_JerryAI_ModifyAndSort {
 
+    /**
+     * 复杂度N*logN
+     */
     public static int question(int[] arr) {
         PriorityQueue<Integer> heap = new PriorityQueue<>();//heap里存的是尚未处理，且去重的数字
         HashSet<Integer> set = new HashSet<>();//数组中已经包含的数字
