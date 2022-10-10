@@ -5,7 +5,7 @@ package com.fei.playground.algorithm.leetcode;
  * 给你一个字符串 s，找到 s 中最长的回文子串。
  * https://leetcode-cn.com/problems/longest-palindromic-substring/
  */
-public class M_String_LongestPalindrome_5 {
+public class M_String_DP_TODO_LongestPalindrome_5 {
 
     /**
      * 我改造的中央扩张法 81% 55%
