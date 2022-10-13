@@ -23,7 +23,7 @@ import java.math.BigInteger;
  *
  * 类似 https://leetcode-cn.com/problems/number-of-steps-to-reduce-a-number-in-binary-representation-to-one/
  */
-public class MS_M_String_ByteOperation {
+public class MS_M_String_BitOperation {
 
     //字符串操作解法
     //判断偶数: 尾字符是否是1
