@@ -21,7 +21,7 @@ public class M_DP_Array_StockBestTimeii_oneStock_122_offer63 {
     }
 
     /**
-     * 手撕 只记录min和profit 
+     * 手撕 只记录min和profit
      */
     public int maxProfit_main(int[] prices) {
         int minprice = Integer.MAX_VALUE;

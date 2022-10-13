@@ -87,6 +87,7 @@ public class M_Tree_FindDuplicateSubTree_652 {
 
     /**
      * 手撕 5% 5%
+     * 每棵节点都返回自己的序列化
      * 时间空间都是O(n平方)
      */
     HashMap<String, Integer> subTrees2count = new HashMap<>();

@@ -17,6 +17,7 @@ public class M_Array_BinarySearch_findKClosestItem_658 {
 
     /**
      * 手撕 二分法 38% 67%
+     * 时间logN+k 空间1
      * 还有大量改进空间
      */
     public static List<Integer> findClosestElements(int[] arr, int k, int x) {

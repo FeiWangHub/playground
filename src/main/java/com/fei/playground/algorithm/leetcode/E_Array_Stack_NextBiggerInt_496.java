@@ -6,6 +6,8 @@ import java.util.Stack;
 
 /**
  * 496. 下一个更大元素 I
+ * nums1 中数字 x 的 下一个更大元素 是指 x 在 nums2 中对应位置 右侧 的 第一个 比 x 大的元素。
+ * 返回一个长度为 nums1.length 的数组 ans 作为答案，满足 ans[i] 是如上所述的 下一个更大元素 。
  * https://leetcode.cn/problems/next-greater-element-i/
  * <p>
  * 加强版 503. 下一个更大元素 II https://leetcode.cn/problems/next-greater-element-ii/
