@@ -7,8 +7,10 @@ import java.util.Stack;
 
 /**
  * 运行字符串中的四元表达式
+ * https://leetcode.cn/problems/basic-calculator-ii/
+ * https://leetcode.cn/problems/calculator-lcci/
  */
-public class MX_5th_StringCalculator {
+public class MX_5th_StringCalculator_227 {
 
     public static void main(String[] args) {
         System.out.println(String.format("---- Started, time now is %s ----", DateUtil.HHmmssSSS.format(new Date())));
@@ -17,8 +19,10 @@ public class MX_5th_StringCalculator {
         int[] arr2 = {0, 1, 2, 4, 8, 18};
 
         cal("1+1+1");
+//        cal("3+2*2");
     }
 
+    //现场手撕 有bug
     //input String, 4-2*5/4+1  : +-*/
     public static void cal(String input) {
         Stack<Float> digitStack = new Stack<>();

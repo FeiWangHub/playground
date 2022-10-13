@@ -12,7 +12,7 @@ import com.fei.playground.algorithm.TreeNode;
  * 2.只有左or右，直接用左or右替换
  * 3.左右都有，要保证删除完之后依然是BST的属性,把左子树最大/或右子树最小，拿来替换
  */
-public class M_TreeBSTDeleteNode_450 {
+public class M_Tree_BST_DeleteNode_450 {
 
     public TreeNode deleteNode(TreeNode root, int key) {
         if (root == null) return null;
