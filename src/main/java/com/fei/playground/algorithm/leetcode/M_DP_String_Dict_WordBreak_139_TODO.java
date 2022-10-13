@@ -14,12 +14,21 @@ import java.util.Set;
  * 设dp[i]代表s.substring(0, i)能否被字典表达，此刻我们知道dp[0]~dp[i-1]的结果。
  * 而dp[i]的结果由两部分组成，一部分是dp[j]（j < i)，已知；另一部分是j到i之间的字符串是不是在字典里。
  * 当这两个部分都为真的时候，dp[i]即为真。而一旦dp[i]为真，就不用继续迭代了。
+ *
+ * DP解题模板
+ * 1. dp数组以及下标的含义:  dp[i]代表s[0-i]能否被字典词代表
+ * 2. 递推公式:  dp[i]=dp[j] && check(s[j..i−1])
+ * 3. dp数组如何初始化
+ * 4. 遍历顺序（2个循环如何嵌套？从前向后，还是反方向？）
+ * 5. 打印dp数组
  */
 public class M_DP_String_Dict_WordBreak_139 {
 
     /**
      * 官方DP 56.56% 50.01%
-     * 时间n2，空间n
+     * 时间n2平方，空间n
+     * n为字符串长度，总共有o(n)个状态需要计算，每次需要枚举O(n)个分割点
+     * 需要n的空间存放dp和哈希表
      */
     public boolean wordBreak(String s, List<String> wordDict) {
         Set<String> dictSet = new HashSet<>(wordDict);
