@@ -22,7 +22,7 @@ public class MX_5th_StringCalculator_227 {
 //        cal("3+2*2");
     }
 
-    //现场手撕 有bug
+    //现场手撕 有bug 其实只需要一个栈，记录上一步的符号sign即可
     //input String, 4-2*5/4+1  : +-*/
     public static void cal(String input) {
         Stack<Float> digitStack = new Stack<>();
@@ -52,10 +52,10 @@ public class MX_5th_StringCalculator_227 {
         }
 
         float result = 0;
-        while(!opStack.isEmpty()){
-            if(opStack.pop()){//+
+        while (!opStack.isEmpty()) {
+            if (opStack.pop()) {//+
                 result += digitStack.pop();
-            }else{//-
+            } else {//-
                 result -= digitStack.pop();
             }
         }

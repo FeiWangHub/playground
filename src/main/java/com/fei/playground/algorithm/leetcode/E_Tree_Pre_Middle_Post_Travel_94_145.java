@@ -4,12 +4,13 @@ import com.fei.playground.algorithm.TreeNode;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * 前序遍历 https://leetcode.cn/problems/binary-tree-preorder-traversal/
  * 中序遍历 https://leetcode.cn/problems/binary-tree-inorder-traversal/
  * 后序遍历 https://leetcode.cn/problems/binary-tree-postorder-traversal/
- *
+ * <p>
  * 遍历结果规律：
  * 1. 前序遍历，第一个是根节点，
  * 2. 后序遍历，最后一个是根节点
@@ -62,5 +63,75 @@ public class E_Tree_Pre_Middle_Post_Travel_94_145 {
         travel_postOrder(root.left, res);
         travel_postOrder(root.right, res);
         res.add(root.val);
+    }
+
+    //以下为stack版本
+
+    /**
+     * 前序遍历 迭代版本 用stack
+     */
+    public void travel_preOrder_iteration(TreeNode head) {
+        if (head == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(head);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            System.out.print(node.val + " ");
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+        }
+    }
+
+    /**
+     * 中序遍历 迭代版本 stack
+     */
+    public void travel_middle_inOrder_iteration(TreeNode head) {
+        if (head == null) {
+            return;
+        }
+        TreeNode cur = head;
+        Stack<TreeNode> stack = new Stack<>();
+        while (!stack.isEmpty() || cur != null) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            TreeNode node = stack.pop();
+            System.out.print(node.val + " ");
+            if (node.right != null) {
+                cur = node.right;
+            }
+        }
+    }
+
+    /**
+     * 后序遍历 迭代版本 stack
+     */
+    public void travel_postOrder_iteration(TreeNode head) {
+        if (head == null) {
+            return;
+        }
+        Stack<TreeNode> stack1 = new Stack<>();
+        Stack<TreeNode> stack2 = new Stack<>();
+        stack1.push(head);
+        while (!stack1.isEmpty()) {
+            TreeNode node = stack1.pop();
+            stack2.push(node);
+            if (node.left != null) {
+                stack1.push(node.left);
+            }
+            if (node.right != null) {
+                stack1.push(node.right);
+            }
+        }
+        while (!stack2.isEmpty()) {
+            System.out.print(stack2.pop().val + " ");
+        }
     }
 }
