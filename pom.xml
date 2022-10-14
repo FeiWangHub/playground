@@ -16,16 +16,16 @@
     <groupId>com.fei</groupId>
     <artifactId>playground</artifactId>
     <version>0.0.1</version>
-    <name>demo</name>
+    <name>playground</name>
     <description>Fei Demo of Spring Boot</description>
     <properties>
         <!--<tomcat.version>7.0.82</tomcat.version>-->
         <java.version>11</java.version>
         <junit.version>4.12</junit.version>
-        <mybatis.version>2.2.0</mybatis.version>
-        <hutool.version>5.3.4</hutool.version>
+        <mybatis.version>2.2.2</mybatis.version>
+        <hutool.version>5.8.8</hutool.version>
         <quartz.version>2.3.2</quartz.version>
-        <fastjson.version>1.2.7</fastjson.version>
+        <fastjson.version>2.0.14</fastjson.version>
         <elasticsearch.version>7.14.1</elasticsearch.version>
         <graphql-dgs-platform-dependencies.verison>4.9.15</graphql-dgs-platform-dependencies.verison><!-- Netflix DGS -->
 
