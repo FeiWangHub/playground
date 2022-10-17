@@ -8,8 +8,8 @@ import java.util.*;
  * A network of flights contains flight nodes number of flights denoted by
  * [1, 2,..., flight nodes]. There is a list of dependencies among flights
  * denoted by the arrays flight fromll, flights leaving a city, and flight toll,
- * flights arriving in a city. Each pair (flight fromlil, flight toil} denotes that
- * flight fromli] depends on flight_ toil and must depart only after
+ * flights arriving in a city. Each pair (flight from, flight to} denotes that
+ * flight_from depends on flight_to and must depart only after
  * flight toli has landed. If a flight is delayed, all the flights dependent on
  * this flight and their corresponding dependencies are also delayed.
  * <p>
