@@ -8,7 +8,8 @@ package com.fei.playground.algorithm.leetcode;
 public class E_Array_BinarySearch_704 {
 
     /**
-     * 是在一个在左闭右闭的区间里，**也就是[left, right]
+     * 左闭右闭的区间里，**也就是[left, right]
+     * 结束时left和right位置交叉
      */
     public int search(int[] nums, int target) {
         int len = nums.length;
@@ -30,6 +31,7 @@ public class E_Array_BinarySearch_704 {
 
     /**
      * 左闭右开区间
+     * 结束时 left = right?
      */
     public int search_2(int[] nums, int target) {
         int left = 0, right = nums.length;
