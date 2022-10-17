@@ -13,7 +13,7 @@ package com.fei.playground.algorithm.hackerRank.M_McKinsey_VA;
  * k=3
  * Hence the answer is 2.
  */
-public class M_HighlyProfitableMonths {
+public class M_McKinsey_HighlyProfitableMonths {
 
     public static int findMonths(int[] prices, int k) {
         //双指针，保证left和right之间是一个asc数组

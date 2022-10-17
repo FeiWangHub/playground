@@ -50,7 +50,7 @@ import java.util.*;
  * 1 ≤ delayed[i] ≤ flight _nodes
  * The pair {flight _fromli], flight_to[il} will only be given once in the input.
  */
-public class M_FlightDelay {
+public class M_McKinsey_FlightDelay {
 
     public static List<Integer> countDelayedFlights(int flightNodes, List<Integer> flightFrom,
                                                     List<Integer> flightTo, List<Integer> delayed) {
