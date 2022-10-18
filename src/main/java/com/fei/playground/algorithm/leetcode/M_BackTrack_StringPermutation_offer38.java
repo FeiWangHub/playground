@@ -42,7 +42,7 @@ public class M_BackTrack_StringPermutation_offer38 {
         }
 
         for (int i = 0; i < chars.length; i++) {
-            //vis[i - 1]为同一树枝去重， !vis[i - 1]为同一树层去重
+            //vis[i - 1]代表同一树枝使用过， !vis[i - 1]为同一树层使用过
             //if (vis[i] || (i > 0 && chars[i] == chars[i - 1] && vis[i - 1])) {
             if (vis[i] || (i > 0 && chars[i] == chars[i - 1] && !vis[i - 1])) {
                 continue;
