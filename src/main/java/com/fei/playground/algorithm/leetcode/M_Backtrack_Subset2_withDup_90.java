@@ -15,6 +15,38 @@ public class M_Backtrack_Subset2_withDup_90 {
     HashSet<String> set = new HashSet<>();
     LinkedList<Integer> curList = new LinkedList<>();
     List<List<Integer>> res = new LinkedList<>();
+    boolean[] used;
+
+    /**
+     * 教程第三版 boolean去重法 99% 87%
+     * TODO 需要学习
+     */
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        if (nums.length == 0) {
+            res.add(curList);
+            return res;
+        }
+        used = new boolean[nums.length];
+        Arrays.sort(nums);
+        backtrack(0, nums);
+        return res;
+    }
+
+    //计算包含idx的 所有宽度的子集组合
+    public void backtrack(int curIdx, int[] nums) {
+        res.add(new LinkedList<>(curList));
+        if (curIdx >= nums.length) return;
+
+        for (int i = curIdx; i < nums.length; i++) {
+            //vis[i - 1]代表同一树枝使用过， !vis[i - 1]为同一树层使用过
+            if ((i > 0 && nums[i] == nums[i - 1] && !used[i - 1])) continue;
+            curList.add(nums[i]);
+            used[i] = true;
+            backtrack(i + 1, nums);
+            curList.removeLast();
+            used[i] = false;
+        }
+    }
 
     /**
      * 手撕第二版 set去重 6.2% 60%
