@@ -1,6 +1,5 @@
 package com.fei.playground.algorithm.leetcode;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +8,7 @@ import java.util.Map;
  * 给定一个数组 nums 和一个目标值 k，找到和等于 k 的最长连续子数组长度。如果不存在任意一个符合要求的子数组，则返回 0。
  * https://leetcode.cn/problems/maximum-size-subarray-sum-equals-k/
  */
-public class M_PrefixSum_Conviva_maxSizeSubarraySumToK_325_TODO {
+public class M_PrefixSum_Conviva_maxSizeSubarraySumToK_325 {
 
     /**
      * 使用前缀和 preSum 来记录截止到 i 位置时，得到的 nums[0:i]之和
@@ -42,7 +41,8 @@ public class M_PrefixSum_Conviva_maxSizeSubarraySumToK_325_TODO {
     }
 
     /**
-     * 手撕前缀和ing 有bug
+     * 手撕前缀和ing 92% 20%
+     * 空间可以优化
      */
     public static int maxSubArrayLen(int[] nums, int k) {
         //前缀和 sums[i]代表位置i之前所有数字的和（包括i）
@@ -51,10 +51,10 @@ public class M_PrefixSum_Conviva_maxSizeSubarraySumToK_325_TODO {
             sums[i] = sums[i - 1] + nums[i - 1];
         }
 
-        System.out.println("前缀和为" + Arrays.toString(sums));
+        //System.out.println("前缀和为" + Arrays.toString(sums));
 
         HashMap<Integer, Integer> sum2minIdxMap = new HashMap<>();
-        sum2minIdxMap.put(0, 0);
+        sum2minIdxMap.put(0, 0);//需要有这个0，相当于前边所有的数字想加，刚好等于3
         int resStartIdx = 0;
         int resEndIdx = 0;
 
@@ -63,12 +63,12 @@ public class M_PrefixSum_Conviva_maxSizeSubarraySumToK_325_TODO {
             int target = curSum - k;
 
             if (sum2minIdxMap.containsKey(target)) {//此区间合法
-                int start = sum2minIdxMap.get(target) + 1;//nums的idx
+                int start = sum2minIdxMap.get(target);//nums的idx
                 int end = i;//nums的idx,inclusive
                 if (end - start > resEndIdx - resStartIdx) {
                     resEndIdx = end;
                     resStartIdx = start;
-                    System.out.println("当前合法的区间为start: " + resStartIdx + " end:" + resEndIdx);
+                    //System.out.println("当前合法的区间为start: " + resStartIdx + " end:" + resEndIdx);
                 }
             }
 
@@ -76,8 +76,7 @@ public class M_PrefixSum_Conviva_maxSizeSubarraySumToK_325_TODO {
                 sum2minIdxMap.put(curSum, i);
             }
         }
-
-        return resEndIdx - resStartIdx + 1;
+        return resEndIdx - resStartIdx;
     }
 
     public static void main(String[] args) {
