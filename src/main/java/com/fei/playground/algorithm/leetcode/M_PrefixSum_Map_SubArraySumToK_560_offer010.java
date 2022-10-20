@@ -33,7 +33,7 @@ public class M_PrefixSum_Map_SubArraySumToK_560_offer010 {
     }
 
     //前缀和算法
-    public int subarraySumAnswer(int[] nums, int k) {
+    public int subarraySum_preFixSum(int[] nums, int k) {
         int len = nums.length;
         int[] sums = new int[len + 1];
 
