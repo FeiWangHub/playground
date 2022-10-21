@@ -15,7 +15,7 @@ public class E_BitOp_Math_HappyNumber_202 {
 
     /**
      * 手撕优化 80% 76%
-     * 用取模获取最后一位数
+     * 用取模每次获取最后一位数
      */
     public boolean isHappy(int n) {
         //1. 最终会得到 11。
