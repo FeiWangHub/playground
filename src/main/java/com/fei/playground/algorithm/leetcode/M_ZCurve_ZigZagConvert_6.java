@@ -11,25 +11,23 @@ import java.util.ArrayList;
 public class M_ZCurve_ZigZagConvert_6 {
 
     /**
-     * 手撕一遍循环arrayList，模拟goingUpDown 86% 25%
+     * 手撕一遍循环arrayList，模拟goingUpDown 86% 55%
+     * 思路是模拟Z、N的走向，碰到numRows时要上下反弹方向，即可
      */
     public String convert(String s, int numRows) {
         if (numRows == 1) return s;
 
         ArrayList<StringBuilder> arr = new ArrayList<>(numRows);
-        for (int i = 0; i < numRows; i++) {
-            arr.add(new StringBuilder());
-        }
+        for (int i = 0; i < numRows; i++) arr.add(new StringBuilder());
 
         int nextRow = 0;
-        int maxRow = numRows - 1;
         boolean goingDown = true;
         for (int i = 0; i < s.length(); i++) {
             arr.get(nextRow).append(s.charAt(i));
             //换行换方向
             if (nextRow == 0 && !goingDown) {//改向下走
                 goingDown = true;
-            } else if (nextRow == maxRow && goingDown) {//改向上走
+            } else if (nextRow == numRows - 1 && goingDown) {//改向上走
                 goingDown = false;
             }
             nextRow = goingDown ? nextRow + 1 : nextRow - 1;
@@ -41,6 +39,37 @@ public class M_ZCurve_ZigZagConvert_6 {
         }
 
         return b.toString();
+    }
+
+    /**
+     * 模拟二维矩阵解法 20% 10%
+     */
+    public String convert_mockGrid(String s, int numRows) {
+        int n = s.length(), r = numRows;
+        if (r == 1 || r >= n) {
+            return s;
+        }
+        int t = r * 2 - 2;
+        int c = (n + t - 1) / t * (r - 1);
+        char[][] mat = new char[r][c];
+        for (int i = 0, x = 0, y = 0; i < n; ++i) {
+            mat[x][y] = s.charAt(i);
+            if (i % t < r - 1) {
+                ++x; // 向下移动
+            } else {
+                --x;
+                ++y; // 向右上移动
+            }
+        }
+        StringBuffer ans = new StringBuffer();
+        for (char[] row : mat) {
+            for (char ch : row) {
+                if (ch != 0) {
+                    ans.append(ch);
+                }
+            }
+        }
+        return ans.toString();
     }
 
 }
