@@ -53,6 +53,9 @@ public class H_LinkedList_ReverseNodesInKGroup_25 {
         return newHead == null ? head : newHead;
     }
 
+    /**
+     * 官方无Stack模拟 100% 20%
+     */
     public ListNode reverseKGroup_officialMock(ListNode head, int k) {
         ListNode hair = new ListNode(0);
         hair.next = head;
