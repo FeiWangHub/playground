@@ -37,4 +37,11 @@ public class M_DoublePointer_SlidingWindow_checkInclusion_567 {
         return false;
     }
 
+    /**
+     * 把整数转换为 0-26的数字
+     */
+    public int charToInt26(char c) {
+        return c - 'a';
+    }
+
 }
