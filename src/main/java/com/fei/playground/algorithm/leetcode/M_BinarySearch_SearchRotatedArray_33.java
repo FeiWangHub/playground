@@ -15,15 +15,60 @@ package com.fei.playground.algorithm.leetcode;
  * 输出：4
  * https://leetcode.cn/problems/search-in-rotated-sorted-array/
  */
-public class M_BinarySearch_SearchRotatedArray_33_TODO {
+public class M_BinarySearch_SearchRotatedArray_33 {
 
+    /**
+     * 手撕二分 100% 10%, logN复杂度
+     * (目标在非递增区间时，要手动判断，是往左走还是往右走)
+     */
     public int search(int[] nums, int target) {
-        //先二分搜索，找到突然递减的分割点
+        int left = 0;
+        int right = nums.length - 1;
+        int mid = 0;
+        while (left <= right) {
+            mid = left + (right - left) / 2;
+            //System.out.println("left:"+left+" right:"+right + " mid:"+nums[mid]);
+            if (nums[mid] == target) return mid;
 
+            //normal binary search
+            if (nums[left] < nums[right]) {
+                if (nums[mid] < target) {//go right
+                    left = mid + 1;
+                } else {//go left
+                    right = mid - 1;
+                }
+            } else {//rotated array search
+                if (nums[left] <= nums[mid]) {//左边是递增区间
+                    if (nums[mid] > target && nums[left] <= target) {//mid大于target，且，向左
+                        right = mid - 1;
+                    } else {
+                        left = mid + 1;
+                    }
+                } else {//右边是上升区间
+                    if (nums[mid] < target && nums[right] >= target) {//在右侧上升区间内
+                        left = mid + 1;
+                    } else {
+                        right = mid - 1;
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 思路2
+     * 先二分搜索，找到突然递减的分割点
+     * 再二分搜索，在剩下的范围中，找到target
+     */
+    public int search_mine2(int[] nums, int target) {
+        //思路一
+        //先二分搜索，找到突然递减的分割点
         //再二分搜索，在剩下的范围中，找到target
 
         return -1;
     }
+
 
     /**
      * 网友高票清晰答案 有待理解
@@ -63,7 +108,6 @@ public class M_BinarySearch_SearchRotatedArray_33_TODO {
     }
 
     /**
-     * TODO
      * 这启示我们可以在常规二分查找的时候查看当前 mid 为分割位置分割出来的两个部分 [l, mid] 和 [mid + 1, r] 哪个部分是有序的，
      * 并根据有序的那个部分确定我们该如何改变二分查找的上下界，因为我们能够根据有序的那部分判断出 target 在不在这个部分
      */
