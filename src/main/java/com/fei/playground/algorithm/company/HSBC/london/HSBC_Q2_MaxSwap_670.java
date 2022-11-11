@@ -15,18 +15,21 @@ package com.fei.playground.algorithm.company.HSBC.london;
 //    Input: num = 9765
 //    Output: 9765
 //    Explanation: No swap.
-public class HSBC_Q2_MaxValAfterSwap {
+public class HSBC_Q2_MaxSwap_670 {
 
     public static void main(String[] args) {
-        calculate(3298);
-        calculate(9765);
-        calculate(0);
-        calculate(90909090);// 99009090 TODO 99909000
-        calculate(123456789);
+        calculate_mine(3298);
+        calculate_mine(9765);
+        calculate_mine(0);
+        calculate_mine(90909090);// 99009090 TODO 99909000
+        calculate_mine(123456789);
         //calculate(Integer.MAX_VALUE);
     }
 
-    public static Integer calculate(int input) {
+    /**
+     * 现场手撕 100% 57%
+     */
+    public static Integer calculate_mine(int input) {
         String str = String.valueOf(input);
         char[] arr = str.toCharArray();
 
@@ -50,13 +53,36 @@ public class HSBC_Q2_MaxValAfterSwap {
         String res = new String(arr);
         System.out.println(res);
         return Integer.valueOf(res);
-
     }
 
-    public static void swap(char[] arr, int x, int y) {
-        int temp = arr[x];
-        arr[x] = arr[y];
-        arr[y] = (char) temp;
+    /**
+     * 官方 官方 100% 68% 跟我一个思路
+     */
+    public int maximumSwap(int num) {
+        char[] charArray = String.valueOf(num).toCharArray();
+        int n = charArray.length;
+        int maxIdx = n - 1;
+        int idx1 = -1, idx2 = -1;
+        for (int i = n - 1; i >= 0; i--) {
+            if (charArray[i] > charArray[maxIdx]) {
+                maxIdx = i;
+            } else if (charArray[i] < charArray[maxIdx]) {
+                idx1 = i;
+                idx2 = maxIdx;
+            }
+        }
+        if (idx1 >= 0) {
+            swap(charArray, idx1, idx2);
+            return Integer.parseInt(new String(charArray));
+        } else {
+            return num;
+        }
+    }
+
+    public static void swap(char[] charArray, int i, int j) {
+        char temp = charArray[i];
+        charArray[i] = charArray[j];
+        charArray[j] = temp;
     }
 
 }
