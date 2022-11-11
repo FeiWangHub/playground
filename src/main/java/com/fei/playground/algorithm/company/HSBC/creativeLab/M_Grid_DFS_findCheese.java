@@ -1,4 +1,4 @@
-package com.fei.playground.algorithm.company.HSBC;
+package com.fei.playground.algorithm.company.HSBC.creativeLab;
 
 /**
  * A mouse is placed in a maze. There is
