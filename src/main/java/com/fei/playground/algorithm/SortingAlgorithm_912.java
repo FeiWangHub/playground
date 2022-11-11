@@ -4,19 +4,13 @@ package com.fei.playground.algorithm;
  * 十大排序算法耗时 https://www.runoob.com/w3cnote/ten-sorting-algorithm.html
  * 十大算法动画解读 https://www.cnblogs.com/onepixel/articles/7674659.html
  * https://leetcode-cn.com/problems/sort-an-array/
- * 输入：nums = [5,2,3,1]
- * 输出：[1,2,3,5]
- * 输入：nums = [5,1,1,2,0,0]
- * 输出：[0,0,1,1,2,5]
- * TIPS
- * 1 <= nums.length <= 5 * 104
- * -5 * 104 <= nums[i] <= 5 * 104
+ * 给你一个整数数组 nums，请你将该数组升序排列。
  */
-public class SortingAlgorithm {
+public class SortingAlgorithm_912 {
     public int[] sortArray(int[] nums) {
         if (nums.length <= 1) return nums;
-        //qSort(nums,0,nums.length-1);
-        //selectSort(nums);
+        // qSort(nums,0,nums.length-1);
+        // selectSort(nums);
         // insertSort(nums);
         // shellSort(nums);
         // bucketSort(nums);
@@ -47,8 +41,10 @@ public class SortingAlgorithm {
     }
 
     /**
-     * 选择排序
-     * 选择排序(Selection-sort)是一种简单直观的排序算法。它的工作原理：首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。
+     * 选择排序 o(n2)
+     * 选择排序(Selection-sort)是一种简单直观的排序算法。
+     * 首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，
+     * 然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。
      **/
     void selectionSort(int[] arr) {
         int min;
@@ -68,8 +64,9 @@ public class SortingAlgorithm {
     }
 
     /**
-     * 插入排序：数列前面部分看为有序，依次将后面的无序数列元素插入到前面的有序数列中，初始状态有序数列仅有一个元素，即首元素。在将无序数列元素插入有序数列的过程中，采用了逆序遍历有序数列，相较于顺序遍历会稍显繁琐，但当数列本身已近排序状态效率会更高。
-     * <p>
+     * 插入排序
+     * 数列前面部分看为有序，依次将后面的无序数列元素插入到前面的有序数列中，初始状态有序数列仅有一个元素，即首元素。
+     * 在将无序数列元素插入有序数列的过程中，采用了逆序遍历有序数列，相较于顺序遍历会稍显繁琐，但当数列本身已近排序状态效率会更高。
      * 时间复杂度：O(N2) 　　稳定性：稳定
      */
     public void insertSort(int arr[]) {
