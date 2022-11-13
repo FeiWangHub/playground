@@ -8,20 +8,21 @@ package com.fei.playground.algorithm.leetcode;
 public class M_String_DP_TODO_LongestPalindrome_5 {
 
     /**
-     * 我改造的中央扩张法 81% 55%
+     * 我改造的中央扩张法 81% 55%; 时间n2，空间o(1)
      */
     String cur = "";
+
     public String longestPalindrome(String s) {
-        for (int i=0; i < s.length(); i++){
+        for (int i = 0; i < s.length(); i++) {
             count(s, i, i);//回文串长度为奇数
-            count(s, i, i+1);//回文串长度为偶数
+            count(s, i, i + 1);//回文串长度为偶数
         }
         return cur;
     }
 
-    public void count(String s, int start, int end){
-        while(start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)){
-            if(cur.length() < end-start+1) cur = s.substring(start, end+1);
+    public void count(String s, int start, int end) {
+        while (start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)) {
+            if (cur.length() < end - start + 1) cur = s.substring(start, end + 1);
             start--;
             end++;
         }
@@ -29,11 +30,12 @@ public class M_String_DP_TODO_LongestPalindrome_5 {
 
     //暴力破解法 字节面试使用
     static String result = "";
-    public static String solution(String s){
-        for(int i=0; i<s.length(); i++){
-            for(int j=i; j<s.length(); j++){
-                if(isValid(s, i, j) && (j-i+1)>result.length()){
-                    result = s.substring(i, j+1);
+
+    public static String solution(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i; j < s.length(); j++) {
+                if (isValid(s, i, j) && (j - i + 1) > result.length()) {
+                    result = s.substring(i, j + 1);
                 }
             }
         }
@@ -41,13 +43,13 @@ public class M_String_DP_TODO_LongestPalindrome_5 {
     }
 
     //start end inclusive
-    public static boolean isValid(String s, int start, int end){
-        while(start < end){
-            if(s.charAt(start)==s.charAt(end)){
+    public static boolean isValid(String s, int start, int end) {
+        while (start < end) {
+            if (s.charAt(start) == s.charAt(end)) {
                 start++;
                 end--;
                 continue;
-            }else{
+            } else {
                 return false;
             }
         }
@@ -55,7 +57,8 @@ public class M_String_DP_TODO_LongestPalindrome_5 {
     }
 
     /**
-     * 官方动态规划 需要学习 45% 31%
+     * 官方动态规划 需要学习 TODO 45% 31% 时间n2，空间n2
+     * 只有s[i+1:j−1]是回文串，并且 s 的第 i 和 j 个字母相同时，s[i:j] 才会是回文串
      */
     public String longestPalindrome_byDP(String s) {
         int len = s.length();
