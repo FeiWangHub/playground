@@ -8,7 +8,26 @@ import java.util.Arrays;
  * 你可以认为每种硬币的数量是无限的。
  * https://leetcode-cn.com/problems/coin-change
  */
-public class M_DP_CoinChange322_TOOD {
+public class M_DP_CoinChange322_TODO {
+
+    /**
+     * 官方动态规划 87% 23% 时间O(Sn) 空间O(S) S是金额，n是面额数 TODO
+     *
+     */
+    public int coinChange(int[] coins, int amount) {
+        int max = amount + 1;
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, max);
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (coins[j] <= i) {
+                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+                }
+            }
+        }
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
 
     /**
      * 我第一次解法，性能不行，击败26%用户
@@ -45,7 +64,7 @@ public class M_DP_CoinChange322_TOOD {
      * TODO 这个算法优化需要理解
      * 网上评论解法 先循环coins 击败86%
      */
-    public int coinChange(int[] coins, int amount){
+    public int coinChange_loopCoin(int[] coins, int amount){
         if(coins.length == 0)
             return -1;
 
