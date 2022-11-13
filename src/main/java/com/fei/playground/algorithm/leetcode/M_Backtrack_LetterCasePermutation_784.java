@@ -1,7 +1,6 @@
 package com.fei.playground.algorithm.leetcode;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 784. 字母大小写全排列
@@ -39,6 +38,39 @@ public class M_Backtrack_LetterCasePermutation_784 {
             arr[curIdx] = Character.toUpperCase(arr[curIdx]);
             backtrack(curIdx + 1);
         }
+    }
+
+    /**
+     * 官方广度优先
+     * 从左往右依次遍历字符，在队列中存储当前为已遍历过字符的字母大小全排列。例如当前字符串为:
+     * s=“abc"
+     * 假设我们当前已经遍历到字符的第 2 个字符‘b’ 时，则此时队列中已经存储的序列为:
+     * “ab",“Ab",“aB",“AB"
+     * 遍历策略：
+     * - 如果 c 为一个数字，则队列中所有的序列的末尾均加上  c c，将修改后的序列再次进入到队列中
+     * - 如果  c c 为一个字母，此时我们在上述序列的末尾依次分别加上 c 的小写形式 lowercase(c) 和
+     *    c 的大写形式 uppercase(c) 后，再次将上述数列放入队列
+     */
+    public List<String> letterCasePermutation_officialBFS(String s) {
+        List<String> ans = new ArrayList<String>();
+        Queue<StringBuilder> queue = new ArrayDeque<StringBuilder>();
+        queue.offer(new StringBuilder());
+        while (!queue.isEmpty()) {
+            StringBuilder curr = queue.peek();
+            if (curr.length() == s.length()) {
+                ans.add(curr.toString());
+                queue.poll();
+            } else {
+                int pos = curr.length();
+                if (Character.isLetter(s.charAt(pos))) {
+                    StringBuilder next = new StringBuilder(curr);
+                    next.append((char) (s.charAt(pos) ^ 32));
+                    queue.offer(next);
+                }
+                curr.append(s.charAt(pos));
+            }
+        }
+        return ans;
     }
 
 }
