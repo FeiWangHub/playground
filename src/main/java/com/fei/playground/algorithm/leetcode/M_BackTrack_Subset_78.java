@@ -16,26 +16,25 @@ public class M_BackTrack_Subset_78 {
     LinkedList<Integer> curList = new LinkedList<>();
 
     /**
-     * 手写回溯 25% 7.4%
-     * 全排列 目测复杂度O(N!)
+     * 手写回溯 25% 7.4% 时间O(2n次方) 总共2n次方个状态 空间O(n)
      */
     public List<List<Integer>> subsets(int[] nums) {
         result.add(new LinkedList<>());
-        for(int i=1; i<=nums.length; i++){
+        for (int i = 1; i <= nums.length; i++) {
             backtrack(nums, 0, i);
         }
         return result;
     }
 
-    public void backtrack(int[] nums, int curIdx, int targetLen){
-        if(curList.size() == targetLen){
+    public void backtrack(int[] nums, int curIdx, int targetLen) {
+        if (curList.size() == targetLen) {
             result.add(new LinkedList<>(curList));
             return;
         }
 
-        for(int i=curIdx; i<nums.length; i++){
+        for (int i = curIdx; i < nums.length; i++) {
             curList.add(nums[i]);
-            backtrack(nums, i+1, targetLen);
+            backtrack(nums, i + 1, targetLen);
             curList.removeLast();
         }
     }
@@ -62,10 +61,10 @@ public class M_BackTrack_Subset_78 {
     /**
      * 官方1 迭代法实现子集枚举
      * 记原序列中元素的总数为 nn。原序列中的每个数字 a_ia
-     *   的状态可能有两种，即「在子集中」和「不在子集中」。我们用 11 表示「在子集中」，00 表示不在子集中，
-     *   那么每一个子集可以对应一个长度为 nn 的 0/10/1 序列，第 ii 位表示 a_ia
-     *   是否在子集中。例如，n = 3n=3 ，a = \{ 5, 2, 9 \}a={5,2,9} 时：
-     *
+     * 的状态可能有两种，即「在子集中」和「不在子集中」。我们用 11 表示「在子集中」，00 表示不在子集中，
+     * 那么每一个子集可以对应一个长度为 nn 的 0/10/1 序列，第 ii 位表示 a_ia
+     * 是否在子集中。例如，n = 3n=3 ，a = \{ 5, 2, 9 \}a={5,2,9} 时：
+     * <p>
      * 可以发现 0/10/1 序列对应的二进制数正好从0到2^n - 1个
      */
     public List<List<Integer>> subsets_official_by_binary(int[] nums) {
