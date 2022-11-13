@@ -23,6 +23,17 @@ import java.util.regex.Pattern;
  */
 public class StringUtil {
 
+    public static void main(String[] args) {
+        System.out.println(switchLowerUpper('a'));
+    }
+
+    /**
+     * 大写字母变小写，小写变大写
+     */
+    public static char switchLowerUpper(char c) {
+        return (char) (c ^ 32);
+    }
+
     /**
      * 首字母变小写
      */
@@ -542,19 +553,19 @@ public class StringUtil {
         return str.substring(0, str.length() > 1 ? str.length() - 1 : 0);
     }
 
-    public static String fillPrefixZero(String str, int expectedLength){
+    public static String fillPrefixZero(String str, int expectedLength) {
         int len = str.length();
-        if (len < expectedLength){
+        if (len < expectedLength) {
             return String.join("", Collections.nCopies(expectedLength - len, "0")) + str;
         }
         return str;
     }
 
-    public static String removePrefixZero(String str){
+    public static String removePrefixZero(String str) {
         int beginIdx = 0;
         char[] chars = str.toCharArray();
-        for (int i = 0; i<chars.length; i++){
-            if (chars[i] != '0'){
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] != '0') {
                 beginIdx = i;
                 break;
             }
@@ -620,19 +631,20 @@ public class StringUtil {
         return true;
     }
 
-    public static String numberToIntWithSeparator(Double number){
-        if(number == null)
+    public static String numberToIntWithSeparator(Double number) {
+        if (number == null)
             return "--";
         DecimalFormat df = new DecimalFormat("###,##0");
         return df.format(number);
     }
 
-    public static String doubleToStringWithSeparator(Double number){
-        if(number == null)
+    public static String doubleToStringWithSeparator(Double number) {
+        if (number == null)
             return "--";
         DecimalFormat df = new DecimalFormat("###,##0.00");
         return df.format(number);
     }
+
     //判断是否含有中文
     public static boolean isChinese(String strName) {
         char[] ch = strName.toCharArray();
@@ -660,32 +672,28 @@ public class StringUtil {
         return false;
     }
 
-
-    public static void main(String ae[]) {
-
-    }
-
     public static Double getNumberForPer(String valStr) {
-        if(valStr.contains("%")){
-          return    Double.parseDouble(valStr.split("%")[0]+"")/100;
+        if (valStr.contains("%")) {
+            return Double.parseDouble(valStr.split("%")[0] + "") / 100;
         } else {
-            return  Double.parseDouble(valStr);
+            return Double.parseDouble(valStr);
         }
     }
 
 
     /**
      * 获取首字符
+     *
      * @param name
      * @return
      */
     public static String getFirstLetters(String name) {
         if (StringUtil.notEmpty(name)) {
-            String[]nameList=name.split(" ");
-            String firstLetters="";
-            for(String letter:nameList){
-                if(StringUtil.notEmpty(letter)&&letter.length()>0){
-                    firstLetters+=letter.substring(0,1).toUpperCase();
+            String[] nameList = name.split(" ");
+            String firstLetters = "";
+            for (String letter : nameList) {
+                if (StringUtil.notEmpty(letter) && letter.length() > 0) {
+                    firstLetters += letter.substring(0, 1).toUpperCase();
                 }
             }
             return firstLetters;
@@ -694,15 +702,15 @@ public class StringUtil {
         }
     }
 
-    public static String getMarket(String code){
+    public static String getMarket(String code) {
         String market = "None";
-        if(code.contains(".SH") || code.contains(".SZ")){
+        if (code.contains(".SH") || code.contains(".SZ")) {
             market = "CN";
-        }else if(code.contains(".HK")){
+        } else if (code.contains(".HK")) {
             market = "HK";
-        }else if(code.contains(".O") || code.contains(".A") || code.contains(".N") || code.contains(".P")){
+        } else if (code.contains(".O") || code.contains(".A") || code.contains(".N") || code.contains(".P")) {
             market = "US";
-        }else
+        } else
             market = "US";//其他市场在下订单到Paladyne的时候当做US
         return market;
     }
@@ -808,31 +816,34 @@ public class StringUtil {
 //        return output;
 //    }
 
-    public static String firstUpperCase(String str){
+    public static String firstUpperCase(String str) {
         return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
     /**
      * 脱敏 显示前4 后4
+     *
      * @param idCardNum
      * @return
      */
     public static String cardString(String idCardNum) {
-        if(StringUtil.notEmpty(idCardNum)&&idCardNum.length()>8){
-            return idCardNum.substring(0,4)+"****"+idCardNum.substring(idCardNum.length()-4);
+        if (StringUtil.notEmpty(idCardNum) && idCardNum.length() > 8) {
+            return idCardNum.substring(0, 4) + "****" + idCardNum.substring(idCardNum.length() - 4);
         }
         return idCardNum;
     }
+
     /**
      * 脱敏 显示前1 后1
+     *
      * @param name
      * @return
      */
     public static String nameString(String name) {
-        if(StringUtil.notEmpty(name)){
-            return name.substring(0,1)+"*"+(name.length()>2?name.substring(name.length()-1):"");
+        if (StringUtil.notEmpty(name)) {
+            return name.substring(0, 1) + "*" + (name.length() > 2 ? name.substring(name.length() - 1) : "");
         }
         return name;
     }
-    
+
 }
