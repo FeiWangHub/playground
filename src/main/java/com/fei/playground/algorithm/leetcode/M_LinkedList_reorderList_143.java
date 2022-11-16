@@ -3,7 +3,6 @@ package com.fei.playground.algorithm.leetcode;
 import com.fei.playground.algorithm.ListNode;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 143. 重排链表
@@ -14,13 +13,50 @@ import java.util.List;
 public class M_LinkedList_reorderList_143 {
 
     /**
-     * 原地翻转
+     * 手撕原地无额外空间 100% 20%
      * 1. 快慢指针找到中间节点
      * 2. 反转后半段链表
      * 3. 合并前半段链表和后半段链表
      */
     public void reorderList(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = slow.next;
 
+        //1. 快慢指针找到中间节点; 奇数个，slow会停在中点；偶数个，slow会停在中间左边
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        //2. 反转后半段链表(保证前半段比后半段长)
+        ListNode secondHead = reverseLinkedList(slow.next);
+        slow.next = null;
+
+        //3. 合并前半段链表和后半段链表
+        while (head != null && secondHead != null) {
+            slow = head.next;
+            fast = secondHead.next;
+
+            secondHead.next = head.next;
+            head.next = secondHead;
+
+            head = slow;
+            secondHead = fast;
+        }
+    }
+
+    public ListNode reverseLinkedList(ListNode head) {
+        ListNode pre = null;
+        ListNode current = head;
+        ListNode tempNext;
+
+        while (current != null) {
+            tempNext = current.next;
+            current.next = pre;
+            pre = current;
+            current = tempNext;
+        }
+        return pre;
     }
 
     /**
