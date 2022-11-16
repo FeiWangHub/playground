@@ -16,7 +16,6 @@ import com.fei.playground.algorithm.ListNode;
 public class E_LinkedList_reverseLinkedList {
 
     public ListNode reverseList(ListNode head) {
-
         ListNode pre = null;
         ListNode current = head;
         ListNode tempNext;
@@ -31,7 +30,6 @@ public class E_LinkedList_reverseLinkedList {
     }
 
     public ListNode reverseListNew(ListNode head) {
-
         ListNode lastReversed = null;
         ListNode currToReverse = head;
         ListNode nextToReverse = null;
