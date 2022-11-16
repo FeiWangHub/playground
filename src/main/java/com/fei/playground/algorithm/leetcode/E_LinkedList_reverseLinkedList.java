@@ -1,44 +1,29 @@
-package com.fei.playground.algorithm;
+package com.fei.playground.algorithm.leetcode;
+
+import com.fei.playground.algorithm.ListNode;
 
 /**
  * https://leetcode-cn.com/problems/reverse-linked-list/comments/
  * Definition for singly-linked list.
  * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * int val;
+ * ListNode next;
+ * ListNode() {}
+ * ListNode(int val) { this.val = val; }
+ * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-public class ReverseLinkList {
-
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
+public class E_LinkedList_reverseLinkedList {
 
     public ListNode reverseList(ListNode head) {
 
         ListNode pre = null;
         ListNode current = head;
-        ListNode tempNext ;
+        ListNode tempNext;
 
-        while(current != null){
+        while (current != null) {
             tempNext = current.next;
-            current.next=pre;
+            current.next = pre;
             pre = current;
             current = tempNext;
         }
@@ -51,7 +36,7 @@ public class ReverseLinkList {
         ListNode currToReverse = head;
         ListNode nextToReverse = null;
 
-        while(currToReverse != null){
+        while (currToReverse != null) {
             nextToReverse = currToReverse.next;
             currToReverse.next = lastReversed;
             lastReversed = currToReverse;
