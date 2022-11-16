@@ -6,7 +6,7 @@ package com.fei.playground.algorithm;
  * https://leetcode-cn.com/problems/sort-an-array/
  * 给你一个整数数组 nums，请你将该数组升序排列。
  */
-public class SortingAlgorithm_912 {
+public class M_Array_sortingAlgorithm_912 {
     public int[] sortArray(int[] nums) {
         if (nums.length <= 1) return nums;
         // qSort(nums,0,nums.length-1);

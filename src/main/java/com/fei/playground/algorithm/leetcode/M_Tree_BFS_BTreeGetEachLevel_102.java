@@ -1,4 +1,6 @@
-package com.fei.playground.algorithm;
+package com.fei.playground.algorithm.leetcode;
+
+import com.fei.playground.algorithm.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Iterator;
