@@ -1,5 +1,8 @@
 package com.fei.playground.algorithm.leetcode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * TODO 可以用这个题练习DP
  * 给你一个字符串 s，找到 s 中最长的回文子串。
@@ -28,10 +31,12 @@ public class M_String_DP_TODO_LongestPalindrome_5 {
         }
     }
 
-    //暴力破解法 字节面试使用
     static String result = "";
 
-    public static String solution(String s) {
+    /**
+     * 暴力破解法 字节面试使用
+     */
+    public static String longestPalindrome_bruteForce(String s) {
         for (int i = 0; i < s.length(); i++) {
             for (int j = i; j < s.length(); j++) {
                 if (isValid(s, i, j) && (j - i + 1) > result.length()) {
@@ -48,7 +53,6 @@ public class M_String_DP_TODO_LongestPalindrome_5 {
             if (s.charAt(start) == s.charAt(end)) {
                 start++;
                 end--;
-                continue;
             } else {
                 return false;
             }
@@ -106,6 +110,58 @@ public class M_String_DP_TODO_LongestPalindrome_5 {
             }
         }
         return s.substring(begin, begin + maxLen);
+    }
+
+    /**
+     * O(n)的Manacher算法 一般不作为面试
+     */
+    public String longestPalindrome_manacher(String s) {
+        int start = 0, end = -1;
+        StringBuffer t = new StringBuffer("#");
+        for (int i = 0; i < s.length(); ++i) {
+            t.append(s.charAt(i));
+            t.append('#');
+        }
+        t.append('#');
+        s = t.toString();
+
+        List<Integer> arm_len = new ArrayList<Integer>();
+        int right = -1, j = -1;
+        for (int i = 0; i < s.length(); ++i) {
+            int cur_arm_len;
+            if (right >= i) {
+                int i_sym = j * 2 - i;
+                int min_arm_len = Math.min(arm_len.get(i_sym), right - i);
+                cur_arm_len = expand(s, i - min_arm_len, i + min_arm_len);
+            } else {
+                cur_arm_len = expand(s, i, i);
+            }
+            arm_len.add(cur_arm_len);
+            if (i + cur_arm_len > right) {
+                j = i;
+                right = i + cur_arm_len;
+            }
+            if (cur_arm_len * 2 + 1 > end - start) {
+                start = i - cur_arm_len;
+                end = i + cur_arm_len;
+            }
+        }
+
+        StringBuffer ans = new StringBuffer();
+        for (int i = start; i <= end; ++i) {
+            if (s.charAt(i) != '#') {
+                ans.append(s.charAt(i));
+            }
+        }
+        return ans.toString();
+    }
+
+    public int expand(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            --left;
+            ++right;
+        }
+        return (right - left - 2) / 2;
     }
 
 }
