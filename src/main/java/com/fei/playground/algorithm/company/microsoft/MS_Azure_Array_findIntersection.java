@@ -1,4 +1,4 @@
-package com.fei.playground.algorithm.company;
+package com.fei.playground.algorithm.company.microsoft;
 
 /**
  * Azure第一面

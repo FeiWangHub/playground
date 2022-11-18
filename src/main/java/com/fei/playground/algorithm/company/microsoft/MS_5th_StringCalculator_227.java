@@ -1,4 +1,4 @@
-package com.fei.playground.algorithm.company;
+package com.fei.playground.algorithm.company.microsoft;
 
 import com.fei.playground.util.DateUtil;
 
@@ -10,7 +10,7 @@ import java.util.Stack;
  * https://leetcode.cn/problems/basic-calculator-ii/
  * https://leetcode.cn/problems/calculator-lcci/
  */
-public class MX_5th_StringCalculator_227 {
+public class MS_5th_StringCalculator_227 {
 
     public static void main(String[] args) {
         System.out.println(String.format("---- Started, time now is %s ----", DateUtil.HHmmssSSS.format(new Date())));

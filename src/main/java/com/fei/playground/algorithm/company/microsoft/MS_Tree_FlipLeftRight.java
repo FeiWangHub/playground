@@ -1,4 +1,4 @@
-package com.fei.playground.algorithm.company;
+package com.fei.playground.algorithm.company.microsoft;
 
 import com.fei.playground.algorithm.TreeNode;
 import com.fei.playground.util.DateUtil;

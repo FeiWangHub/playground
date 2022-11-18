@@ -1,4 +1,4 @@
-package com.fei.playground.algorithm.company;
+package com.fei.playground.algorithm.company.microsoft;
 
 /**
  * 2022.01.28

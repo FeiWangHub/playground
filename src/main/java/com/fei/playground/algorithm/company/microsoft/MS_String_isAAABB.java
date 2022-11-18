@@ -1,4 +1,4 @@
-package com.fei.playground.algorithm.company;
+package com.fei.playground.algorithm.company.microsoft;
 
 /**
  * Write a function solution that, given a string S consisting of N letters 'a'
