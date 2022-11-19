@@ -6,7 +6,7 @@ import java.util.*;
  * 双指针法，排序后，遍历右边O(N),总复杂度 排序NLogN + n平方
  * https://leetcode-cn.com/problems/3sum/
  */
-public class M_Arra_Three3Sum_15 {
+public class M_Array_Three3Sum_15 {
 
     /**
      * 双指针法 并跳过重复value
