@@ -10,7 +10,7 @@ import java.util.Queue;
  * 此外，你可以假设该网格的四条边均被水包围。
  * https://leetcode-cn.com/problems/number-of-islands/
  */
-public class M_Array_DFS_NumOfIslands_200 {
+public class M_Grid_DFS_NumOfIslands_200 {
 
     int count = 0;
     int rows = 0;

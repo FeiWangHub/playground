@@ -5,7 +5,7 @@ package com.fei.playground.algorithm.leetcode;
  * https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/
  * 同螺旋矩阵题目 54 https://leetcode-cn.com/problems/spiral-matrix/submissions/
  */
-public class M_Array_GridSpiral29 {
+public class M_Grid_Spiral_29 {
 
     /**
      * 我的第一遍解法 比较笨 击败97 84

@@ -5,7 +5,7 @@ package com.fei.playground.algorithm.leetcode;
  * (评论解法思路 一张图先上下反转，再对角反转)
  * https://leetcode-cn.com/problems/rotate-image/
  */
-public class M_Array_GridRotate90_48 {
+public class M_Grid_Rotate90_48 {
 
     /**
      * 我花了几乎3个小时的解法 100% 100%

@@ -6,7 +6,7 @@ package com.fei.playground.algorithm.leetcode;
  * 且元素按顺时针顺序螺旋排列的 n x n 正方形矩阵 matrix 。
  * https://leetcode.cn/problems/spiral-matrix-ii/
  */
-public class M_Array_GridSpiral2_59 {
+public class M_Grid_Spiral2_59 {
 
     /**
      * 手撕模拟 100% 11%

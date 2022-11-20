@@ -9,7 +9,7 @@ import java.util.*;
  * （若两个四元组元素一一对应，则认为两个四元组重复）
  * https://leetcode.cn/problems/4sum/
  */
-public class M_Array_Four4Sum_18 {
+public class M_Grid_Four4Sum_18 {
 
     int i1, i2, i3, i4;
     int left, right, sum;
@@ -103,7 +103,7 @@ public class M_Array_Four4Sum_18 {
 
     public static void main(String[] args) {
 //        new M_Array_Four4Sum_18().fourSum(new int[]{0, 0, 0, 0}, 0).forEach(System.out::println);
-        new M_Array_Four4Sum_18().fourSum(new int[]{2, 2, 2, 2, 2}, 8).forEach(System.out::println);
+        new M_Grid_Four4Sum_18().fourSum(new int[]{2, 2, 2, 2, 2}, 8).forEach(System.out::println);
 //        HashSet<List<Integer>> set = new HashSet<>();
 //        set.add(Arrays.asList(2,2,2,2));
 //        System.out.println(set.contains(Arrays.asList(2,2,2,2)));
