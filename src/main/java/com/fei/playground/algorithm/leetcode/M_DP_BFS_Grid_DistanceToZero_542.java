@@ -9,7 +9,7 @@ import java.util.Queue;
  * 两个相邻元素间的距离为 1 。
  * https://leetcode.cn/problems/01-matrix/
  */
-public class M_DP_BFS_Grid_DistanceToZero_542_TODO {
+public class M_DP_BFS_Grid_DistanceToZero_542 {
 
     static int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
@@ -31,7 +31,7 @@ public class M_DP_BFS_Grid_DistanceToZero_542_TODO {
             }
         }
 
-        // 广度优先搜索
+        // 广度优先搜索，从已经访问过的位置，向上下左右传递1层；已经访问过的就不再访问了，因为它不会再更小了
         while (!queue.isEmpty()) {
             int[] cell = queue.poll();
             int i = cell[0], j = cell[1];
