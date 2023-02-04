@@ -20,7 +20,7 @@
     <description>Fei Demo of Spring Boot</description>
     <properties>
         <!--<tomcat.version>7.0.82</tomcat.version>-->
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <junit.version>4.12</junit.version>
         <mybatis.version>2.2.2</mybatis.version>
         <hutool.version>5.8.8</hutool.version>

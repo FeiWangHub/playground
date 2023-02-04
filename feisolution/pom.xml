@@ -14,7 +14,7 @@
 	<name>feisolution</name>
 	<description>Fei CSS interview solution</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 
