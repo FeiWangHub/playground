@@ -21,6 +21,10 @@ public class DateUtil {
     public static DateFormat formatNowDate5 = new SimpleDateFormat("MM/dd/yyyy");
     public static DateFormat formatNowTime = new SimpleDateFormat("HH:mm:ss");
 
+    public static SimpleDateFormat yyyyMMdd() {
+        return new SimpleDateFormat("yyyy-MM-dd");
+    }
+
     /**
      * add specified seconds to target date
      * @param time target Date

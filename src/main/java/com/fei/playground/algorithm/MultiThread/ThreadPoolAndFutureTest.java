@@ -8,7 +8,7 @@ import java.util.function.Supplier;
  * CompletableFuture有返回值
  * (thenApplyAsync串行化处理另一个CompletableFuture)
  * (anyOf()和allOf()用于并行化多个CompletableFuture)
- *
+ * <p>
  * 廖雪峰教程 https://www.liaoxuefeng.com/wiki/1252599548343744/1306581182447650
  */
 public class ThreadPoolAndFutureTest {
@@ -60,7 +60,7 @@ public class ThreadPoolAndFutureTest {
         return 5 + Math.random() * 20;
     }
 
-    public static void testFuture() {
+    public static void testFuture() throws ExecutionException, InterruptedException {
         System.out.println("main函数开始执行");
 
         ExecutorService executor = Executors.newFixedThreadPool(1);
@@ -75,7 +75,7 @@ public class ThreadPoolAndFutureTest {
             }
         });
         //这里需要返回值时会阻塞主线程，如果不需要返回值使用是OK的。倒也还能接收
-        //Integer result=future.get();
+        Integer result = future.get();
         System.out.println("main函数执行结束");
 
 //        System.in.read();
