@@ -1,0 +1,48 @@
+{
+  "mcp_services": {
+    "harry_potter": {
+      "name": "Harry Potter MCP Service",
+      "description": "A service providing Harry Potter character, house, spell, and book information",
+      "base_url": "http://localhost:8000",
+      "openapi_url": "http://localhost:8000/openapi.json",
+      "endpoints": {
+        "characters": {
+          "path": "/characters",
+          "description": "Get all characters or a specific character by index"
+        },
+        "houses": {
+          "path": "/api/v1/houses",
+          "description": "Get information about Hogwarts houses"
+        },
+        "spells": {
+          "path": "/spells",
+          "description": "Get all spells"
+        },
+        "books": {
+          "path": "/api/v1/books",
+          "description": "Get book information with optional search term"
+        }
+      },
+      "examples": [
+        {
+          "description": "Get all characters",
+          "request": "GET /characters"
+        },
+        {
+          "description": "Get a specific character by index",
+          "request": "GET /characters/0"
+        },
+        {
+          "description": "Get all spells",
+          "request": "GET /spells"
+        }
+      ]
+    }
+  },
+  "ai_config": {
+    "model": "gpt-4",
+    "temperature": 0.7,
+    "max_tokens": 2000,
+    "system_prompt": "You are a helpful AI assistant that can interact with the Harry Potter MCP service. Use the provided endpoints to fetch and process Harry Potter related information."
+  }
+} 

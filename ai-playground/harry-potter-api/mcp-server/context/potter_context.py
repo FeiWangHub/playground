@@ -1,14 +1,16 @@
-from typing import Dict, Optional
+from typing import Dict, Optional, Any
 import requests
+from ..protocol.potter_protocol import ServiceConfig
 from ..model.potter_model import PotterModel
 
 class PotterContext:
     BASE_URL = "https://potterapi-fedeperin.vercel.app"
     
-    def __init__(self, language: str = "en"):
-        self.language = language
-        self._model = None
-        self._api_data = None
+    def __init__(self, config: ServiceConfig):
+        self.config = config
+        self._model: Optional[PotterModel] = None
+        self._cache: Dict[str, Any] = {}
+        self._last_refresh = 0
     
     def _fetch_api_data(self) -> Dict:
         """从 API 获取所有数据"""
@@ -16,32 +18,45 @@ class PotterContext:
         data = {}
         
         for endpoint in endpoints:
-            url = f"{self.BASE_URL}/{self.language}/{endpoint}"
+            url = f"{self.BASE_URL}/{self.config.language}/{endpoint}"
             response = requests.get(url)
             response.raise_for_status()
             data[endpoint] = response.json()
         
         return data
     
-    def initialize(self) -> None:
-        """初始化上下文，加载所有数据"""
-        if not self._api_data:
-            self._api_data = self._fetch_api_data()
-            self._model = PotterModel(self._api_data)
-    
     def get_model(self) -> PotterModel:
-        """获取模型实例"""
-        if not self._model:
-            self.initialize()
+        """获取或创建模型实例"""
+        if self._model is None:
+            self._model = PotterModel(self.config)
         return self._model
     
-    def refresh(self) -> None:
-        """刷新数据"""
-        self._api_data = self._fetch_api_data()
-        self._model = PotterModel(self._api_data)
+    def update_config(self, config: ServiceConfig):
+        """更新配置"""
+        self.config = config
+        if self._model:
+            self._model.update_config(config)
+        self.refresh()
+    
+    def refresh(self):
+        """刷新缓存数据"""
+        self._cache.clear()
+        self._last_refresh = 0
+        if self._model:
+            self._model.refresh()
+    
+    def get_cache(self, key: str) -> Optional[Any]:
+        """从缓存获取数据"""
+        if key in self._cache:
+            return self._cache[key]
+        return None
+    
+    def set_cache(self, key: str, value: Any):
+        """设置缓存数据"""
+        self._cache[key] = value
     
     def set_language(self, language: str) -> None:
         """设置语言"""
-        if language != self.language:
-            self.language = language
+        if language != self.config.language:
+            self.config.language = language
             self.refresh() 
