@@ -11,7 +11,7 @@ env = input_json.pop('openv', {})
 # DONT CHANGE INPUT PART END
 
 # Make API call to get random Hogwarts house
-api_url = "https://potterapi-fedeperin.vercel.app/houses/random"
+api_url = "https://potterapi-fedeperin.vercel.app/en/houses/random"
 
 try:
     response = requests.get(api_url)

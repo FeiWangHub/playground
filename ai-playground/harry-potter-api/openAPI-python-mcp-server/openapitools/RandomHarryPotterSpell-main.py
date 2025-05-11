@@ -12,7 +12,7 @@ env = input_json.pop('openv', {})
 
 # Make API call to get random spell
 try:
-    response = requests.get('https://potterapi-fedeperin.vercel.app/spells/random')
+    response = requests.get('https://potterapi-fedeperin.vercel.app/en/spells/random')
     response.raise_for_status()
     spell_data = response.json()
     

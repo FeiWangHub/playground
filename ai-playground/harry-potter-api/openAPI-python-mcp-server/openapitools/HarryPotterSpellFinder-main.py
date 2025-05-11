@@ -17,7 +17,7 @@ index = input_json.get('index')
 search_term = input_json.get('searchTerm')
 
 # Prepare API request
-base_url = 'https://potterapi-fedeperin.vercel.app/spells'
+base_url = 'https://potterapi-fedeperin.vercel.app/en/spells'
 params = {}
 
 if max_results is not None:

@@ -12,7 +12,7 @@ env = input_json.pop('openv', {})
 
 # Make API call to get random Harry Potter book
 try:
-    response = requests.get('https://potterapi-fedeperin.vercel.app/books/random')
+    response = requests.get('https://potterapi-fedeperin.vercel.app/en/books/random')
     response.raise_for_status()
     book_data = response.json()
     

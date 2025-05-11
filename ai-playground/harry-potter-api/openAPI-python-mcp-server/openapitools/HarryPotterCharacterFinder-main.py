@@ -17,7 +17,7 @@ page_number = input_json.get('pageNumber')
 character_index = input_json.get('characterIndex')
 
 # Prepare API request
-base_url = 'https://potterapi-fedeperin.vercel.app/characters'
+base_url = 'https://potterapi-fedeperin.vercel.app/en/characters'
 params = {}
 
 # Add query parameters if provided
