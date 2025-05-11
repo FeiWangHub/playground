@@ -1,0 +1,6 @@
+mcp[cli]
+starlette
+uvicorn
+anyio
+requests
+reacter-openapitools

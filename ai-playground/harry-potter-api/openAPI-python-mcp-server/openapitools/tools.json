@@ -1,0 +1,202 @@
+[
+  {
+    "name": "RandomHarryPotterSpell",
+    "production_version_name": "main",
+    "versions": {
+      "main": {
+        "description": "Returns a random spell from Harry Potter with its name and use.",
+        "input_schema": {
+          "type": "object",
+          "required": [],
+          "properties": {}
+        },
+        "script_type": "python"
+      }
+    }
+  },
+  {
+    "name": "HarryPotterSpellFinder",
+    "production_version_name": "main",
+    "versions": {
+      "main": {
+        "description": "Fetches Harry Potter spells with descriptions and supports filtering, pagination, and search.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "page": {
+              "type": "number",
+              "optional": true,
+              "description": "Page number for pagination when using maxResults"
+            },
+            "index": {
+              "type": "number",
+              "optional": true,
+              "description": "Return a specific spell by its index"
+            },
+            "maxResults": {
+              "type": "number",
+              "optional": true,
+              "description": "Maximum number of spells to return"
+            },
+            "searchTerm": {
+              "type": "string",
+              "optional": true,
+              "description": "Search for spells matching this term"
+            }
+          }
+        },
+        "script_type": "python"
+      }
+    }
+  },
+  {
+    "name": "RandomHogwartsHouse",
+    "production_version_name": "main",
+    "versions": {
+      "main": {
+        "description": "Returns a random Hogwarts house with its animal, colors, founder and other metadata.",
+        "input_schema": {
+          "type": "object",
+          "required": [],
+          "properties": {}
+        },
+        "script_type": "python"
+      }
+    }
+  },
+  {
+    "name": "HogwartsHousesRetriever",
+    "production_version_name": "main",
+    "versions": {
+      "main": {
+        "description": "Retrieves Hogwarts houses with metadata, supporting pagination, search, and filtering.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "max": {
+              "type": "number",
+              "optional": true,
+              "description": "Maximum number of houses to return"
+            },
+            "page": {
+              "type": "number",
+              "optional": true,
+              "description": "Page number for pagination when max is specified"
+            },
+            "index": {
+              "type": "number",
+              "optional": true,
+              "description": "Return only the house at this index (0-3)"
+            },
+            "search": {
+              "type": "string",
+              "optional": true,
+              "description": "Search term to filter houses by name, animal, founder, etc."
+            }
+          }
+        },
+        "script_type": "python"
+      }
+    }
+  },
+  {
+    "name": "RandomHarryPotterCharacter",
+    "production_version_name": "main",
+    "versions": {
+      "main": {
+        "description": "Retrieves a random Harry Potter character with complete biographical information.",
+        "input_schema": {
+          "type": "object",
+          "required": [],
+          "properties": {}
+        },
+        "script_type": "python"
+      }
+    }
+  },
+  {
+    "name": "HarryPotterCharacterFinder",
+    "production_version_name": "main",
+    "versions": {
+      "main": {
+        "description": "Fetches Harry Potter characters with filtering options for search, pagination, and specific character retrieval.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "maxResults": {
+              "type": "number",
+              "optional": true,
+              "description": "Maximum number of characters to return"
+            },
+            "pageNumber": {
+              "type": "number",
+              "optional": true,
+              "description": "Page number for paginated results"
+            },
+            "searchTerm": {
+              "type": "string",
+              "optional": true,
+              "description": "Search for characters by name or other attributes"
+            },
+            "characterIndex": {
+              "type": "number",
+              "optional": true,
+              "description": "Index of a specific character to retrieve"
+            }
+          }
+        },
+        "script_type": "python"
+      }
+    }
+  },
+  {
+    "name": "RandomHarryPotterBook",
+    "production_version_name": "main",
+    "versions": {
+      "main": {
+        "description": "Retrieves a randomly selected book from the Harry Potter series.",
+        "input_schema": {
+          "type": "object",
+          "required": [],
+          "properties": {}
+        },
+        "script_type": "python"
+      }
+    }
+  },
+  {
+    "name": "HarryPotterBookFinder",
+    "production_version_name": "main",
+    "versions": {
+      "main": {
+        "description": "Fetches Harry Potter books with filtering, searching, and pagination options.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "max": {
+              "type": "number",
+              "optional": true,
+              "description": "Maximum number of books to return"
+            },
+            "page": {
+              "type": "number",
+              "optional": true,
+              "description": "Page number for pagination (works with max parameter)"
+            },
+            "index": {
+              "type": "number",
+              "optional": true,
+              "description": "Return a specific book by its index"
+            },
+            "search": {
+              "type": "string",
+              "optional": true,
+              "description": "Search term to find matching books"
+            }
+          }
+        },
+        "script_type": "python"
+      }
+    }
+  }
+]
