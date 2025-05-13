@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "harry-nodejs": {
+      "command": "node",
+      "args": [
+        "/Users/Fei/Dev/repos/feiGitHub/playground/ai-playground/harry-potter-api/openAPI-nodejs-mcp-server/index.js"
+      ]
+    }
+  }
+}
