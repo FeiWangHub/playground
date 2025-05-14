@@ -1,6 +1,6 @@
 # Harry Potter API Service
 
-这是一个基于 FastAPI 的哈利波特 API 服务，采用了 Model-Context-Protocol (MCP) 架构设计，提供了书籍、角色、学院和咒语等信息的访问。
+这是一个基于 FastAPI 和 Express.js 的哈利波特 API 服务，采用了 Model-Context-Protocol (MCP) 架构设计，提供了书籍、角色、学院和咒语等信息的访问。
 
 ## 目录结构
 
@@ -17,6 +17,7 @@ harry-potter-api/
 │   ├── protocol/        # 客户端协议
 │   └── main.py          # 客户端入口
 ├── potter_api.py        # 原始 API 实现
+├── potterapi/           # Express.js 版 PotterAPI
 ├── requirements.txt     # 项目依赖
 └── README.md           # 项目文档
 ```
@@ -49,6 +50,29 @@ pip install -r requirements.txt
 cd mcp-client
 pip install -r requirements.txt
 ```
+
+---
+
+## 启动 PotterAPI（Express.js 版本）
+
+1. 进入 potterapi 目录：
+```bash
+cd potterapi
+```
+
+2. 安装依赖：
+```bash
+npm install
+```
+
+3. 启动服务：
+```bash
+npm start
+```
+
+服务启动后，默认监听 3000 端口，可通过 http://localhost:3000/en/books 等端点访问。
+
+---
 
 ## 运行服务
 

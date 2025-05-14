@@ -1,6 +1,7 @@
 import json
 import sys
 import requests
+from .BaseUrl import POTTERAPI_BASE_URL
 
 # DONT CHANGE INPUT PART START
 try:
@@ -17,7 +18,7 @@ index = input_json.get('index')
 search_term = input_json.get('searchTerm')
 
 # Prepare API request
-base_url = 'https://potterapi-fedeperin.vercel.app/en/spells'
+base_url = POTTERAPI_BASE_URL + 'spells'
 params = {}
 
 if max_results is not None:

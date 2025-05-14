@@ -28,7 +28,8 @@ if search_term is not None:
     params['search'] = search_term
 
 # Make API request
-url = 'https://potterapi-fedeperin.vercel.app/en/books'
+POTTERAPI_BASE_URL = 'https://potterapi-fedeperin.vercel.app/en/'
+url = POTTERAPI_BASE_URL + 'books'
 try:
     response = requests.get(url, params=params)
     response.raise_for_status()

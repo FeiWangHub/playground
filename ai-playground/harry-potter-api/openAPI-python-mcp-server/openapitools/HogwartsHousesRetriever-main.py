@@ -1,6 +1,7 @@
 import json
 import sys
 import requests
+from .BaseUrl import POTTERAPI_BASE_URL
 
 # DONT CHANGE INPUT PART START
 try:
@@ -28,7 +29,7 @@ if search is not None:
     params['search'] = search
 
 # Make API request
-url = 'https://potterapi-fedeperin.vercel.app/en/houses'
+url = POTTERAPI_BASE_URL + 'houses'
 try:
     response = requests.get(url, params=params)
     response.raise_for_status()

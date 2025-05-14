@@ -1,6 +1,7 @@
 import json
 import sys
 import requests
+from BaseUrl import BASE_URL
 
 # DONT CHANGE INPUT PART START
 try:
@@ -17,7 +18,7 @@ page_number = input_json.get('pageNumber')
 character_index = input_json.get('characterIndex')
 
 # Prepare API request
-base_url = 'https://potterapi-fedeperin.vercel.app/en/characters'
+base_url = BASE_URL + 'characters'
 params = {}
 
 # Add query parameters if provided

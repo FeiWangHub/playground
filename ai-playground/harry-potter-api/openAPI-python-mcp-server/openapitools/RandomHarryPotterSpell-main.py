@@ -1,6 +1,7 @@
 import json
 import sys
 import requests
+from .BaseUrl import POTTERAPI_BASE_URL
 
 # DONT CHANGE INPUT PART START
 try:
@@ -12,7 +13,7 @@ env = input_json.pop('openv', {})
 
 # Make API call to get random spell
 try:
-    response = requests.get('https://potterapi-fedeperin.vercel.app/en/spells/random')
+    response = requests.get(POTTERAPI_BASE_URL + 'spells/random')
     response.raise_for_status()
     spell_data = response.json()
     
