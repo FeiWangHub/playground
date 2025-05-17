@@ -31,7 +31,7 @@ const HSBCAppsAgent = () => {
         <nav className="flex justify-between items-center py-5">
           <div className="text-2xl font-bold text-white">CodeCup 2025</div>
           <div className="flex items-center gap-3 text-white">
-            <span>Hello </span>
+            <span>Made by </span>
             <div className="w-9 h-9 rounded-full bg-[#2563eb] flex items-center justify-center font-medium">KW</div>
             <span>Keyboard Warriors</span>
           </div>
@@ -57,11 +57,11 @@ const HSBCAppsAgent = () => {
             transition={{ duration: 0, delay: 0 }}
             className="bg-white rounded-xl p-6 shadow-lg flex-1 min-w-[300px]"
           >
-            <h2 className="text-2xl font-semibold text-[#1E3A8A] mb-4">How can I help you?</h2>
+            <h2 className="text-2xl font-semibold text-[#1E3A8A] mb-4 text-left">How can I help you?</h2>
             <div className="relative">
               <textarea
                 className="w-full h-32 p-4 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-[#2563eb] resize-none"
-                placeholder="Type your message here..."
+                placeholder="Type your question or requirement here..."
               />
               <motion.button 
                 whileHover={{ scale: 1.05 }}
@@ -78,7 +78,7 @@ const HSBCAppsAgent = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex-1 min-w-[300px]"
+            className="lg:w-[35%] w-full min-w-[300px]"
           >
             <h2 className="text-xl font-semibold text-white mb-5">Apps</h2>
             <ul className="space-y-3">
