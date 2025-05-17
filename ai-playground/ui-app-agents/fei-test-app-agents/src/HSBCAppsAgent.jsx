@@ -1,5 +1,5 @@
-import React from "react";
-import { ToggleLeft, ToggleRight, ArrowRight, ChevronDown, Send } from "lucide-react";
+import React, { useRef } from "react";
+import { ToggleLeft, ToggleRight, ArrowRight, ChevronDown, Send, Paperclip, Download, Play } from "lucide-react";
 import { motion } from "framer-motion";
 
 const HSBCAppsAgent = () => {
@@ -15,6 +15,19 @@ const HSBCAppsAgent = () => {
   const [loading, setLoading] = React.useState(false);
   const [input, setInput] = React.useState("");
   const [code, setCode] = React.useState("");
+  const [selectedFile, setSelectedFile] = React.useState(null);
+  const fileInputRef = useRef(null);
+
+  const handleFileSelect = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+    }
+  };
+
+  const handleAttachmentClick = () => {
+    fileInputRef.current.click();
+  };
 
   const toggleApp = (appName) => {
     setEnabledApps(prev => ({
@@ -33,11 +46,26 @@ const HSBCAppsAgent = () => {
       apps: apps
     };
     console.log("[MOCK POST] http://localhost:9000/prompt", payload);
-    // 模拟请求3秒
+    // 模拟请求1秒
     setTimeout(() => {
       setLoading(false);
       setCode(`# Example Python code returned by backend\nprint('Hello, this is a mock response!')\n# Prompt: ${input}\n# Apps: ${apps.join(', ')}`);
-    }, 3000);
+    }, 1000);
+  };
+
+  const handleDownload = () => {
+    const element = document.createElement("a");
+    const file = new Blob([code], {type: 'text/plain'});
+    element.href = URL.createObjectURL(file);
+    element.download = "script.py";
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  };
+
+  const handleRun = () => {
+    console.log("Running code:", code);
+    // TODO: 实现代码运行逻辑
   };
 
   return (
@@ -77,7 +105,7 @@ const HSBCAppsAgent = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="bg-[#1e293b] rounded-xl p-6 shadow-lg flex-1 min-w-[300px] border border-[#334155]"
           >
-            <h2 className="text-2xl font-semibold text-[#38bdf8] mb-4 text-left">How can I help you?</h2>
+            <h2 className="text-2xl font-semibold text-[#38bdf8] mb-4 text-left">How can I help today?</h2>
             <div className="relative">
               <textarea
                 className="w-full h-32 p-4 rounded-lg bg-[#23272f] text-[#e0e7ef] font-mono border-2 border-[#334155] focus:border-[#38bdf8] focus:ring-2 focus:ring-[#38bdf8] transition-all resize-none placeholder:text-[#64748b]"
@@ -85,28 +113,67 @@ const HSBCAppsAgent = () => {
                 value={input}
                 onChange={e => setInput(e.target.value)}
               />
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="absolute right-3 bottom-3 bg-gradient-to-r from-[#38bdf8] to-[#6366F1] text-white p-3 rounded-lg hover:opacity-90 transition-opacity shadow-lg flex items-center justify-center"
-                onClick={handleSend}
-                disabled={loading}
-              >
-                {loading ? (
-                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-                  </svg>
-                ) : (
-                  <Send size={20} />
-                )}
-              </motion.button>
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileSelect}
+                className="hidden"
+              />
+              <div className="absolute right-3 bottom-3 flex gap-2">
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-[#334155] text-white px-3 py-2 mb-1 rounded-lg hover:opacity-90 transition-opacity shadow-lg flex items-center justify-center"
+                  onClick={handleAttachmentClick}
+                >
+                  <Paperclip size={20} />
+                  {selectedFile && (
+                    <span className="ml-1 text-xs max-w-[80px] truncate">{selectedFile.name}</span>
+                  )}
+                </motion.button>
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-gradient-to-r from-[#38bdf8] to-[#6366F1] text-white px-6 py-2 mb-1 rounded-lg hover:opacity-90 transition-opacity shadow-lg flex items-center justify-center"
+                  onClick={handleSend}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                  ) : (
+                    <Send size={20} />
+                  )}
+                </motion.button>
+              </div>
             </div>
             {/* 代码返回区 */}
             {code && (
-              <pre className="mt-6 bg-[#23272f] text-[#38bdf8] rounded-lg p-4 overflow-x-auto text-sm font-mono border border-[#334155]">
-                <code>{code}</code>
-              </pre>
+              <div>
+                <pre className="mt-6 bg-[#23272f] text-[#38bdf8] rounded-lg p-4 overflow-x-auto text-sm font-mono border border-[#334155]">
+                  <code>{code}</code>
+                </pre>
+                <div className="flex gap-2 mt-2 justify-end">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleDownload}
+                    className="bg-[#334155] text-white p-2 rounded-lg hover:opacity-90 transition-opacity shadow-lg w-16 flex items-center justify-center"
+                  >
+                    <Download size={20} />
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleRun}
+                    className="bg-[#2ECA68] text-white p-2 rounded-lg hover:opacity-90 transition-opacity shadow-lg w-16 flex items-center justify-center"
+                  >
+                    <Play size={20} />
+                  </motion.button>
+                </div>
+              </div>
             )}
           </motion.section>
 
