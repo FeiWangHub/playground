@@ -54,7 +54,7 @@ const HSBCAppsAgent = () => {
           <motion.section 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0, delay: 0 }}
             className="bg-white rounded-xl p-6 shadow-lg flex-1 min-w-[300px]"
           >
             <h2 className="text-2xl font-semibold text-[#1E3A8A] mb-4">How can I help you?</h2>
