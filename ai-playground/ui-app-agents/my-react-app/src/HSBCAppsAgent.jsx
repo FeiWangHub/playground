@@ -1,5 +1,5 @@
 import React from "react";
-import { ToggleLeft, ToggleRight, ArrowRight, ChevronDown } from "lucide-react";
+import { ToggleLeft, ToggleRight, ArrowRight, ChevronDown, Send } from "lucide-react";
 import { motion } from "framer-motion";
 
 const HSBCAppsAgent = () => {
@@ -13,6 +13,8 @@ const HSBCAppsAgent = () => {
     confluence: true
   });
   const [loading, setLoading] = React.useState(false);
+  const [input, setInput] = React.useState("");
+  const [code, setCode] = React.useState("");
 
   const toggleApp = (appName) => {
     setEnabledApps(prev => ({
@@ -21,10 +23,21 @@ const HSBCAppsAgent = () => {
     }));
   };
 
-  const handleSend = () => {
+  const handleSend = async () => {
+    if (!input.trim()) return;
     setLoading(true);
-    // 模拟异步操作，2秒后恢复
-    setTimeout(() => setLoading(false), 2000);
+    setCode("");
+    const apps = Object.keys(enabledApps).filter(key => enabledApps[key]);
+    const payload = {
+      prompt: input,
+      apps: apps
+    };
+    console.log("[MOCK POST] http://localhost:9000/prompt", payload);
+    // 模拟请求3秒
+    setTimeout(() => {
+      setLoading(false);
+      setCode(`# Example Python code returned by backend\nprint('Hello, this is a mock response!')\n# Prompt: ${input}\n# Apps: ${apps.join(', ')}`);
+    }, 3000);
   };
 
   return (
@@ -69,6 +82,8 @@ const HSBCAppsAgent = () => {
               <textarea
                 className="w-full h-32 p-4 rounded-lg bg-[#23272f] text-[#e0e7ef] font-mono border-2 border-[#334155] focus:border-[#38bdf8] focus:ring-2 focus:ring-[#38bdf8] transition-all resize-none placeholder:text-[#64748b]"
                 placeholder="Type your question or requirement here..."
+                value={input}
+                onChange={e => setInput(e.target.value)}
               />
               <motion.button 
                 whileHover={{ scale: 1.05 }}
@@ -83,10 +98,16 @@ const HSBCAppsAgent = () => {
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
                   </svg>
                 ) : (
-                  <ArrowRight size={20} />
+                  <Send size={20} />
                 )}
               </motion.button>
             </div>
+            {/* 代码返回区 */}
+            {code && (
+              <pre className="mt-6 bg-[#23272f] text-[#38bdf8] rounded-lg p-4 overflow-x-auto text-sm font-mono border border-[#334155]">
+                <code>{code}</code>
+              </pre>
+            )}
           </motion.section>
 
           {/* 右侧应用列表 */}
