@@ -2,7 +2,7 @@ import React from "react";
 import { ToggleLeft, ToggleRight, ArrowRight, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 
-const HSBCAppsConnector = () => {
+const HSBCAppsAgent = () => {
   const [enabledApps, setEnabledApps] = React.useState({
     github: true,
     copilot: false,
@@ -29,11 +29,11 @@ const HSBCAppsConnector = () => {
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-6xl">
         {/* 顶部导航 */}
         <nav className="flex justify-between items-center py-5">
-          <div className="text-2xl font-bold text-white">SBC</div>
+          <div className="text-2xl font-bold text-white">CodeCup 2025</div>
           <div className="flex items-center gap-3 text-white">
-            <span>Hello:</span>
-            <div className="w-9 h-9 rounded-full bg-[#2563eb] flex items-center justify-center font-medium">J</div>
-            <span>Jchpes</span>
+            <span>Hello </span>
+            <div className="w-9 h-9 rounded-full bg-[#2563eb] flex items-center justify-center font-medium">KW</div>
+            <span>Keyboard Warriors</span>
           </div>
         </nav>
 
@@ -44,8 +44,8 @@ const HSBCAppsConnector = () => {
           transition={{ duration: 0.5 }}
           className="mt-10"
         >
-          <h1 className="text-3xl md:text-4xl font-bold text-white">HSBC Apps Connector</h1>
-          <p className="text-[#94a3b8] mt-2">AI Adient</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-white">HSBC Apps Agent</h1>
+          <p className="text-[#94a3b8] mt-2">Your App Copilot to connect 20,000+ Apps</p>
         </motion.div>
 
         {/* 主内容区 */}
@@ -120,11 +120,11 @@ const HSBCAppsConnector = () => {
 
       {/* 页脚 */}
       <footer className="mt-16 py-6 text-center text-gray-400 text-sm">
-        <p>created by <a href="https://space.coze.cn" className="hover:text-white transition-colors">coze space</a></p>
-        <p className="mt-1">Make with heart by </p>
+        <p className="mt-1">AI generated content could be wrong.</p>
+        <p className="mt-1">Please check it carefully.</p>
       </footer>
     </div>
   );
 };
 
-export default HSBCAppsConnector;
+export default HSBCAppsAgent;
