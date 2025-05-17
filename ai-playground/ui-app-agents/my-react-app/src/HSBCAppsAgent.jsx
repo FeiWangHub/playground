@@ -93,9 +93,9 @@ const HSBCAppsAgent = () => {
               ].map((app, index) => (
                 <motion.li
                   key={index}
-                  whileHover={{ x: 8 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="flex items-center justify-between p-4 bg-white/10 backdrop-blur-md rounded-lg"
+                  whileHover={{ scale: 1.03, backgroundColor: "rgba(255,255,255,0.18)" }}
+                  transition={{ type: "tween", duration: 0.15 }}
+                  className="flex items-center justify-between p-4 bg-white/10 backdrop-blur-md rounded-lg transition-all"
                 >
                   <div className="flex items-center gap-3">
                     <div className={`w-6 h-6 rounded ${app.color}`}></div>
