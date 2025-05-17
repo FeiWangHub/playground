@@ -12,12 +12,19 @@ const HSBCAppsAgent = () => {
     serviceNow: false,
     confluence: true
   });
+  const [loading, setLoading] = React.useState(false);
 
   const toggleApp = (appName) => {
     setEnabledApps(prev => ({
       ...prev,
       [appName]: !prev[appName]
     }));
+  };
+
+  const handleSend = () => {
+    setLoading(true);
+    // 模拟异步操作，2秒后恢复
+    setTimeout(() => setLoading(false), 2000);
   };
 
   return (
@@ -54,21 +61,30 @@ const HSBCAppsAgent = () => {
           <motion.section 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0, delay: 0 }}
-            className="bg-white rounded-xl p-6 shadow-lg flex-1 min-w-[300px]"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="bg-[#1e293b] rounded-xl p-6 shadow-lg flex-1 min-w-[300px] border border-[#334155]"
           >
-            <h2 className="text-2xl font-semibold text-[#1E3A8A] mb-4 text-left">How can I help you?</h2>
+            <h2 className="text-2xl font-semibold text-[#38bdf8] mb-4 text-left">How can I help you?</h2>
             <div className="relative">
               <textarea
-                className="w-full h-32 p-4 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-[#2563eb] resize-none"
+                className="w-full h-32 p-4 rounded-lg bg-[#23272f] text-[#e0e7ef] font-mono border-2 border-[#334155] focus:border-[#38bdf8] focus:ring-2 focus:ring-[#38bdf8] transition-all resize-none placeholder:text-[#64748b]"
                 placeholder="Type your question or requirement here..."
               />
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="absolute right-3 bottom-3 bg-gradient-to-r from-[#3B82F6] to-[#6366F1] text-white p-3 rounded-lg hover:opacity-90 transition-opacity"
+                className="absolute right-3 bottom-3 bg-gradient-to-r from-[#38bdf8] to-[#6366F1] text-white p-3 rounded-lg hover:opacity-90 transition-opacity shadow-lg flex items-center justify-center"
+                onClick={handleSend}
+                disabled={loading}
               >
-                <ArrowRight size={20} />
+                {loading ? (
+                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                  </svg>
+                ) : (
+                  <ArrowRight size={20} />
+                )}
               </motion.button>
             </div>
           </motion.section>
