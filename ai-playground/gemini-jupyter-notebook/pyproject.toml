@@ -1,0 +1,19 @@
+[project]
+name = "gemini-jupyter-notebook"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "FeiWangHub",email = "fei.wang.cn@icloud.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy (>=2.3.1,<3.0.0)",
+    "pandas (>=2.3.0,<3.0.0)",
+    "matplotlib (>=3.10.3,<4.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
