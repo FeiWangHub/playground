@@ -61,6 +61,21 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# 环境变量文件
+# Environment variables
 .env
 .env.*
+
+#### Rust - Build artifacts
+/target/
+
+# Rust - Dependency lock file (usually committed for binaries, but can be ignored for libraries)
+# Uncomment the following line if you want to ignore Cargo.lock
+# Cargo.lock
+
+# Rust - Local Rust toolchain and override files
+.rustup
+.cargo/config.toml
+.cargo/config
+
+# Rust - Rust analyzer cache
+.rust-analyzer-cache
