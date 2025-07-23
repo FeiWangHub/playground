@@ -1,0 +1,11 @@
+[package]
+name = "space_shooter"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "space_shooter"
+path = "space_shooter.rs"
+
+[dependencies]
+fastrand = "2.0"

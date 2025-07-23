@@ -67,6 +67,7 @@ yarn-error.log*
 
 #### Rust - Build artifacts
 /target/
+**/target/
 
 # Rust - Dependency lock file (usually committed for binaries, but can be ignored for libraries)
 # Uncomment the following line if you want to ignore Cargo.lock
@@ -79,3 +80,7 @@ yarn-error.log*
 
 # Rust - Rust analyzer cache
 .rust-analyzer-cache
+
+# Rust - Additional build artifacts
+**/*.rs.bk
+*.pdb
