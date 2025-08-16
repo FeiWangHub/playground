@@ -15,13 +15,44 @@
   "contributes": {
     "commands": [
       {
-        "command": "apps-copilot.helloWorld",
-        "title": "Hello World"
+        "command": "apps-copilot.undo",
+        "title": "Undo",
+        "icon": "$(arrow-left)"
       },
       {
-        "command": "apps-copilot.refreshApps",
-        "title": "Refresh",
-        "icon": "$(refresh)"
+        "command": "apps-copilot.redo",
+        "title": "Redo",
+        "icon": "$(arrow-right)"
+      },
+      {
+        "command": "apps-copilot.newChat",
+        "title": "New Chat",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "apps-copilot.history",
+        "title": "History",
+        "icon": "$(history)"
+      },
+      {
+        "command": "apps-copilot.mcpServers",
+        "title": "MCP Servers",
+        "icon": "$(plug)"
+      },
+      {
+        "command": "apps-copilot.account",
+        "title": "Account",
+        "icon": "$(account)"
+      },
+      {
+        "command": "apps-copilot.openSettings",
+        "title": "Settings",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "apps-copilot.close",
+        "title": "Close",
+        "icon": "$(close)"
       }
     ],
     "viewsContainers": {
@@ -36,8 +67,9 @@
     "views": {
       "apps-copilot": [
         {
-          "id": "appsExplorer",
-          "name": "Apps Explorer",
+          "type": "webview",
+          "id": "apps-copilot.chatView",
+          "name": "",
           "when": "true"
         }
       ]
@@ -45,9 +77,44 @@
     "menus": {
       "view/title": [
         {
-          "command": "apps-copilot.refreshApps",
-          "when": "view == appsExplorer",
-          "group": "navigation"
+          "command": "apps-copilot.undo",
+          "when": "view == apps-copilot.chatView",
+          "group": "navigation@1"
+        },
+        {
+          "command": "apps-copilot.redo",
+          "when": "view == apps-copilot.chatView",
+          "group": "navigation@2"
+        },
+        {
+          "command": "apps-copilot.newChat",
+          "when": "view == apps-copilot.chatView",
+          "group": "navigation@3"
+        },
+        {
+          "command": "apps-copilot.history",
+          "when": "view == apps-copilot.chatView",
+          "group": "navigation@4"
+        },
+        {
+          "command": "apps-copilot.mcpServers",
+          "when": "view == apps-copilot.chatView",
+          "group": "navigation@5"
+        },
+        {
+          "command": "apps-copilot.account",
+          "when": "view == apps-copilot.chatView",
+          "group": "navigation@6"
+        },
+        {
+          "command": "apps-copilot.openSettings",
+          "when": "view == apps-copilot.chatView",
+          "group": "navigation@7"
+        },
+        {
+          "command": "apps-copilot.close",
+          "when": "view == apps-copilot.chatView",
+          "group": "navigation@8"
         }
       ]
     }
