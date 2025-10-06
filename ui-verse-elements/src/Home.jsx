@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import Button3D from './components/Button3D/Button3D.jsx'
 import Loader from './components/Loader/Loader.jsx'
 import Card from './components/InputCard/Card.jsx'
+import InputGemini from './components/InputGeminiColor/InputGemini.jsx'
+import MacButton from './components/MacButton/MacButton.jsx'
 
 function Home() {
   return (
@@ -76,6 +78,42 @@ function Home() {
             </ButtonPreview>
           </ComponentCard>
 
+          <ComponentCard as="div">
+            <CardIcon>✨</CardIcon>
+            <CardTitle>Gemini Input</CardTitle>
+            <CardDescription>
+              Futuristic search input with animated gradient borders, 
+              glow effects, and smooth hover interactions inspired by AI interfaces.
+            </CardDescription>
+            <CardFeatures>
+              <Feature>• Animated gradient borders</Feature>
+              <Feature>• Glow effects</Feature>
+              <Feature>• Smooth transitions</Feature>
+              <Feature>• AI-inspired design</Feature>
+            </CardFeatures>
+            <ButtonPreview>
+              <InputGemini />
+            </ButtonPreview>
+          </ComponentCard>
+
+          <ComponentCard as="div">
+            <CardIcon>🖥️</CardIcon>
+            <CardTitle>Mac Buttons</CardTitle>
+            <CardDescription>
+              macOS-style buttons with 3D perspective effects, realistic shadows, 
+              and authentic Mac design language for a premium look.
+            </CardDescription>
+            <CardFeatures>
+              <Feature>• 3D perspective effects</Feature>
+              <Feature>• Realistic shadows</Feature>
+              <Feature>• macOS design language</Feature>
+              <Feature>• Interactive hover states</Feature>
+            </CardFeatures>
+            <ButtonPreview>
+              <MacButton />
+            </ButtonPreview>
+          </ComponentCard>
+
           <ComponentCard disabled>
             <CardIcon>📝</CardIcon>
             <CardTitle>Form Elements</CardTitle>
@@ -131,7 +169,7 @@ function Home() {
           Built with React, Styled Components, and React Router
         </FooterText>
         <FooterText>
-          Components inspired by <a href="https://uiverse.io" target="_blank" rel="noopener noreferrer">Uiverse.io</a>
+          Components inspired by <a href="https://uiverse.io/elements" target="_blank" rel="noopener noreferrer">Uiverse.io</a>
         </FooterText>
       </Footer>
     </HomeContainer>
