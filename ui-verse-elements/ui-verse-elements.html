@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Verse Elements - 3D Button</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* From Uiverse.io by FColombati */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .title {
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .button {
+            all: unset;
+            cursor: pointer;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            position: relative;
+            border-radius: 100em;
+            background-color: rgba(0, 0, 0, 0.75);
+            box-shadow:
+                -0.15em -0.15em 0.15em -0.075em rgba(5, 5, 5, 0.25),
+                0.0375em 0.0375em 0.0675em 0 rgba(5, 5, 5, 0.1);
+        }
+
+        .button::after {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            width: calc(100% + 0.3em);
+            height: calc(100% + 0.3em);
+            top: -0.15em;
+            left: -0.15em;
+            border-radius: inherit;
+            background: linear-gradient(
+                -135deg,
+                rgba(5, 5, 5, 0.5),
+                transparent 20%,
+                transparent 100%
+            );
+            filter: blur(0.0125em);
+            opacity: 0.25;
+            mix-blend-mode: multiply;
+        }
+
+        .button .button-outer {
+            position: relative;
+            z-index: 1;
+            border-radius: inherit;
+            transition: box-shadow 300ms ease;
+            will-change: box-shadow;
+            box-shadow:
+                0 0.05em 0.05em -0.01em rgba(5, 5, 5, 1),
+                0 0.01em 0.01em -0.01em rgba(5, 5, 5, 0.5),
+                0.15em 0.3em 0.1em -0.01em rgba(5, 5, 5, 0.25);
+        }
+
+        .button:hover .button-outer {
+            box-shadow:
+                0 0 0 0 rgba(5, 5, 5, 1),
+                0 0 0 0 rgba(5, 5, 5, 0.5),
+                0 0 0 0 rgba(5, 5, 5, 0.25);
+        }
+
+        .button-inner {
+            --inset: 0.035em;
+            position: relative;
+            z-index: 1;
+            border-radius: inherit;
+            padding: 1em 1.5em;
+            background-image: linear-gradient(
+                135deg,
+                rgba(230, 230, 230, 1),
+                rgba(180, 180, 180, 1)
+            );
+            transition:
+                box-shadow 300ms ease,
+                clip-path 250ms ease,
+                background-image 250ms ease,
+                transform 250ms ease;
+            will-change: box-shadow, clip-path, background-image, transform;
+            overflow: clip;
+            clip-path: inset(0 0 0 0 round 100em);
+            box-shadow:
+                /* 1 */
+                0 0 0 0 inset rgba(5, 5, 5, 0.1),
+                /* 2 */ -0.05em -0.05em 0.05em 0 inset rgba(5, 5, 5, 0.25),
+                /* 3 */ 0 0 0 0 inset rgba(5, 5, 5, 0.1),
+                /* 4 */ 0 0 0.05em 0.2em inset rgba(255, 255, 255, 0.25),
+                /* 5 */ 0.025em 0.05em 0.1em 0 inset rgba(255, 255, 255, 1),
+                /* 6 */ 0.12em 0.12em 0.12em inset rgba(255, 255, 255, 0.25),
+                /* 7 */ -0.075em -0.25em 0.25em 0.1em inset rgba(5, 5, 5, 0.25);
+        }
+
+        .button:hover .button-inner {
+            clip-path: inset(
+                clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px)
+                clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) round 100em
+            );
+            box-shadow:
+                /* 1 */
+                0.1em 0.15em 0.05em 0 inset rgba(5, 5, 5, 0.75),
+                /* 2 */ -0.025em -0.03em 0.05em 0.025em inset rgba(5, 5, 5, 0.5),
+                /* 3 */ 0.25em 0.25em 0.2em 0 inset rgba(5, 5, 5, 0.5),
+                /* 4 */ 0 0 0.05em 0.5em inset rgba(255, 255, 255, 0.15),
+                /* 5 */ 0 0 0 0 inset rgba(255, 255, 255, 1),
+                /* 6 */ 0.12em 0.12em 0.12em inset rgba(255, 255, 255, 0.25),
+                /* 7 */ -0.075em -0.12em 0.2em 0.1em inset rgba(5, 5, 5, 0.25);
+        }
+
+        .button .button-inner span {
+            position: relative;
+            z-index: 4;
+            font-family: "Inter", sans-serif;
+            letter-spacing: -0.05em;
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0);
+            background-image: linear-gradient(
+                135deg,
+                rgba(25, 25, 25, 1),
+                rgba(75, 75, 75, 1)
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            transition: transform 250ms ease;
+            display: block;
+            will-change: transform;
+            text-shadow: rgba(0, 0, 0, 0.1) 0 0 0.1em;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .button:hover .button-inner span {
+            transform: scale(0.975);
+        }
+
+        .button:active .button-inner {
+            transform: scale(0.975);
+        }
+
+        .description {
+            color: white;
+            margin-top: 2rem;
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 400px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">UI Verse Elements</h1>
+        
+        <!-- https://uiverse.io/FColombati/spotty-snake-82 -->
+        <button class="button">
+            <div class="button-outer">
+                <div class="button-inner">
+                    <span>Press me</span>
+                </div>
+            </div>
+        </button>
+        
+        <p class="description">
+            A beautiful 3D button component with advanced CSS styling and smooth hover effects. 
+            Created by FColombati on Uiverse.io.
+        </p>
+    </div>
+</body>
+</html>
