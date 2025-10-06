@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Button3D from './components/Button3D/Button3D.jsx'
 import Loader from './components/Loader/Loader.jsx'
+import Card from './components/InputCard/Card.jsx'
 
 function Home() {
   return (
@@ -55,6 +56,24 @@ function Home() {
               <Loader />
             </ButtonPreview>
             <ViewButton>View Components →</ViewButton>
+          </ComponentCard>
+
+          <ComponentCard as="div">
+            <CardIcon>💬</CardIcon>
+            <CardTitle>Input Cards</CardTitle>
+            <CardDescription>
+              Interactive chat-style input interfaces with gradient borders, 
+              functional buttons, and modern AI-inspired design elements.
+            </CardDescription>
+            <CardFeatures>
+              <Feature>• Gradient borders</Feature>
+              <Feature>• Interactive buttons</Feature>
+              <Feature>• Chat interface</Feature>
+              <Feature>• Modern styling</Feature>
+            </CardFeatures>
+            <ButtonPreview>
+              <Card />
+            </ButtonPreview>
           </ComponentCard>
 
           <ComponentCard disabled>
@@ -309,6 +328,17 @@ const ButtonPreview = styled.div`
   background: rgba(255, 255, 255, 0.05);
   border-radius: 0.5rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
+`
+
+const InteractivePreview = styled.div`
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-align: center;
+  opacity: 0.9;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 `
 
 export default Home
