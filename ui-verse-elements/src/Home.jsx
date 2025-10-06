@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Button3D from './components/Button3D/Button3D.jsx'
+import Loader from './components/Loader/Loader.jsx'
 
 function Home() {
   return (
@@ -33,6 +34,25 @@ function Home() {
             </CardFeatures>
             <ButtonPreview>
               <Button3D text="Default Button" onClick={() => alert('Button clicked!')} />
+            </ButtonPreview>
+            <ViewButton>View Components →</ViewButton>
+          </ComponentCard>
+
+          <ComponentCard to="/loaders">
+            <CardIcon>⚡</CardIcon>
+            <CardTitle>Loaders</CardTitle>
+            <CardDescription>
+              Matrix-style loading animations with digital rain effects 
+              and smooth transitions for modern applications.
+            </CardDescription>
+            <CardFeatures>
+              <Feature>• Matrix digital rain</Feature>
+              <Feature>• Smooth animations</Feature>
+              <Feature>• Customizable timing</Feature>
+              <Feature>• Green glow effects</Feature>
+            </CardFeatures>
+            <ButtonPreview>
+              <Loader />
             </ButtonPreview>
             <ViewButton>View Components →</ViewButton>
           </ComponentCard>

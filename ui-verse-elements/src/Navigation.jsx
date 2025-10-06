@@ -20,6 +20,9 @@ function Navigation() {
           <NavLink to="/button3d" $active={location.pathname === '/button3d'}>
             3D Buttons
           </NavLink>
+          <NavLink to="/loaders" $active={location.pathname === '/loaders'}>
+            Loaders
+          </NavLink>
         </NavLinks>
       </NavContent>
     </NavContainer>
