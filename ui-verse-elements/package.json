@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://ui-verse-elements-3huc2vxnr-feis-projects-b8995c22.vercel.app",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
