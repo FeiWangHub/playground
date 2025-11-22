@@ -1,9 +1,10 @@
-import streamlit as st
+import io
+import time
+import wave
+
 import numpy as np
 import pandas as pd
-import time
-import io
-import wave
+import streamlit as st
 
 st.set_page_config(page_title="Streamlit Feature Demo", layout="wide")
 
