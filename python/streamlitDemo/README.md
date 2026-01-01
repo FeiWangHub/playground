@@ -2,25 +2,38 @@
 
 This project provides a centralized hub to manage and run multiple Streamlit mini-applications.
 
-## Setup
+## How to Run
 
-1. **Create and activate a virtual environment**:
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
-   ```
+### Option 1: Using `uv` (Recommended)
+`uv` is a fast Python package manager.
 
-2. **Install dependencies**:
-   ```bash
-   pip install -r python/streamlitDemo/requirements.txt
-   ```
+1.  **Install Dependencies & Run**:
+    ```bash
+    cd python/streamlitDemo
+    uv run streamlit run streamlit_mini_apps_hub_home.py
+    ```
 
-## Usage
+### Option 2: Standard Python Virtual Environment
+1.  **Create and activate a virtual environment**:
+    ```bash
+    cd python/streamlitDemo
+    python3 -m venv .venv
+    source .venv/bin/activate  # macOS/Linux
+    ```
+2.  **Install dependencies**:
+    ```bash
+    pip install .
+    ```
+3.  **Run the App Hub**:
+    ```bash
+    streamlit run streamlit_mini_apps_hub_home.py
+    ```
 
-Start the main hub to explore all available mini-apps:
-
+### Running with FastAPI Launcher
+You can also run the FastAPI app which automatically starts the Streamlit hub:
 ```bash
-streamlit run python/streamlitDemo/streamlit_mini_apps_hub_home.py
+cd python/streamlitDemo
+uv run python fastapi_launcher.py
 ```
 
 ### How it works:
