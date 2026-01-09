@@ -59,6 +59,14 @@ if selected_script_path:
         with st.spinner(f"Loading {pathlib.Path(selected_script_path).name}..."):
             # run_path executes the script in the current context
             runpy.run_path(selected_script_path, run_name="__main__")
+            
+        # Add "View Source" expander at the bottom
+        st.divider()
+        with st.expander("🔍 View Source Code", expanded=False):
+            with open(selected_script_path, "r", encoding="utf-8") as f:
+                source_code = f.read()
+            st.code(source_code, language="python")
+            
     except Exception as e:
         st.error(f"Error running script: {e}")
 else:
