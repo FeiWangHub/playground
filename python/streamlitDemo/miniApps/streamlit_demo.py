@@ -10,6 +10,7 @@ st.set_page_config(page_title="Streamlit Feature Demo", layout="wide")
 
 st.title("Streamlit Feature Demo")
 st.write("Use the sidebar to explore common features.")
+st.markdown('<hr style="margin: 1px 0;">', unsafe_allow_html=True)
 
 section = st.sidebar.radio(
     "Select module", ["Widgets", "Charts", "Layout", "Data & State", "Media"]
@@ -17,6 +18,8 @@ section = st.sidebar.radio(
 
 if section == "Widgets":
     st.header("Interactive widgets")
+    st.subheader("File upload")
+
     name = st.text_input("Your name")
     age = st.number_input("Age", min_value=0, max_value=120, value=25)
     level = st.slider("Satisfaction", 0, 100, 50)
@@ -28,7 +31,6 @@ if section == "Widgets":
             f"Hello {name}, age {age}, satisfaction {level}, color {color}, agree {agree}, date {date}"
         )
 
-    st.subheader("File upload")
     file = st.file_uploader("Upload a text file", type=["txt", "csv"])
     if file is not None:
         content = file.read()

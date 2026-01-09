@@ -6,6 +6,7 @@ st.set_page_config(page_title="Random Numbers Chart", layout="centered")
 
 st.title("Random Number Generator & Analysis")
 st.write("Generate 10 random numbers and visualize them with an average line.")
+st.markdown('<hr style="margin: 1px 0;">', unsafe_allow_html=True)
 
 # Default data for initial load
 DEFAULT_DATA = np.array([10, 25, 45, 30, 60, 85, 70, 90, 50, 20])

@@ -87,3 +87,7 @@ yarn-error.log*
 # Rust - Additional build artifacts
 **/*.rs.bk
 *.pdb
+
+# Vercel
+.vercel
+
