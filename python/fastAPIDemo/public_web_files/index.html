@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>前端入口</title>
+    <style>
+      body { font-family: system-ui, -apple-system, sans-serif; margin: 2rem; }
+      code { background: #f4f4f4; padding: 2px 4px; border-radius: 4px; }
+    </style>
+  </head>
+  <body>
+    <h1>静态前端已接入</h1>
+    <p>将你编译好的前端文件放到 <code>public_web_files/</code> 目录即可。</p>
+    <h2>测试链接</h2>
+    <ul>
+      <li><a href="/health">健康检查</a></li>
+      <li><a href="/info">应用信息</a></li>
+      <li><a href="/swagger">Swagger UI</a></li>
+      <li><a href="/openapi.json">OpenAPI JSON</a></li>
+    </ul>
+    <h3>各服务</h3>
+    <ul>
+      <li><a href="/ai/status">AIService: /ai/status</a></li>
+      <li><a href="/ai/models">AIService: /ai/models</a></li>
+      <li><a href="/login/me">loginService: /login/me</a></li>
+      <li><a href="/openapi/spec">openAPIService: /openapi/spec</a></li>
+      <li><a href="/mcp/status">MCPService: /mcp/status</a></li>
+      <li><a href="/exe/jobs">outputEXEBuilderService: /exe/jobs</a></li>
+      <li><a href="/jupyter/kernels">outputJupyterService: /jupyter/kernels</a></li>
+      <li><a href="/streamlit/apps">outputStreamLitService: /streamlit/apps</a></li>
+      <li><a href="/apprunner/deployments">outputAppRunnerService: /apprunner/deployments</a></li>
+    </ul>
+  </body>
+  </html>

@@ -14,6 +14,10 @@
 5. 验证接口
    - 健康检查: `http://localhost:8000/health`
    - 应用信息: `http://localhost:8000/info`
+   - OpenAPI JSON: `http://localhost:8000/openapi.json`
+   - Swagger UI: `http://localhost:8000/swagger`
+   - 前端首页: `http://localhost:8000/` 或 `http://localhost:8000/public_web_files/index.html`
+   - SPA 回退：任意未匹配路径会回退到首页
 
 ## 分类服务示例
 - AIService: GET `/ai/status`, GET `/ai/models`, POST `/ai/generate`
@@ -37,6 +41,10 @@
 }
 ```
 响应模型位置：`app/schemas/http_resp_dto.py`；响应快捷函数位置：`app/core/http_response.py`
+
+## 静态前端集成
+- 将编译后的前端文件放入 `public_web_files/` 目录（例如 `index.html`, `assets/`）
+- 访问根路径 `/` 即展示前端；前端可直接调用本服务 API（已启用 CORS）
 
 ## 异常与错误码
 - 统一异常处理：BusinessError、HTTPException、校验异常均包装为上述响应结构
