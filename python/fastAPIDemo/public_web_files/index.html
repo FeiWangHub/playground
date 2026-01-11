@@ -31,5 +31,22 @@
       <li><a href="/streamlit/apps">outputStreamLitService: /streamlit/apps</a></li>
       <li><a href="/apprunner/deployments">outputAppRunnerService: /apprunner/deployments</a></li>
     </ul>
+    <h2>健康检查按钮</h2>
+    <button id="checkHealthBtn">请求 /health</button>
+    <pre id="healthResult" style="margin-top:1rem"></pre>
+    <script>
+      const btn = document.getElementById('checkHealthBtn');
+      const out = document.getElementById('healthResult');
+      btn.addEventListener('click', async () => {
+        out.textContent = 'Loading...';
+        try {
+          const res = await fetch('/health');
+          const json = await res.json();
+          out.textContent = JSON.stringify(json, null, 2);
+        } catch (e) {
+          out.textContent = String(e);
+        }
+      });
+    </script>
   </body>
   </html>
