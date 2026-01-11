@@ -4,8 +4,8 @@
 1. 创建虚拟环境
    - macOS/Linux: `python3 -m venv .venv && source .venv/bin/activate`
    - Windows: `python -m venv .venv && .venv\\Scripts\\activate`
-2. 安装依赖
-   - `pip install -r requirements.txt`
+2. 安装依赖（使用 pyproject）
+   - 在项目目录执行：`pip install -e .`
 3. 复制环境配置文件
    - `cp .env.example .env`
 4. 启动服务
