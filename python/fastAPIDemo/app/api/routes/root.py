@@ -1,6 +1,6 @@
 from app.core.config import settings
-from app.core.response import ok
-from app.schemas.response import ResponseDTO
+from app.core.http_response import ok
+from app.schemas.http_resp_dto import ResponseDTO
 from fastapi import APIRouter
 
 router = APIRouter()

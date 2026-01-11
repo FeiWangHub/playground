@@ -36,6 +36,7 @@
   "timestamp": 1730000000000
 }
 ```
+响应模型位置：`app/schemas/http_resp_dto.py`；响应快捷函数位置：`app/core/http_response.py`
 
 ## 异常与错误码
 - 统一异常处理：BusinessError、HTTPException、校验异常均包装为上述响应结构

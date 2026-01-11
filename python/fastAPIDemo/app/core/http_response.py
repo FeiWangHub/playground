@@ -1,5 +1,5 @@
 from typing import Any, Optional
-from app.schemas.response import ResponseDTO
+from app.schemas.http_resp_dto import ResponseDTO
 
 def ok(data: Optional[Any] = None, message: str = "success") -> ResponseDTO:
     return ResponseDTO(code=0, message=message, data=data)

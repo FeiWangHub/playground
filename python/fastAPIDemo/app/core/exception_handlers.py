@@ -1,8 +1,9 @@
-from fastapi import FastAPI, Request, HTTPException
+from app.core.errors import BusinessError, ErrorCodes
+from app.core.http_response import error
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-from app.core.response import error
-from app.core.errors import BusinessError, ErrorCodes
+
 
 def register_exception_handlers(app: FastAPI):
     @app.exception_handler(BusinessError)
@@ -16,6 +17,10 @@ def register_exception_handlers(app: FastAPI):
         return JSONResponse(status_code=exc.status_code, content=dto.model_dump())
 
     @app.exception_handler(RequestValidationError)
-    async def validation_exception_handler(request: Request, exc: RequestValidationError):
-        dto = error(ErrorCodes.VALIDATION_ERROR, "validation_error", {"errors": exc.errors()})
+    async def validation_exception_handler(
+        request: Request, exc: RequestValidationError
+    ):
+        dto = error(
+            ErrorCodes.VALIDATION_ERROR, "validation_error", {"errors": exc.errors()}
+        )
         return JSONResponse(status_code=422, content=dto.model_dump())
