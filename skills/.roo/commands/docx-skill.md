@@ -1,27 +1,15 @@
 # docx-skill
 
-Read and write Microsoft Word documents.
+Read and write Microsoft Word documents (.docx)
 
 ## Prerequisites
 
-Install `python-docx`:
-
-```bash
-pip install python-docx
-```
+[List prerequisites here]
 
 ## How to Use
 
-### Read Text
+Run the following command:
 
 ```bash
-python3 .shared/docx-skill/scripts/docx_tool.py read "path/to/document.docx"
-```
-
-### Create Document
-
-Create a text file with basic Markdown (headers `#`, lists `-`):
-
-```bash
-python3 .shared/docx-skill/scripts/docx_tool.py create "input.md" "output.docx"
+python3 .shared/docx-skill/scripts/example.py
 ```

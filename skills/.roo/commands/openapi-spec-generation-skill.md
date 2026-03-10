@@ -1,19 +1,15 @@
 # openapi-spec-generation-skill
 
-Generate OpenAPI 3.0 specs from JSON.
+Generate OpenAPI 3.0 specifications from simple JSON definitions.
 
 ## Prerequisites
 
-Install `pyyaml`:
-
-```bash
-pip install pyyaml
-```
+[List prerequisites here]
 
 ## How to Use
 
-Run the generation script:
+Run the following command:
 
 ```bash
-python3 .shared/openapi-spec-generation-skill/scripts/generate_spec.py <input.json> <output.yaml>
+python3 .shared/openapi-spec-generation-skill/scripts/example.py
 ```

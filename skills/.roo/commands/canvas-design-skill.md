@@ -1,27 +1,15 @@
 # canvas-design-skill
 
-Generate HTML5 Canvas designs.
+Generate HTML5 Canvas code for design patterns.
 
 ## Prerequisites
 
-Python 3 installed.
+[List prerequisites here]
 
 ## How to Use
 
-Run the generation script with a design type and output path:
+Run the following command:
 
 ```bash
-python3 .shared/canvas-design-skill/scripts/generate_canvas.py <type> <output.html>
-```
-
-**Available Types:**
-- `rect`
-- `circle`
-- `grid`
-- `star`
-
-**Example:**
-
-```bash
-python3 .shared/canvas-design-skill/scripts/generate_canvas.py grid my_grid.html
+python3 .shared/canvas-design-skill/scripts/example.py
 ```

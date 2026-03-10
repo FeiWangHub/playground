@@ -1,27 +1,19 @@
 ---
 name: docx-skill
-description: "Read text from and create Microsoft Word documents (.docx)."
+description: "Read and write Microsoft Word documents (.docx)"
 ---
 
-# DOCX Skill
+# Docx Skill
 
-This skill provides tools to interact with Microsoft Word documents.
+Read and write Microsoft Word documents (.docx)
 
 ## Capabilities
 
-- **Read**: Extract full text from `.docx` files.
-- **Create**: Generate `.docx` files from simple Markdown-formatted text.
+- [List capabilities here]
 
 ## Usage
 
-### Read a Document
-
 ```bash
-python3 .shared/docx-skill/scripts/docx_tool.py read "document.docx"
-```
-
-### Create a Document
-
-```bash
-python3 .shared/docx-skill/scripts/docx_tool.py create "content.md" "output.docx"
+# Example command
+python3 .shared/docx-skill/scripts/example.py
 ```

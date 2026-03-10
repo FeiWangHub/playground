@@ -1,15 +1,15 @@
 # fastapi-templates-skill
 
-Scaffold FastAPI projects.
+Scaffold FastAPI projects with standard structure.
 
 ## Prerequisites
 
-Python 3 installed.
+[List prerequisites here]
 
 ## How to Use
 
-Run the creation script with your desired project name:
+Run the following command:
 
 ```bash
-python3 .shared/fastapi-templates-skill/scripts/create_fastapi.py "project-name"
+python3 .shared/fastapi-templates-skill/scripts/example.py
 ```

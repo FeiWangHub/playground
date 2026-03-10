@@ -1,21 +1,19 @@
 ---
 name: fastapi-templates-skill
-description: "Scaffold new FastAPI projects with standard directory structure and configuration."
+description: "Scaffold FastAPI projects with standard structure."
 ---
 
-# FastAPI Templates Skill
+# Fastapi Templates Skill
 
-This skill allows you to quickly generate a boilerplate FastAPI project.
+Scaffold FastAPI projects with standard structure.
 
 ## Capabilities
 
-- Create a new directory with `main.py`, `requirements.txt`, and `README.md`.
-- Includes a basic "Hello World" endpoint and item lookup endpoint.
+- [List capabilities here]
 
 ## Usage
 
-Create a new project:
-
 ```bash
-python3 .shared/fastapi-templates-skill/scripts/create_fastapi.py "my-api-project"
+# Example command
+python3 .shared/fastapi-templates-skill/scripts/example.py
 ```

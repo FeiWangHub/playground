@@ -1,24 +1,15 @@
 # icon-generation-skill
 
-Generate PNG icons with text.
+Generate simple PNG icons with text.
 
 ## Prerequisites
 
-Install `Pillow`:
-
-```bash
-pip install Pillow
-```
+[List prerequisites here]
 
 ## How to Use
 
-Run the generation script:
+Run the following command:
 
 ```bash
-python3 .shared/icon-generation-skill/scripts/generate_icon.py "TEXT" "output.png" [options]
+python3 .shared/icon-generation-skill/scripts/example.py
 ```
-
-**Options:**
-- `--size`: Image size (default: 512)
-- `--bg`: Background hex color (default: #007bff)
-- `--fg`: Text hex color (default: #ffffff)

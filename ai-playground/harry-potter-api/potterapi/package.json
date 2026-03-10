@@ -7,7 +7,7 @@
     "start": "node .",
     "dev": "nodemon .",
     "vercel-build": "echo hello",
-    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "keywords": [],
   "author": "",

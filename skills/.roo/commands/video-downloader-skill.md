@@ -1,19 +1,15 @@
 # video-downloader-skill
 
-Download videos using yt-dlp.
+Download videos from various platforms using yt-dlp.
 
 ## Prerequisites
 
-Install `yt-dlp`:
-
-```bash
-pip install yt-dlp
-```
+[List prerequisites here]
 
 ## How to Use
 
-Run the download script with the video URL:
+Run the following command:
 
 ```bash
-python3 .shared/video-downloader-skill/scripts/download.py "VIDEO_URL"
+python3 .shared/video-downloader-skill/scripts/example.py
 ```
