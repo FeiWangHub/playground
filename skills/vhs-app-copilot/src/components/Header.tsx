@@ -1,7 +1,12 @@
 import React from 'react';
-import { Search, Bell } from 'lucide-react';
+import { Search, Bell, PanelRightClose, PanelRightOpen } from 'lucide-react';
 
-export const Header = () => {
+interface HeaderProps {
+  onTogglePreview: () => void;
+  isPreviewOpen: boolean;
+}
+
+export const Header = ({ onTogglePreview, isPreviewOpen }: HeaderProps) => {
   return (
     <header className="h-16 border-b border-border bg-surface/80 backdrop-blur-md flex items-center justify-between px-6 sticky top-0 z-50">
       <div className="flex items-center gap-4">
@@ -43,6 +48,20 @@ export const Header = () => {
             F
           </div>
           <span className="text-sm font-medium text-text hidden sm:block">Fei</span>
+        </button>
+
+        <div className="h-6 w-px bg-border mx-1"></div>
+
+        <button 
+          onClick={onTogglePreview}
+          className={`p-2 rounded-full transition-all flex items-center justify-center ${
+            isPreviewOpen 
+              ? 'text-primary bg-primary/10 hover:bg-primary/20' 
+              : 'text-muted hover:text-text hover:bg-background'
+          }`}
+          title={isPreviewOpen ? "Close Preview" : "Open Preview"}
+        >
+          {isPreviewOpen ? <PanelRightClose size={20} /> : <PanelRightOpen size={20} />}
         </button>
       </div>
     </header>

@@ -3,7 +3,7 @@ import { RotateCw, Terminal, Maximize2 } from 'lucide-react';
 
 export const PreviewPanel = () => {
   return (
-    <div className="w-[400px] h-full border-l border-border bg-background flex flex-col">
+    <div className="w-[400px] h-full bg-background flex flex-col">
       <div className="h-12 border-b border-border flex items-center justify-between px-4 bg-surface">
         <div className="flex items-center gap-2">
           <span className="w-3 h-3 rounded-full bg-danger"></span>
